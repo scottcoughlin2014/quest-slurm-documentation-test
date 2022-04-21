@@ -12,19 +12,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.7]
+        python-version: [3.8]
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Get pip cache dir
       id: pip-cache
       run: |
         python -m pip install --upgrade pip setuptools wheel
         echo "::set-output name=dir::$(pip cache dir)"
+
     - name: pip cache
       uses: actions/cache@v2
       with:
@@ -35,8 +38,7 @@ jobs:
     - name: Install dependencies
       run: |
         #sudo apt-get install gfortran swig libhdf5-serial-dev libmpich-dev
-        python -m pip install coverage cpp-coveralls flake8 pytest
-        python -m pip install .[doc]
+        python -m pip install matplotlib ipython sphinx numpydoc sphinx_rtd_theme sphinxcontrib_programoutput
 
     - name: Make dependencies
       run: |
