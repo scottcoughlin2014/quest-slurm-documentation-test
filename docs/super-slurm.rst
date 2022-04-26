@@ -45,10 +45,10 @@ using them.
 
    -  `Table of Common Slurm
       Commands <#section-common-slurm-commands>`__
-   -  `squeue <#h_65825072313811650315528091>`__
-   -  `sacct <#h_65825072313811650315528091>`__
-   -  `checkjob <#h_30279704940681650315796740>`__
-   -  `scancel <#h_62538097251311650316072591>`__
+   -  `squeue <#squeue>`__
+   -  `sacct <#sacct>`__
+   -  `checkjob <#checkjob>`__
+   -  `scancel <#scancel>`__
 
 -  `Example of Jobs on Quest <#h_90022083356871649361533121>`__
 
@@ -251,7 +251,7 @@ will return the error,
 ``"sbatch: error: Batch job submission failed: No partition specified or system default partition"``.
 
 Partition Definitions: General Access (“p” and “e” accounts)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Standard compute node access.
 
@@ -339,7 +339,7 @@ Specialty compute node access
 +-----------+------------------+-------------------------------------+
 
 Partition Definitions: Full Access (buy-ins, or “b” accounts)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-----------------------+-----------------------+-----------------------+
 | Partition             | Maximum Walltime      | Notes                 |
@@ -391,7 +391,7 @@ Partition Definitions: Full Access (buy-ins, or “b” accounts)
 +-----------------------+-----------------------+-----------------------+
 
 Notes
-~~~~~
+^^^^^
 
 Additional specialized partitions exist for specific allocations. You
 may be instructed to use a partition name that isn’t listed above.
@@ -510,19 +510,19 @@ relevant information.
 |                |                | *Schedulable** | Nodes          |
 |                |                | Memory/RAM     |                |
 +----------------+----------------+----------------+----------------+
-| quest7         | 28             | 116GB          | short/norm     |
-|                |                |                | al/long/buying |
+| quest7         | 28             | 116GB          | short/nor      |
+|                |                |                | mal/long/buyin |
 +----------------+----------------+----------------+----------------+
-| quest8         | 28             | 84GB           | short/norm     |
-| (general       |                |                | al/long/buying |
+| quest8         | 28             | 84GB           | short/nor      |
+| (general       |                |                | mal/long/buyin |
 | access)        |                |                |                |
 +----------------+----------------+----------------+----------------+
 | quest8 (buyin) | 28             | 180GB          | buyin/short    |
 +----------------+----------------+----------------+----------------+
 | quest9         | 40             | 180GB          | buyin/short    |
 +----------------+----------------+----------------+----------------+
-| quest10        | 52             | 180GB          | short/norm     |
-|                |                |                | al/long/buying |
+| quest10        | 52             | 180GB          | short/nor      |
+|                |                |                | mal/long/buyin |
 +----------------+----------------+----------------+----------------+
 
 To drive home this point, imagine you made the following request:
@@ -581,19 +581,19 @@ summarizes the relevant information.
 |                |                | *Schedulable** | Nodes          |
 |                |                | Memory/RAM     |                |
 +----------------+----------------+----------------+----------------+
-| quest7         | 28             | 116GB          | short/norm     |
-|                |                |                | al/long/buying |
+| quest7         | 28             | 116GB          | short/nor      |
+|                |                |                | mal/long/buyin |
 +----------------+----------------+----------------+----------------+
-| quest8         | 28             | 84GB           | short/norm     |
-| (general       |                |                | al/long/buying |
+| quest8         | 28             | 84GB           | short/nor      |
+| (general       |                |                | mal/long/buyin |
 | access)        |                |                |                |
 +----------------+----------------+----------------+----------------+
 | quest8 (buyin) | 28             | 180GB          | buyin/short    |
 +----------------+----------------+----------------+----------------+
 | quest9         | 40             | 180GB          | buyin/short    |
 +----------------+----------------+----------------+----------------+
-| quest10        | 52             | 180GB          | short/norm     |
-|                |                |                | al/long/buying |
+| quest10        | 52             | 180GB          | short/nor      |
+|                |                |                | mal/long/buyin |
 +----------------+----------------+----------------+----------------+
 
 A final consideration when selecting how much memory/RAM you want is how
@@ -612,7 +612,8 @@ of the computers from generation quest7/8 and would increase the amount
 of time it will take to schedule your job as you will have reduced the
 pool of available compute nodes.
 
-**How can I tell if my job needs more memory to run successfully?**
+How can I tell if my job needs more memory to run successfully?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Use the ``sacct -X`` command to see information about your recent jobs,
 for example:
@@ -644,14 +645,16 @@ for example:
 | Specify the date using MMDDYY. More information on sacct is available
   `here <https://slurm.schedmd.com/sacct.html>`__.
 
-**My job ran out of memory and failed, now what?**
+My job ran out of memory and failed, now what?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First, determine how much memory your job needs following the steps
 outlined below. Once you know how much memory your job needs, edit your
 job submission script to reserve that amount of memory + 10% for your
 job.
 
-**How much memory does my job need?**
+How much memory does my job need?
+'''''''''''''''''''''''''''''''''
 
 To determine out how much memory your job uses on a compute node:
 
@@ -717,10 +720,12 @@ Check the job State reported in the 4th line. If it is “COMPLETED (exit
 code 0)”, look at the last two lines. “Memory Utilized” is the amount of
 memory your job used, in this case 60Gb.
 
-| If the job State is FAILED or CANCELLED, the Memory Efficiency
-  percentage reported by seff will be extremely inaccurate. The seff
-  command only works on jobs that have COMPLETED successfully.
-| **How much memory should I reserve in my job script?**
+If the job State is FAILED or CANCELLED, the Memory Efficiency
+percentage reported by seff will be extremely inaccurate. The seff
+command only works on jobs that have COMPLETED successfully.
+
+How much memory should I reserve in my job script?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It’s a good idea to reserve slightly more memory than your job utilized
 since the same job may require slightly different amounts of memory
@@ -1024,7 +1029,7 @@ Table of Common Slurm Commands
 |                                   | <jobID> [filename]                |
 +-----------------------------------+-----------------------------------+
 
-.. _h_65825072313811650315528091:
+.. _squeue:
 
 The ``squeue`` Command
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1043,7 +1048,7 @@ squeue -t PD             Show pending jobs
 squeue –help             See documentation and additional options
 ======================== =============================================
 
-.. _h_65825072313811650315528091:
+.. _sacct:
 
 The ``sacct`` Command
 ~~~~~~~~~~~~~~~~~~~~~
@@ -1051,10 +1056,10 @@ The ``sacct`` Command
 The ``sacct`` command can be used display information about your past
 and current jobs on Quest.
 
-Like ``sstat``, the standard output of sacct may not provide the
-information we want. To remedy this, we can use the ``--format`` flag to
-choose what we want in our output. Similarly, the format flag is handled
-by a list of comma separated variables which specify output data:
+The standard output of sacct may not provide the information we want. To
+remedy this, we can use the ``--format`` flag to choose what we want in
+our output. The format flag is handled by a list of comma separated
+variables which specify output data:
 
 ::
 
@@ -1062,72 +1067,37 @@ by a list of comma separated variables which specify output data:
 
 A chart of some variables is provided below:
 
-+--------------+--------------------------------------------------------------+
-| Variable     | Description                                                  |
-+==============+==============================================================+
-| account      | Account the job ran under.                                   |
-+--------------+--------------------------------------------------------------+
-| avecpu       | Average CPU time of all tasks in job.                        |
-+--------------+--------------------------------------------------------------+
-| averss       | Average resident set size of all tasks in the job.           |
-+--------------+--------------------------------------------------------------+
-| cputime      | Formatted (Elapsed time \* CPU) count used by a job or step. |
-+--------------+--------------------------------------------------------------+
-| elapsed      | Jobs elapsed time formated as DD-HH:MM:SS.                   |
-+--------------+--------------------------------------------------------------+
-| exitcode     | The exit code returned by the job script or salloc.          |
-+--------------+--------------------------------------------------------------+
-| jobid        | The id of the Job.                                           |
-+--------------+--------------------------------------------------------------+
-| jobname      | The name of the Job.                                         |
-+--------------+--------------------------------------------------------------+
-| maxdiskread  | Maximum number of bytes read by all tasks in the job.        |
-+--------------+--------------------------------------------------------------+
-| maxdiskwrite | Maximum number of bytes written by all tasks in the job.     |
-+--------------+--------------------------------------------------------------+
-| maxrss       | Maximum resident set size of all tasks in the job.           |
-+--------------+--------------------------------------------------------------+
-| ncpus        | Amount of allocated CPUs.                                    |
-+--------------+--------------------------------------------------------------+
-| nnodes       | The number of nodes used in a job.                           |
-+--------------+--------------------------------------------------------------+
-| ntasks       | Number of tasks in a job.                                    |
-+--------------+--------------------------------------------------------------+
-| priority     | Slurm priority.                                              |
-+--------------+--------------------------------------------------------------+
-| qos          | Quality of service.                                          |
-+--------------+--------------------------------------------------------------+
-| reqcpu       | Required number of CPUs                                      |
-+--------------+--------------------------------------------------------------+
-| reqmem       | Required amount of memory for a job.                         |
-+--------------+--------------------------------------------------------------+
-| user         | Username of the person who ran the job.                      |
-+--------------+--------------------------------------------------------------+
+======== ============================================================
+Variable Description
+======== ============================================================
+account  Account the job ran under.
+cputime  Formatted (Elapsed time \* CPU) count used by a job or step.
+elapsed  Jobs elapsed time formated as DD-HH:MM:SS.
+exitcode The exit code returned by the job script or salloc.
+jobid    The id of the Job.
+jobname  The name of the Job.
+ncpus    Amount of allocated CPUs.
+nnodes   The number of nodes used in a job.
+ntasks   Number of tasks in a job.
+priority Slurm priority.
+qos      Quality of service.
+user     Username of the person who ran the job.
+======== ============================================================
 
 As an example, suppose you want to find information about jobs that were
 run on March 12, 2018. You want to show information regarding the job
-name, the number of nodes used in the job, the number of cpus, the
-maxrss, and the elapsed time. Your command would look like this:
+name, the number of nodes used in the job, the number of cpus, and the
+elapsed time. Your command would look like this:
 
 ::
 
-   $ sacct --jobs=your_job-id --starttime=2018-03-12 --format=jobname,nnodes,ncpus,maxrss,elapsed
-
-As another example, suppose you would like to pull up information on
-jobs that were run on February 21, 2018. You would like information on
-job ID, job name, QoS, Number of Nodes used, Number of CPUs used,
-Maximum RSS, CPU time, Average CPU time, and elapsed time. Your command
-would look like this:
-
-::
-
-   $ sacct –-jobs=your_job-id –-starttime=2018-02-21 --format=jobid,jobname,qos,nnodes,ncpu,maxrss,cputime,avecpu,elapsed
+   $ sacct --jobs=your_job-id --starttime=2018-03-12 --format=jobname,nnodes,ncpus,elapsed
 
 A full list of variables that specify data handled by sacct can be found
 with the ``--helpformat`` flag or by `visiting the slurm page on
 sacct <https://slurm.schedmd.com/sacct.html>`__.
 
-.. _h_30279704940681650315796740:
+.. _checkjob:
 
 The checkjob Command
 ~~~~~~~~~~~~~~~~~~~~
@@ -1211,7 +1181,7 @@ Note in the output above that:
 -  If a batch job script is used for submission, the script is presented
    at the end.
 
-.. _h_62538097251311650316072591:
+.. _scancel:
 
 Cancelling Jobs
 ~~~~~~~~~~~~~~~
@@ -1460,25 +1430,25 @@ command line arguments.
 .. code:: code
 
    #!/bin/bash
-       #SBATCH --account=w10001  ## YOUR ACCOUNT pXXXX or bXXXX
-       #SBATCH --partition=w10001  ### PARTITION (buyin, short, normal, w10001, etc)
-       #SBATCH --array=0-9 ## number of jobs to run "in parallel" 
-       #SBATCH --nodes=1 ## how many computers do you need
-       #SBATCH --ntasks-per-node=1 ## how many cpus or processors do you need on each computer
-       #SBATCH --time=00:10:00 ## how long does this need to run (remember different partitions have restrictions on this param)
-       #SBATCH --mem-per-cpu=1G ## how much RAM do you need per CPU (this effects your FairShare score so be careful to not ask for more than you need))
-       #SBATCH --job-name="sample_job_\${SLURM_ARRAY_TASK_ID}" ## use the task id in the name of the job
-       #SBATCH --output=sample_job.%A_%a.out ## use the jobid (A) and the specific job index (a) to name your log file
-       #SBATCH --mail-type=ALL ## you can receive e-mail alerts from SLURM when your job begins and when your job finishes (completed, failed, etc)
-       #SBATCH --mail-user=email@u.northwestern.edu  ## your email
+   #SBATCH --account=w10001  ## YOUR ACCOUNT pXXXX or bXXXX
+   #SBATCH --partition=w10001  ### PARTITION (buyin, short, normal, w10001, etc)
+   #SBATCH --array=0-9 ## number of jobs to run "in parallel" 
+   #SBATCH --nodes=1 ## how many computers do you need
+   #SBATCH --ntasks-per-node=1 ## how many cpus or processors do you need on each computer
+   #SBATCH --time=00:10:00 ## how long does this need to run (remember different partitions have restrictions on this param)
+   #SBATCH --mem-per-cpu=1G ## how much RAM do you need per CPU (this effects your FairShare score so be careful to not ask for more than you need))
+   #SBATCH --job-name="sample_job_\${SLURM_ARRAY_TASK_ID}" ## use the task id in the name of the job
+   #SBATCH --output=sample_job.%A_%a.out ## use the jobid (A) and the specific job index (a) to name your log file
+   #SBATCH --mail-type=ALL ## you can receive e-mail alerts from SLURM when your job begins and when your job finishes (completed, failed, etc)
+   #SBATCH --mail-user=email@u.northwestern.edu  ## your email
 
-       module purge all
-       module load python-anaconda3
-       source activate /projects/intro/envs/slurm-py37-test
+   module purge all
+   module load python-anaconda3
+   source activate /projects/intro/envs/slurm-py37-test
 
-       IFS=$'\n' read -d '' -r -a input_args < input_args.txt
+   IFS=$'\n' read -d '' -r -a input_args < input_args.txt
 
-       python slurm_test.py --filename ${input_args[$SLURM_ARRAY_TASK_ID]}
+   python slurm_test.py --filename ${input_args[$SLURM_ARRAY_TASK_ID]}
 
 where *input_args.txt* contains the following:
 
@@ -1489,15 +1459,15 @@ where *input_args.txt* contains the following:
 .. code:: code
 
    filename1.txt
-       filename2.txt
-       filename3.txt
-       filename4.txt
-       filename5.txt
-       filename6.txt
-       filename7.txt
-       filename8.txt
-       filename9.txt
-       filename10.txt
+   filename2.txt
+   filename3.txt
+   filename4.txt
+   filename5.txt
+   filename6.txt
+   filename7.txt
+   filename8.txt
+   filename9.txt
+   filename10.txt
 
 and *myscript.py* contains the following code:
 
@@ -1508,30 +1478,29 @@ and *myscript.py* contains the following code:
 .. code:: code
 
    import argparse
-       import time
+   import time
+
+   def parse_commandline():
+       """Parse the arguments given on the command-line.
+       """
+       parser = argparse.ArgumentParser(description=__doc__)
+       parser.add_argument("--filename",
+                          help="Name of file",
+                          default=None)
 
 
-       def parse_commandline():
-           """Parse the arguments given on the command-line.
-           """
-           parser = argparse.ArgumentParser(description=__doc__)
-           parser.add_argument("--filename",
-                              help="Name of file",
-                              default=None)
+       args = parser.parse_args()
+
+       return args
 
 
-           args = parser.parse_args()
-
-           return args
-
-
-       ###############################################################################
-       # BEGIN MAIN FUNCTION
-       ###############################################################################
-       if __name__ == '__main__':
-           args = parse_commandline()
-           #time.sleep(10) # Sleep for 3 seconds
-           print(args.filename)
+   ###############################################################################
+   # BEGIN MAIN FUNCTION
+   ###############################################################################
+   if __name__ == '__main__':
+       args = parse_commandline()
+       #time.sleep(10) # Sleep for 3 seconds
+       print(args.filename)
 
 In this example, myscript.py will receive the values in input.csv as
 arguments: the first field will be sys.argv[1], the second field will be
@@ -1585,18 +1554,17 @@ jid1, jid2* will contain the jobid that SLURM assigns after you run the
 .. code:: code
 
    #!/bin/bash
+   jid0=($(sbatch --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out example_submit.sh))
 
-       jid0=($(sbatch --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out example_submit.sh))
+   echo "jid0 ${jid0[-1]}" >> slurm_ids
 
-       echo "jid0 ${jid0[-1]}" >> slurm_ids
+   jid1=($(sbatch --dependency=afterok:${jid0[-1]} --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out --export=DEPENDENTJOB=${jid0[-1]} example_submit.sh))
 
-       jid1=($(sbatch --dependency=afterok:${jid0[-1]} --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out --export=DEPENDENTJOB=${jid0[-1]} example_submit.sh))
+   echo "jid1 ${jid1[-1]}" >> slurm_ids
 
-       echo "jid1 ${jid1[-1]}" >> slurm_ids
+   jid2=($(sbatch --dependency=afterok:${jid1[-1]} --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out --export=DEPENDENTJOB=${jid1[-1]} example_submit.sh))
 
-       jid2=($(sbatch --dependency=afterok:${jid1[-1]} --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out --export=DEPENDENTJOB=${jid1[-1]} example_submit.sh))
-
-       echo "jid2 ${jid2[-1]}" >> slurm_ids
+   echo "jid2 ${jid2[-1]}" >> slurm_ids
 
 In the above, the second job will not start until the first job is
 finished and the third job will not start until the second one is
@@ -1609,21 +1577,21 @@ finished. The actual submission script that is being run is below.
 .. code:: code
 
    #!/bin/bash
-       #SBATCH --mail-type=ALL ## you can receive e-mail alerts from SLURM when your job begins and when your job finishes (completed, failed, etc)
-       #SBATCH --mail-user=email@u.northwestern.edu ## your email
+   #SBATCH --mail-type=ALL ## you can receive e-mail alerts from SLURM when your job begins and when your job finishes (completed, failed, etc)
+   #SBATCH --mail-user=email@u.northwestern.edu ## your email
 
-       if [[ -z "${DEPENDENTJOB}" ]]; then
-           echo "First job in workflow"
-       else
-           echo "Job started after " $DEPENDENTJOB
-       fi
+   if [[ -z "${DEPENDENTJOB}" ]]; then
+       echo "First job in workflow"
+   else
+       echo "Job started after " $DEPENDENTJOB
+   fi
 
-       module purge all
-       module load python-anaconda3
-       source activate /projects/intro/envs/slurm-py37-test
+   module purge all
+   module load python-anaconda3
+   source activate /projects/intro/envs/slurm-py37-test
 
-       python --version
-       python myscript.py --job-id $DEPENDENTJOB
+   python --version
+   python myscript.py --job-id $DEPENDENTJOB
 
 where *myscript.py* contains the following code:
 
@@ -1634,29 +1602,29 @@ where *myscript.py* contains the following code:
 .. code:: code
 
    import argparse
-       import time
+   import time
 
 
-       def parse_commandline():
-           """Parse the arguments given on the command-line.
-           """
-           parser = argparse.ArgumentParser(description=__doc__)
-           parser.add_argument("--job-id",
-                              help="Job number",
-                              default=0)
+   def parse_commandline():
+       """Parse the arguments given on the command-line.
+       """
+       parser = argparse.ArgumentParser(description=__doc__)
+       parser.add_argument("--job-id",
+                          help="Job number",
+                          default=0)
 
-           args = parser.parse_args()
+       args = parser.parse_args()
 
-           return args
+       return args
 
 
-       ###############################################################################
-       # BEGIN MAIN FUNCTION
-       ###############################################################################
-       if __name__ == '__main__':
-           args = parse_commandline()
-           time.sleep(3) # Sleep for 3 seconds
-           print(args.job_id)
+   ###############################################################################
+   # BEGIN MAIN FUNCTION
+   ###############################################################################
+   if __name__ == '__main__':
+       args = parse_commandline()
+       time.sleep(3) # Sleep for 3 seconds
+       print(args.job_id)
 
 In this example, we print the job id that had to finish in order for the
 dependent job to begin. Therefore, the very first job should print 0
