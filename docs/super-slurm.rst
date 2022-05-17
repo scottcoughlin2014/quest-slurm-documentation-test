@@ -1,105 +1,43 @@
 Everything You Need to Know about Using Slurm on Quest
 ======================================================
 
-We breakdown the key configuration settings of your Slurm submission
-script in detail, provide some details on additional settings you can
-specify, and provide examples of types of jobs your can submit. The
-program that schedules jobs and manages resources on Quest is called
-Slurm. For video demonstrations on using Slurm on Quest please visit our
+The program that schedules jobs and manages resources on Quest is called
+Slurm. This page is designed to help facilitate a deeper understanding
+of how Slurm works and to contextualize the things that you can do with
+Slurm. For those who are brand new to Quest, we recommend visiting our
 `Research Computing How-to
-Videos <https://www.it.northwestern.edu/research/videos.html>`__ page.
-We start off with an example Slurm job submission and follow with a
-detailed discussion of each of the key configuration settings in the
-script. These discussions will include the possible range of values you
-can set, how to think about what value to use for the setting, and
-whether or not the setting is required and if not required, what the
-default is for the setting. After this, we will lay out and provide some
-details on additional Slurm configuration settings that can be
-specified. Finally, we will provide a number of job submission script
-examples and motivate situations in which you would want to explore
-using them.
+Videos <https://www.it.northwestern.edu/research/videos.html>`__ page
+and watching our *Introduction to Quest* video before proceeding with
+this documentation. This page covers…
 
--  `The Job Submission Script <#h_8666220334701650307877674>`__
-
-   -  `Example Submission Script <#h_6598678335431650314984849>`__
-   -  `Submitting Your Batch Job <#h_943032369801650314991617>`__
-
--  `Slurm Configuration Settings <#key-slurm-configuration-settings>`__
-
-   -  `Account/Allocation <#section-account>`__
-   -  `Partition/Queue <#section-partitions>`__
-   -  `Walltime/Length of the job <#section-walltime>`__
-   -  `Number of nodes <#section-number-of-nodes>`__
-   -  `Number of cores <#section-number-of-cores>`__
-   -  `Required memory <#section-required-memory>`__
-   -  `Standard output/error <#section-output-error>`__
-   -  `Job Name <#section-job-name>`__
-   -  `E-Mail Alerts <#section-email>`__
-   -  `Constraint <#section-constraints>`__
-   -  `All Slurm Configuration Settings <#section-all-slurm-options>`__
-   -  `Environmental Variables Set by
-      Slurm <#section-slurm-environmental-variables>`__
-
--  `SLURM Commands and Job
-   Management <#all-slurm-commands-and-submission-options>`__
-
-   -  `Table of Common Slurm
-      Commands <#section-common-slurm-commands>`__
-   -  `squeue <#squeue>`__
-   -  `sacct <#sacct>`__
-   -  `checkjob <#checkjob>`__
-   -  `scancel <#scancel>`__
-
--  `Example of Jobs on Quest <#h_90022083356871649361533121>`__
-
-   -  `Interactive Jobs <#section-interactive-jobs>`__
-
-      -  `Without Graphical User
-         Interface <#section-section-interactive-jobs-non-gui>`__
-      -  `With Graphical User
-         Interface <#section-section-interactive-jobs-gui>`__
-
-   -  `Job Array <#section-job-array>`__
-   -  `Dependent Jobs <#section-dependent-jobs>`__
-
--  `Diagnosing Issues with Your Job Submission Script and/or Your Job
-   Itself <#section-diagnosing-jobs>`__
-
-   -  `Debugging a Job Rejected by the
-      Scheduler <#section-debugging-jobs>`__
-   -  `Debugging a Job Accepted by the Scheduler that Fails
-      Immediately <#h_94310085932911650907024000>`__
-
--  `Factors Affecting Job Scheduling on
-   Quest <#section-job-scheduling>`__
--  `Common Reasons for Failed Jobs <#section-job-failures>`__
-
-   -  `Not enough memory or time
-      requested <#h_28007174239751650907046424>`__
-   -  `Ran out of disk space in home folder or allocation
-      folder <#h_834160044061650907053691>`__
-
-Expand All Collapse All
+-  A simple Slurm job submission script.
+-  The key configuration settings of the Slurm submission script as well
+   as details on additional settings that may be useful to specify.
+-  How to monitor and manage your job submissions
+-  Special types of job submissions and when they are useful.
+-  Diagnosing issues with your job submission.
 
 .. _h_8666220334701650307877674:
 
 The Job Submission Script
 -------------------------
 
-In this section, we present a basic submission script and how a user
-would then submit a batch job using this submission script. To submit a
-batch job, you first write a submission script specifying the resources
-you need and what commands to run, then you submit this script to the
-scheduler by running the ``sbatch`` command on the command line.
+Slurm requires users to write a batch submission script to submit a
+batch job. In this section, we present a basic submission script and how
+a user would then submit a batch job using this submission script. To
+submit a batch job, you first write a submission script specifying the
+resources you need and what commands to run, then you submit this script
+to the scheduler by running the ``sbatch`` command on the command line.
 
 .. _h_6598678335431650314984849:
 
 Example Submission Script
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A submission script for a batch job could look like the following. When
-substituting values, replace ``<>`` too. These commands would be saved
-in a file such as ``jobscript.sh``.
+The following is an example batch job. Please note any placeholders
+which are denoted with ``<>``. You will need to replace these with the
+appropriate value including the ``<>``. These commands would be saved in
+a file such as ``jobscript.sh``.
 
 ::
 
@@ -109,11 +47,11 @@ in a file such as ``jobscript.sh``.
    #SBATCH --time=00:10:00 ## Required: How long will the job need to run (remember different partitions have restrictions on this parameter)
    #SBATCH --nodes=1 ## how many computers/nodes do you need (no default)
    #SBATCH --ntasks-per-node=1 ## how many cpus or processors do you need on per computer/node (default value 1)
-   #SBATCH --mem=1G ## how much RAM do you need per computer/node (this effects your FairShare score so be careful to not ask for more than you need))
+   #SBATCH --mem=1G ## how much RAM do you need per computer/node (this affects your FairShare score so be careful to not ask for more than you need))
    #SBATCH --job-name=sample_job ## When you run squeue -u NETID this is how you can identify the job
    #SBATCH --output=output.log ## standard out and standard error goes to this file
 
-
+   # A regular comment in Bash
    module purge all
    module load python-anaconda3
    source activate /projects/intro/envs/slurm-py37-test
@@ -122,15 +60,21 @@ in a file such as ``jobscript.sh``.
    python slurm_test.py
 
 The first line of the script loads the bash shell. Lines that begin with
-``#SBATCH`` are interpreted by Slurm. Until Slurm places the job on a
-compute node, no other line in this script is executed. In these lines,
-``#`` is needed; it is not a comment character when used with
-``#SBATCH``.
+``#SBATCH`` are interpreted by Slurm and Slurm will ignore any of the
+words in the ``#SBATCH`` line which follow ``##``. At the time of
+submission, the only lines that are interpreted/run are those that begin
+with ``#SBATCH``. Once the job has been placed on the compute node, the
+remainder of the script (everything after the last ``#SBATCH`` line) is
+run. Normally in Bash, ``#`` is a comment character which means that
+anything written after a ``#`` is ignored by the Bash
+interpreter/language. When writing a submission script, however, it is
+not a comment character when used with ``#SBATCH``.
 
 After the Slurm commands, the rest of the script works like a regular
 Bash script. You can modify environment variables, load modules, change
 directories, and execute program commands. Lines in the second half of
-the script that start with ``#`` are comments.
+the script that start with ``#`` are comments, such as
+``# A regular comment in Bash`` in the the example above.
 
 Find a downloadable copy of this example script `on
 GitHub <https://github.com/nuitrcs/examplejobs>`__.
@@ -155,16 +99,16 @@ number:
 
    Submitted batch job 549005
 
-If you would prefer the return value of your job submission to be just
-the job number, pass the ``--parsable`` argument:
+If you have a workflow that accepts or needs the jobid as an input for
+`job monitoring <#all-slurm-commands-and-submission-options>`__ or `job
+dependencies <#section-dependent-jobs>`__, then you may prefer the
+return value of your job submission be just the job number, To do this,
+pass the ``--parsable`` argument:
 
 .. code:: code
 
    sbatch --parsable <name_of_script>
    549005
-
-This may be desirable if you have a workflow that accepts the return
-value as a variable for job monitoring or dependencies.
 
 If there is an error in your job submission script, the job will not be
 accepted by the scheduler and you will receive an error message right
@@ -414,19 +358,22 @@ option in your job submission script:
 There are two important considerations when selecting the walltime, the
 `partition <#section-partitions>`__ that you chose and how long your job
 is expected to run. Although the partition that you choose will control
-the maximum wall time that can be selected, we recommend not to simply
-select the maximum allowable wall time for that partition unless it is
-truly needed. The scheduler will take your walltime request at face
-value, and so this can lead to your job taking longer than necessary to
-be scheduled. An incorrect walltime specification does not hurt you when
-Slurm assesses your utilization of the cluster as *only
-the*\ **actual**\ *duration of your job is used in computing your
-utilization.* On the flip side of being too conservative with your
-walltime selection, if you are too aggressive and your job will need
-more time to complete then requested, there is no way to extend the
-walltime of a running job on Quest. This is why we recommend submitting
-a single, representative job and seeing how long it takes to run before
-selecting a walltime and submitting a large number of jobs.
+the maximum wall time that can be selected, we do *not* recommend to
+simply select the maximum allowable wall time for that partition unless
+it is truly needed. There are two problematic ways to set wall time:
+
+-  If your walltime is much longer than your job needs to run, then your
+   job will take longer to start running.
+-  If your walltime is shorter than your job needs to run, then your job
+   will fail as there is no way to extend the walltime of a running job
+   on Quest.
+
+This is why we recommend submitting a single, representative job and
+seeing how long it takes to run before selecting a walltime and
+submitting a large number of jobs. Please note that a incorrect walltime
+specification does not hurt you when Slurm assesses your utilization of
+the cluster as *only the*\ **actual**\ *duration of your job is used in
+computing your utilization.*
 
 .. _section-number-of-nodes:
 
@@ -464,7 +411,7 @@ like:
 
 ``#SBATCH --ntasks=<number_of_cores>``
 
-or the ``--ntasks-per-node=n`` option which indicates how many cores you
+or the ``--ntasks-per-node=n`` option whichindicates how many cores you
 would like *per node* and should always be used with the `Number of
 Nodes <#number-of-nodes>`__ option:
 
@@ -496,7 +443,7 @@ recommend setting this value (to start) to
 
 Finally, if you know that your application uses Message Passing
 Interface (MPI) to parallelize, then it can utilize CPUs
-allocated *across* computers and therefore setting ``-n/--ntasks``
+allocated\ *across* computers and therefore setting ``-n/--ntasks``
 without also setting ``-N/--nodes`` would make sense.
 
 A final consideration when selecting how many CPUs you want is how many
@@ -509,7 +456,7 @@ relevant information.
 | Name           |                | *              | with these     |
 |                |                | *Schedulable** | Nodes          |
 |                |                | Memory/RAM     |                |
-+----------------+----------------+----------------+----------------+
++================+================+================+================+
 | quest7         | 28             | 116GB          | short/nor      |
 |                |                |                | mal/long/buyin |
 +----------------+----------------+----------------+----------------+
@@ -544,7 +491,7 @@ Required memory
 ~~~~~~~~~~~~~~~
 
 There are two methods for specifying how much memory/RAM you need, the
-``--mem`` option which indicates how much memory you want *per node*.
+``--mem`` option which indicates how much memory you want\ *per node*.
 
 ``#SBATCH --mem=<memory per node>G``
 
@@ -580,7 +527,7 @@ summarizes the relevant information.
 | Name           |                | *              | with these     |
 |                |                | *Schedulable** | Nodes          |
 |                |                | Memory/RAM     |                |
-+----------------+----------------+----------------+----------------+
++================+================+================+================+
 | quest7         | 28             | 116GB          | short/nor      |
 |                |                |                | mal/long/buyin |
 +----------------+----------------+----------------+----------------+
@@ -596,7 +543,7 @@ summarizes the relevant information.
 |                |                |                | mal/long/buyin |
 +----------------+----------------+----------------+----------------+
 
-A final consideration when selecting how much memory/RAM you want is how
+A final consideration when selecting how much memory/RAM you want ishow
 much memory/RAM is available on each of the different
 generations/families of compute nodes that make up Quest. To drive home
 this point, imagine you made the following request:
@@ -807,6 +754,11 @@ option in your job submission script:
 
 ``#SBATCH --job-name=<job name>``
 
+The default is to set this value to the name of the submission file, so
+we recommend that you set this to a memorable string because it can be
+useful when trying to identify a specific job among several running or
+completed jobs.
+
 .. _section-email:
 
 Sending e-mail alerts about your job
@@ -857,85 +809,111 @@ To specify an architecture constraint for your job, please include a
 All Slurm Configuration Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+-----------------------------------+-----------------------------------+
-| Option                            | Slurm (sbatch)                    |
-+===================================+===================================+
-| Job name                          | –job-name=<name>                  |
-|                                   | -J <name>                         |
-+-----------------------------------+-----------------------------------+
-| Account                           | –account=<account>                |
-|                                   | -A <account>                      |
-+-----------------------------------+-----------------------------------+
-| Queue                             | –partition=<queue>                |
-+-----------------------------------+-----------------------------------+
-| Wall time limit                   | –time=<hh:mm:ss>                  |
-|                                   | -t<hh:mm:ss>                      |
-+-----------------------------------+-----------------------------------+
-| Node count                        | –nodes=<count>                    |
-|                                   | -N <count>                        |
-+-----------------------------------+-----------------------------------+
-| Core count                        | -n <count>                        |
-+-----------------------------------+-----------------------------------+
-| Process count per node            | –ntasks-per-node=<count>          |
-+-----------------------------------+-----------------------------------+
-| Core count (per process)          | –cpus-per-task=<cores>            |
-+-----------------------------------+-----------------------------------+
-| Memory limit                      | –mem=<limit> (Memory per node in  |
-|                                   | MB)                               |
-+-----------------------------------+-----------------------------------+
-| Minimum memory per processor      | –mem-per-cpu=<memory>             |
-+-----------------------------------+-----------------------------------+
-| Request GPUs                      | –gres=gpu:<count>                 |
-+-----------------------------------+-----------------------------------+
-| Instead of specifying how many    | -w, –nodelist=<node>[,node2[,…]]> |
-| nodes you want,                   | -F, –nodefile=<node file>         |
-| you could request a specific set  |                                   |
-| of compute nodes.                 |                                   |
-| This cannot be used in            |                                   |
-| combination with ``--nodes=``.    |                                   |
-+-----------------------------------+-----------------------------------+
-| Job array                         | -a <array indices>                |
-+-----------------------------------+-----------------------------------+
-| Standard output file              | –output=<file path> (path must    |
-|                                   | exist)                            |
-+-----------------------------------+-----------------------------------+
-| Standard error file               | –error=<file path> (path must     |
-|                                   | exist)                            |
-+-----------------------------------+-----------------------------------+
-| Combine stdout/stderr to stdout   | –output=<combined out and err     |
-|                                   | file path>                        |
-+-----------------------------------+-----------------------------------+
-| Architecture constraint           | –constraint=<architecture>        |
-|                                   | -C <architecture>                 |
-+-----------------------------------+-----------------------------------+
-| Copy environment                  | –export=ALL (default)             |
-|                                   | –export=NONE ## to not export     |
-|                                   | environment                       |
-+-----------------------------------+-----------------------------------+
-| Copy environment variable         | –export=<variabl                  |
-|                                   | e[=value][,variable2=value2[,…]]> |
-+-----------------------------------+-----------------------------------+
-| Job dependency                    | –dependency=after:jobID[:jobID…]  |
-|                                   | –                                 |
-|                                   | dependency=afterok:jobID[:jobID…] |
-|                                   | –dep                              |
-|                                   | endency=afternotok:jobID[:jobID…] |
-|                                   | –d                                |
-|                                   | ependency=afterany:jobID[:jobID…] |
-+-----------------------------------+-----------------------------------+
-| Request event notification        | –mail-type=<events>               |
-|                                   | Note: multiple mail-type requests |
-|                                   | may be specified in a comma       |
-|                                   | separated list:                   |
-|                                   | –mail-type=BEGIN,END,FAIL         |
-+-----------------------------------+-----------------------------------+
-| Email address                     | –mail-user=<email address>        |
-+-----------------------------------+-----------------------------------+
-| Defer job until the specified     | –begin=<date/time>                |
-| time                              |                                   |
-+-----------------------------------+-----------------------------------+
-| Node exclusive job                | –exclusive                        |
-+-----------------------------------+-----------------------------------+
++-----------------------+-----------------------+-----------------------+
+| Option                | Slurm (sbatch)        | Default/Required      |
++=======================+=======================+=======================+
+| Account               | –account=<account>    | Required: Not set by  |
+|                       | -A <account>          | default               |
++-----------------------+-----------------------+-----------------------+
+| Partition/queue       | –                     | Required: Not set by  |
+|                       | partition=<partition> | default               |
++-----------------------+-----------------------+-----------------------+
+| Wall time limit       | –time=<hh:mm:ss>      | Required: Not set by  |
+|                       | -t<hh:mm:ss>          | default               |
++-----------------------+-----------------------+-----------------------+
+| Job name              | –job-name=<name>      | Optional: Default is  |
+|                       | -J <name>             | to set this value to  |
+|                       |                       | the name of the       |
+|                       |                       | submission file.      |
++-----------------------+-----------------------+-----------------------+
+| Node count            | –nodes=<count>        | Optional: Not set by  |
+|                       | -N <count>            | default               |
++-----------------------+-----------------------+-----------------------+
+| Core count            | -n <count>            | Optional: Default is  |
+|                       |                       | 1                     |
+|                       | –ntasks=<count>       |                       |
++-----------------------+-----------------------+-----------------------+
+| Process count per     | –nt                   | Optional: Not set by  |
+| node                  | asks-per-node=<count> | default               |
++-----------------------+-----------------------+-----------------------+
+| Core count (per       | –                     | Optional: Default is  |
+| process)              | cpus-per-task=<cores> | 1                     |
++-----------------------+-----------------------+-----------------------+
+| Memory limit          | –mem=<limit> (Memory  | Optional: Not set by  |
+|                       | per node in MB)       | default               |
++-----------------------+-----------------------+-----------------------+
+| Minimum memory per    | –mem-per-cpu=<memory> | Optional: Default is  |
+| processor             |                       | 3.25GB                |
++-----------------------+-----------------------+-----------------------+
+| Request GPUs          | –gres=gpu:<count>     | Optional: Not set by  |
+|                       |                       | default               |
++-----------------------+-----------------------+-----------------------+
+| Instead of specifying | -w,                   | Optional: Not set by  |
+| how many nodes you    | –nodelis              | default               |
+| want,                 | t=<node>[,node2[,…]]> |                       |
+| you could request a   | -F, –nodefile=<node   |                       |
+| specific set of       | file>                 |                       |
+| compute nodes.        |                       |                       |
+| This cannot be used   |                       |                       |
+| in combination with   |                       |                       |
+| the ``--nodes=``      |                       |                       |
+| setting.              |                       |                       |
++-----------------------+-----------------------+-----------------------+
+| Job array             | -a <array indices>    | Optional: Not set by  |
+|                       |                       | default               |
++-----------------------+-----------------------+-----------------------+
+| Standard output file  | –output=<file path>   | Optional: Not set by  |
+|                       | (path must exist)     | default               |
++-----------------------+-----------------------+-----------------------+
+| Standard error file   | –error=<file path>    | Optional: Not set by  |
+|                       | (path must exist)     | default               |
++-----------------------+-----------------------+-----------------------+
+| Combine stdout/stderr | –output=<combined out | Optional: Set to      |
+| to stdout             | and err file path>    | ``slurm-<jobid>.out`` |
+|                       |                       | by default.           |
++-----------------------+-----------------------+-----------------------+
+| Architecture          | –cons                 | Optional: Not set by  |
+| constraint            | traint=<architecture> | default               |
+|                       | -C <architecture>     |                       |
++-----------------------+-----------------------+-----------------------+
+| Copy environment      | –export=ALL (default) | Optional: Default is  |
+|                       | –export=NONE ## to    | to export ALL         |
+|                       | not export            | environmental         |
+|                       | environment           | settings from the     |
+|                       |                       | submission            |
+|                       |                       | environment to the    |
+|                       |                       | runtime environment.  |
++-----------------------+-----------------------+-----------------------+
+| Copy environment      | –export               | Optional: Not set by  |
+| variable              | =<variable[=value][,v | default               |
+|                       | ariable2=value2[,…]]> |                       |
++-----------------------+-----------------------+-----------------------+
+| Job dependency        | –dependency           | Optional: Not set by  |
+|                       | =after:jobID[:jobID…] | default               |
+|                       | –dependency=a         |                       |
+|                       | fterok:jobID[:jobID…] |                       |
+|                       | –dependency=afte      |                       |
+|                       | rnotok:jobID[:jobID…] |                       |
+|                       | –dependency=af        |                       |
+|                       | terany:jobID[:jobID…] |                       |
++-----------------------+-----------------------+-----------------------+
+| Request event         | –mail-type=<events>   | Optional: Not set by  |
+| notification          | Note: multiple        | default               |
+|                       | mail-type requests    |                       |
+|                       | may be specified in a |                       |
+|                       | comma separated list: |                       |
+|                       | –mai                  |                       |
+|                       | l-type=BEGIN,END,FAIL |                       |
++-----------------------+-----------------------+-----------------------+
+| Email address         | –mail-user=<email     | Optional: Not set by  |
+|                       | address>              | default               |
++-----------------------+-----------------------+-----------------------+
+| Defer job until the   | –begin=<date/time>    | Optional: Not set by  |
+| specified time        |                       | default               |
++-----------------------+-----------------------+-----------------------+
+| Node exclusive job    | –exclusive            | Optional: Not set by  |
+|                       |                       | default               |
++-----------------------+-----------------------+-----------------------+
 
 .. _section-slurm-environmental-variables:
 
@@ -1277,8 +1255,8 @@ For running jobs, you can see the starting priority using checkjob
 
 .. _h_90022083356871649361533121:
 
-Example of Jobs on Quest
-------------------------
+Special Types of Job Submissions
+--------------------------------
 
 In this section, we provide details and examples of how to use Slurm to
 run interactive jobs, job arrays, and jobs that depend on each other.
@@ -1305,7 +1283,7 @@ interactive job will terminate.*
 
 .. code:: code
 
-   [quser23 ~]$ srun -N 1 -n 1 --account=<account> --mem=XXG --partition=<partition> --time=<hh:mm:ss> --pty bash -l
+   [quser23 ~]$srun -N 1 -n 1 --account=<account> --mem=XXG --partition=<partition> --time=<hh:mm:ss> --pty bash -l
    srun: job 3201233 queued and waiting for resources
    srun: job 3201233 has been allocated resources
    ----------------------------------------
@@ -1343,7 +1321,7 @@ interactive session, the interactive job will*\ **not**\ *terminate.
    salloc: Nodes qnode8029 are ready for job
    [quser21 ~]$ ssh qnode8029
    Warning: Permanently added 'qnode8029,172.20.134.29' (ECDSA) to the list of known hosts.
-   [qnode8029 ~]$ 
+   [qnode8029 ~]$
 
 .. _section-section-interactive-jobs-gui:
 
@@ -1365,7 +1343,7 @@ interactive job will terminate.*
 
 .. code:: code
 
-   [quser23 ~]$ srun --x11 -N 1 -n 1 --account=<account> --mem=XXG --partition=<partition> --time=<hh:mm:ss> --pty bash -l
+   [quser23 ~]$srun --x11 -N 1 -n 1 --account=<account> --mem=XXG --partition=<partition> --time=<hh:mm:ss> --pty bash -l
    srun: job 3201233 queued and waiting for resources
    srun: job 3201233 has been allocated resources
    ----------------------------------------
@@ -1402,7 +1380,7 @@ interactive session, the interactive job will*\ **not**\ *terminate.*
    salloc: Nodes qnode8029 are ready for job
    [quser21 ~]$ ssh -X qnode8029
    Warning: Permanently added 'qnode8029,172.20.134.29' (ECDSA) to the list of known hosts.
-   [qnode8029 ~]$ 
+   [qnode8029 ~]$
 
 .. _section-job-array:
 
@@ -1436,7 +1414,7 @@ command line arguments.
    #SBATCH --nodes=1 ## how many computers do you need
    #SBATCH --ntasks-per-node=1 ## how many cpus or processors do you need on each computer
    #SBATCH --time=00:10:00 ## how long does this need to run (remember different partitions have restrictions on this param)
-   #SBATCH --mem-per-cpu=1G ## how much RAM do you need per CPU (this effects your FairShare score so be careful to not ask for more than you need))
+   #SBATCH --mem-per-cpu=1G ## how much RAM do you need per CPU (this affects your FairShare score so be careful to not ask for more than you need))
    #SBATCH --job-name="sample_job_\${SLURM_ARRAY_TASK_ID}" ## use the task id in the name of the job
    #SBATCH --output=sample_job.%A_%a.out ## use the jobid (A) and the specific job index (a) to name your log file
    #SBATCH --mail-type=ALL ## you can receive e-mail alerts from SLURM when your job begins and when your job finishes (completed, failed, etc)
@@ -1974,9 +1952,11 @@ sbatch: error: –time limit option required or sbatch: error: Unable to allocat
    ========= ==================
    Partition Walltime limit
    ========= ==================
-   Short     4 hours
-   Normal    48 hours
-   Long      7 days / 168 hours
+   short     4 hours
+   normal    48 hours
+   long      7 days / 168 hours
+   genhimem  48 hours
+   gengpu    48 hours
    ========= ==================
 
    Buy-in accounts that begin with a “b” have their own wall time
@@ -2311,7 +2291,7 @@ Job Exceeded Request Time or Memory
 Besides errors in your script or hardware failure, your job may be
 aborted by the system if it is still running when the walltime limit you
 requested (or the upper walltime limit for the partition) is reached.
-You will see TIMEOUT state for these jobs.
+You will see state for these jobs.
 
 If you use more cores than you requested, the system will again stop the
 job. This can happen with programs that are multi-threaded. Similarly,
