@@ -1,0 +1,2623 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Everything You Need to Know about Using Slurm on Quest &mdash; Quest v2022.04.20 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/Quest-docs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Quest
+          </a>
+              <div class="version">
+                v2022.04.20
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Everything You Need to Know about Using Slurm on Quest</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-job-submission-script">The Job Submission Script</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-submission-script">Example Submission Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#submitting-your-batch-job">Submitting Your Batch Job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#slurm-configuration-settings">Slurm Configuration Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#allocation-account">Allocation/Account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quest-partitions-queues">Quest Partitions/Queues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#partition-definitions-general-access-p-and-e-accounts">Partition Definitions: General Access (“p” and “e” accounts)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#partition-definitions-full-access-buy-ins-or-b-accounts">Partition Definitions: Full Access (buy-ins, or “b” accounts)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#walltime-length-of-the-job">Walltime/Length of the job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#number-of-nodes">Number of Nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#number-of-cores">Number of Cores</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#required-memory">Required memory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-can-i-tell-if-my-job-needs-more-memory-to-run-successfully">How can I tell if my job needs more memory to run successfully?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#my-job-ran-out-of-memory-and-failed-now-what">My job ran out of memory and failed, now what?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-much-memory-should-i-reserve-in-my-job-script">How much memory should I reserve in my job script?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-output-error">Standard Output/Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#job-name">Job Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sending-e-mail-alerts-about-your-job">Sending e-mail alerts about your job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constraints">Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#all-slurm-configuration-options">All Slurm Configuration Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environmental-variables-set-by-slurm">Environmental Variables Set by Slurm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#slurm-commands-and-job-management">SLURM Commands and Job Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-common-slurm-commands">Table of Common Slurm Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-squeue-command">The <code class="docutils literal notranslate"><span class="pre">squeue</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-sacct-command">The <code class="docutils literal notranslate"><span class="pre">sacct</span></code> Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-checkjob-command">The checkjob Command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-for-a-successfully-running-job">Example for a Successfully Running Job</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cancelling-jobs">Cancelling Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#holding-releasing-or-modifying-jobs">Holding, Releasing, or Modifying Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#probing-priority">Probing Priority</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#special-types-of-job-submissions">Special Types of Job Submissions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#interactive-job-examples">Interactive Job Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submitting-an-interactive-job-to-run-an-application-without-graphical-user-interface">Submitting an Interactive Job (to run an application <em>without</em> Graphical User Interface)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submitting-an-interactive-job-to-run-an-application-with-graphical-user-interface">Submitting an Interactive Job (to run an application <em>with</em> Graphical User Interface)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#job-array">Job Array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependent-jobs">Dependent Jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#diagnosing-issues-with-your-job-submission-script-and-or-your-job-itself">Diagnosing Issues with Your Job Submission Script and/or Your Job Itself</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-a-job-submission-script-rejected-by-the-scheduler">Debugging a Job Submission Script Rejected By The Scheduler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-account-option-required-or-sbatch-error-unable-to-allocate-resources-invalid-account-or-account-partition-combination-specified">sbatch: error: –account option required or sbatch: error: Unable to allocate resources: Invalid account or account/partition combination specified</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-your-allocation-has-expired-or-sbatch-error-unable-to-allocate-resources-invalid-qos-specification">sbatch: error: Your allocation has expired or sbatch: error: Unable to allocate resources: Invalid qos specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#srun-error-partition-option-required-or-srun-error-unable-to-allocate-resources-access-permission-denied">srun: error: –partition option required or srun: error: Unable to allocate resources: Access/permission denied</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-unable-to-allocate-resources-invalid-qos-specification">sbatch: error: Unable to allocate resources: Invalid qos specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-invalid-partition-specified-partition-name-or-sbatch-error-unable-to-allocate-resources-invalid-partition-name-specified">sbatch: error: invalid partition specified: &lt;partition_name&gt; or sbatch: error: Unable to allocate resources: Invalid partition name specified</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-unable-to-allocate-resources-invalid-account-or-account-partition-combination-specified-or-sbatch-error-unable-to-allocate-resources-users-group-not-permitted-to-use-this-partition">sbatch: error: Unable to allocate resources: Invalid account or account/partition combination specified or sbatch: error: Unable to allocate resources: User’s group not permitted to use this partition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-time-limit-option-required-or-sbatch-error-unable-to-allocate-resources-requested-time-limit-is-invalid-missing-or-exceeds-some-limit">sbatch: error: –time limit option required or sbatch: error: Unable to allocate resources: Requested time limit is invalid (missing or exceeds some limit)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-unrecognized-option-option">sbatch: unrecognized option &lt;option&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-cpu-count-per-node-can-not-be-satisfied-or-sbatch-error-batch-job-submission-failed-requested-node-configuration-is-not-available">sbatch: error: CPU count per node can not be satisfied or sbatch: error: Batch job submission failed: Requested node configuration is not available</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sbatch-error-batch-script-contains-dos-line-breaks-rn-or-sbatch-error-instead-of-expected-unix-line-breaks-n">sbatch: error: Batch script contains DOS line breaks (rn) or sbatch: error: instead of expected UNIX line breaks (n).</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-a-job-accepted-by-the-scheduler">Debugging a Job Accepted by the Scheduler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#job-runs-very-slowly-or-dies-after-starting">Job runs very slowly or dies after starting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#job-name-is-name-of-job-submission-script-instead-of-name-in-submission-script">Job name is name of job submission script instead of name in submission script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modules-or-environment-variables-are-inherited-from-the-login-session-by-a-running-job">Modules or environment variables are inherited from the login session by a running job</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#factors-affecting-job-scheduling-on-quest">Factors Affecting Job Scheduling on Quest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#priority">Priority</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#backfill-scheduling">Backfill Scheduling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#common-reasons-for-failed-jobs">Common reasons for Failed Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#job-exceeded-request-time-or-memory">Job Exceeded Request Time or Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#out-of-disk-space">Out of Disk Space</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Quest</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Everything You Need to Know about Using Slurm on Quest</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/super-slurm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="everything-you-need-to-know-about-using-slurm-on-quest">
+<h1>Everything You Need to Know about Using Slurm on Quest<a class="headerlink" href="#everything-you-need-to-know-about-using-slurm-on-quest" title="Permalink to this headline"></a></h1>
+<p>The program that schedules jobs and manages resources on Quest is called
+Slurm. This page is designed to help facilitate a deeper understanding
+of how Slurm works and to contextualize the things that you can do with
+Slurm. For those who are brand new to Quest, we recommend visiting our
+<a class="reference external" href="https://www.it.northwestern.edu/research/videos.html">Research Computing How-to
+Videos</a> page
+and watching our <em>Introduction to Quest</em> video before proceeding with
+this documentation. This page covers…</p>
+<ul class="simple">
+<li><p>A simple Slurm job submission script.</p></li>
+<li><p>The key configuration settings of the Slurm submission script as well
+as details on additional settings that may be useful to specify.</p></li>
+<li><p>How to monitor and manage your job submissions</p></li>
+<li><p>Special types of job submissions and when they are useful.</p></li>
+<li><p>Diagnosing issues with your job submission.</p></li>
+</ul>
+<section id="the-job-submission-script">
+<span id="h-8666220334701650307877674"></span><h2>The Job Submission Script<a class="headerlink" href="#the-job-submission-script" title="Permalink to this headline"></a></h2>
+<p>Slurm requires users to write a batch submission script to submit a
+batch job. In this section, we present a basic submission script and how
+a user would then submit a batch job using this submission script. To
+submit a batch job, you first write a submission script specifying the
+resources you need and what commands to run, then you submit this script
+to the scheduler by running the <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command on the command line.</p>
+<section id="example-submission-script">
+<span id="h-6598678335431650314984849"></span><h3>Example Submission Script<a class="headerlink" href="#example-submission-script" title="Permalink to this headline"></a></h3>
+<p>The following is an example batch job. Please note any placeholders
+which are denoted with <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code>. You will need to replace these with the
+appropriate value including the <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code>. These commands would be saved in
+a file such as <code class="docutils literal notranslate"><span class="pre">jobscript.sh</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --account=&lt;account&gt; ## Required: your allocation/account name, i.e. eXXXXX, pXXXX or bXXXX</span>
+<span class="c1">#SBATCH --partition=short ## Required: (buyin, short, normal, long, gengpu, genhimem, etc)</span>
+<span class="c1">#SBATCH --time=00:10:00 ## Required: How long will the job need to run (remember different partitions have restrictions on this parameter)</span>
+<span class="c1">#SBATCH --nodes=1 ## how many computers/nodes do you need (no default)</span>
+<span class="c1">#SBATCH --ntasks-per-node=1 ## how many cpus or processors do you need on per computer/node (default value 1)</span>
+<span class="c1">#SBATCH --mem=1G ## how much RAM do you need per computer/node (this affects your FairShare score so be careful to not ask for more than you need))</span>
+<span class="c1">#SBATCH --job-name=sample_job ## When you run squeue -u NETID this is how you can identify the job</span>
+<span class="c1">#SBATCH --output=output.log ## standard out and standard error goes to this file</span>
+
+<span class="c1"># A regular comment in Bash</span>
+<span class="n">module</span> <span class="n">purge</span> <span class="nb">all</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">python</span><span class="o">-</span><span class="n">anaconda3</span>
+<span class="n">source</span> <span class="n">activate</span> <span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">intro</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">slurm</span><span class="o">-</span><span class="n">py37</span><span class="o">-</span><span class="n">test</span>
+
+
+<span class="n">python</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">python</span> <span class="n">slurm_test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>The first line of the script loads the bash shell. Lines that begin with
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> are interpreted by Slurm and Slurm will ignore any of the
+words in the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line which follow <code class="docutils literal notranslate"><span class="pre">##</span></code>. At the time of
+submission, the only lines that are interpreted/run are those that begin
+with <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code>. Once the job has been placed on the compute node, the
+remainder of the script (everything after the last <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line) is
+run. Normally in Bash, <code class="docutils literal notranslate"><span class="pre">#</span></code> is a comment character which means that
+anything written after a <code class="docutils literal notranslate"><span class="pre">#</span></code> is ignored by the Bash
+interpreter/language. When writing a submission script, however, it is
+not a comment character when used with <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code>.</p>
+<p>After the Slurm commands, the rest of the script works like a regular
+Bash script. You can modify environment variables, load modules, change
+directories, and execute program commands. Lines in the second half of
+the script that start with <code class="docutils literal notranslate"><span class="pre">#</span></code> are comments, such as
+<code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">A</span> <span class="pre">regular</span> <span class="pre">comment</span> <span class="pre">in</span> <span class="pre">Bash</span></code> in the the example above.</p>
+<p>Find a downloadable copy of this example script <a class="reference external" href="https://github.com/nuitrcs/examplejobs">on
+GitHub</a>.</p>
+</section>
+<section id="submitting-your-batch-job">
+<span id="h-943032369801650314991617"></span><h3>Submitting Your Batch Job<a class="headerlink" href="#submitting-your-batch-job" title="Permalink to this headline"></a></h3>
+<p>After you’ve written and saved your submission script, you can submit
+your job. At the command line type</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sbatch &lt;name_of_script&gt;
+</pre></div>
+</div>
+<p>where, in the example above <code class="docutils literal notranslate"><span class="pre">&lt;name_of_script&gt;</span></code> would be
+<code class="docutils literal notranslate"><span class="pre">jobscript.sh</span></code>. Upon submission the scheduler will return your job
+number:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>Submitted batch job 549005
+</pre></div>
+</div>
+<p>If you have a workflow that accepts or needs the jobid as an input for
+<a class="reference external" href="#all-slurm-commands-and-submission-options">job monitoring</a> or <a class="reference external" href="#section-dependent-jobs">job
+dependencies</a>, then you may prefer the
+return value of your job submission be just the job number, To do this,
+pass the <code class="docutils literal notranslate"><span class="pre">--parsable</span></code> argument:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sbatch --parsable &lt;name_of_script&gt;
+549005
+</pre></div>
+</div>
+<p>If there is an error in your job submission script, the job will not be
+accepted by the scheduler and you will receive an error message right
+away, for example:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sbatch: error: Batch job submission failed: Invalid account or account/partition combination specified
+</pre></div>
+</div>
+<p>If your job submission receives an error, you will need to resubmit your
+job. If no error is received, your job has entered the queue and will
+run.</p>
+</section>
+</section>
+<section id="slurm-configuration-settings">
+<h2>Slurm Configuration Settings<a class="headerlink" href="#slurm-configuration-settings" title="Permalink to this headline"></a></h2>
+<p>In this section, we go into details about a number of the Slurm
+configurations settings. In each subsection, we include the possible
+range of values a user can set, how to think about what value to use for
+a given setting, and whether or not the setting is required and if not
+required, what the default is for the setting.</p>
+<section id="allocation-account">
+<span id="section-account"></span><h3>Allocation/Account<a class="headerlink" href="#allocation-account" title="Permalink to this headline"></a></h3>
+<p>To specify the account, please include a <code class="docutils literal notranslate"><span class="pre">-A/--account</span></code> option in your
+job submission script:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">&lt;allocation&gt;</span></code></p>
+<p>To submit jobs to Quest, you must be part of an <strong>active</strong> classroom,
+research, or buy-in allocation. Additionally, for buy-in allocations you
+must be part of a <strong>buy-in allocation with access to compute
+resources</strong>. To determine the names of the allocation(s)/account(s) that
+you are part of on Quest, you can run the following on the command line
+which will produce output similar to below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ groups
+quest_demo b1011 p30157 e31572
+</pre></div>
+</div>
+<p>Once you determine the allocation(s)/account(s) that you are part of,
+you can check whether or not the allocation is active and has access to
+compute resources by running <code class="docutils literal notranslate"><span class="pre">checkproject</span></code> and reading the last two
+lines of the output. An example of running <code class="docutils literal notranslate"><span class="pre">checkproject</span></code> is below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ checkproject &lt;allocation&gt;
+
+====================================
+Reporting for project pXXXXX
+------------------------------------
+1 GB in 4623 files (0% of 1000 GB quota)
+Allocation Type: Allocation I
+Expiration Date: 2022-12-01
+Status: ACTIVE
+Compute and storage allocation - when status is ACTIVE, this allocation has compute node access and can submit jobs
+------------------------------------
+====================================
+</pre></div>
+</div>
+<p>For more information on allocations and allocation management, please
+see <a class="reference external" href="https://kb.northwestern.edu/65175">Managing an Allocation on
+Quest</a>.</p>
+</section>
+<section id="quest-partitions-queues">
+<span id="section-partitions"></span><h3>Quest Partitions/Queues<a class="headerlink" href="#quest-partitions-queues" title="Permalink to this headline"></a></h3>
+<p>To specify the partition, please include a <code class="docutils literal notranslate"><span class="pre">-p/--partition</span></code> option in
+your job submission script:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition&gt;</span></code></p>
+<p>Quest offers several partitions or queues where you can run your job.
+Based on the duration of your job, number of cores, and type of access
+to Quest, you should select the most appropriate partition for your job.
+A partition must be specified when you submit your job or the scheduler
+will return the error,
+<code class="docutils literal notranslate"><span class="pre">&quot;sbatch:</span> <span class="pre">error:</span> <span class="pre">Batch</span> <span class="pre">job</span> <span class="pre">submission</span> <span class="pre">failed:</span> <span class="pre">No</span> <span class="pre">partition</span> <span class="pre">specified</span> <span class="pre">or</span> <span class="pre">system</span> <span class="pre">default</span> <span class="pre">partition&quot;</span></code>.</p>
+<section id="partition-definitions-general-access-p-and-e-accounts">
+<h4>Partition Definitions: General Access (“p” and “e” accounts)<a class="headerlink" href="#partition-definitions-general-access-p-and-e-accounts" title="Permalink to this headline"></a></h4>
+<p>Standard compute node access.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Minimum
+Walltime</p></th>
+<th class="head"><p>Maximum
+Walltime</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>short</p></td>
+<td><p>00:00:00</p></td>
+<td><p>04:00:00</p></td>
+<td><p>The short
+partition is
+for jobs that
+will run in 4
+hours or less.
+The short
+partition has
+access to more
+compute nodes
+than the normal
+or long
+partitions.
+This feature
+plus the
+shorter
+duration
+enables short
+partition jobs
+to be scheduled
+faster.</p></td>
+</tr>
+<tr class="row-odd"><td><p>normal</p></td>
+<td><p>04:00:00</p></td>
+<td><p>48:00:00</p></td>
+<td><p>The normal
+partition is
+for jobs that
+will run in
+between 4 hours
+and 2 days. The
+normal
+partition has
+access to more
+compute nodes
+than the long
+partition, but
+less than the
+short
+partition.</p></td>
+</tr>
+<tr class="row-even"><td><p>long</p></td>
+<td><p>48:00:00</p></td>
+<td><p>168:00:00</p></td>
+<td><p>The long
+partition is
+for jobs that
+will run in
+between 2 days
+and 7 days. The
+long partition
+has access to a
+less compute
+nodes than the
+short or normal
+partition.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Specialty compute node access</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 27%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Maximum Walltime</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gengpu</p></td>
+<td><p>48:00:00</p></td>
+<td><p>This partition can be used only if
+your job requires GPUs. In addition
+to specifying <em>gengpu</em> as your
+partition, you must additionally
+specify in your submission script
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--gres=gpu:a100:X</span></code>,
+where <code class="docutils literal notranslate"><span class="pre">X</span></code> is the number of GPUs
+you want to request. Please see
+<a class="reference external" href="https://kb.northwestern.edu/108515">GPUs on
+QUEST</a>
+for more information about the
+GPUs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>genhimem</p></td>
+<td><p>48:00:00</p></td>
+<td><p>This partition can be used only if
+your job requires more than 180 GB
+memory per node. This partition has
+access to 4 nodes, three 28 core
+nodes with 500GB of schedulable
+memory and one 52 core node with
+1TB of schedulable memory.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="partition-definitions-full-access-buy-ins-or-b-accounts">
+<h4>Partition Definitions: Full Access (buy-ins, or “b” accounts)<a class="headerlink" href="#partition-definitions-full-access-buy-ins-or-b-accounts" title="Permalink to this headline"></a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Maximum Walltime</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Allocation name (e.g.
+“b1234”)
+or
+“buyin”</p></td>
+<td><p>Allocation-specific</p></td>
+<td><p>Using the allocation
+name as the partition
+name is only
+available to users
+with <a class="reference external" href="http://www.it.northwestern.edu/research/user-services/quest/full-access.html">full
+acce
+ss</a>
+to Quest. The
+resources available
+and any limits on
+jobs are governed by
+the specific policies
+of the full-access
+allocation.
+Example:
+<code class="docutils literal notranslate"><span class="pre">#SLURM</span> <span class="pre">-p</span> <span class="pre">b1234</span></code>
+When using the buyin
+partition, you must
+also specify the
+appropriate buyin
+allocation ID in your
+job submission
+script, using the
+<code class="docutils literal notranslate"><span class="pre">-A</span></code> flag. Using
+the buyin partition
+is the same as using
+your allocation name
+as the partition
+name.
+Example:
+<code class="docutils literal notranslate"><span class="pre">#SLURM</span> <span class="pre">-p</span> <span class="pre">buyin</span></code>
+If your allocation
+has specific
+partition names, such
+as genomics,
+ciera-std, grail-std
+etc., you should use
+those partition names
+instead of your
+allocation name or
+buyin partition.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes">
+<h4>Notes<a class="headerlink" href="#notes" title="Permalink to this headline"></a></h4>
+<p>Additional specialized partitions exist for specific allocations. You
+may be instructed to use a partition name that isn’t listed above.</p>
+<p>If you need to run jobs longer than one week, <a class="reference external" href="mailto:quest-help&#37;&#52;&#48;northwestern&#46;edu?subject=Quest%20Long-running%20job">contact Research
+Computing</a>
+for a consultation. Some special accommodations can be made for jobs
+requiring the resources of up to a single node for a month or less.</p>
+</section>
+</section>
+<section id="walltime-length-of-the-job">
+<span id="section-walltime"></span><h3>Walltime/Length of the job<a class="headerlink" href="#walltime-length-of-the-job" title="Permalink to this headline"></a></h3>
+<p>To specify the walltime for your job, please include a <code class="docutils literal notranslate"><span class="pre">-t/--walltime</span></code>
+option in your job submission script:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-t</span> <span class="pre">&lt;timelimit&gt;</span></code></p>
+<p>There are two important considerations when selecting the walltime, the
+<a class="reference external" href="#section-partitions">partition</a> that you chose and how long your job
+is expected to run. Although the partition that you choose will control
+the maximum wall time that can be selected, we do <em>not</em> recommend to
+simply select the maximum allowable wall time for that partition unless
+it is truly needed. There are two problematic ways to set wall time:</p>
+<ul class="simple">
+<li><p>If your walltime is much longer than your job needs to run, then your
+job will take longer to start running.</p></li>
+<li><p>If your walltime is shorter than your job needs to run, then your job
+will fail as there is no way to extend the walltime of a running job
+on Quest.</p></li>
+</ul>
+<p>This is why we recommend submitting a single, representative job and
+seeing how long it takes to run before selecting a walltime and
+submitting a large number of jobs. Please note that a incorrect walltime
+specification does not hurt you when Slurm assesses your utilization of
+the cluster as <em>only the</em><strong>actual</strong><em>duration of your job is used in
+computing your utilization.</em></p>
+</section>
+<section id="number-of-nodes">
+<span id="section-number-of-nodes"></span><h3>Number of Nodes<a class="headerlink" href="#number-of-nodes" title="Permalink to this headline"></a></h3>
+<p>To specify the number of nodes, please include the <code class="docutils literal notranslate"><span class="pre">-N/--nodes</span></code> option
+in your job submission script:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--nodes=&lt;number_of_nodes&gt;</span></code></p>
+<p>Although the number of nodes is an optional setting, we strongly
+recommend always setting this value. Specifically, we recommend setting
+this value to</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--nodes=1</span></code></p>
+<p>as the vast majority of software can only run on a single computer and
+cannot run across multiple computers. When you forget to set this value,
+but you do set the <a class="reference external" href="#number-of-cores">Number of Cores</a>, this can
+cause Slurm to match you with a set of computing resources which your
+application will be unable to use, but will still be penalized in your
+fair share for using. If you know that your application uses Message
+Passing Interface (MPI) to parallelize, then setting this value to
+something <code class="docutils literal notranslate"><span class="pre">&gt;1</span></code> could make sense.</p>
+</section>
+<section id="number-of-cores">
+<span id="section-number-of-cores"></span><h3>Number of Cores<a class="headerlink" href="#number-of-cores" title="Permalink to this headline"></a></h3>
+<p>There are two methods for specifying the number of cores, the
+<code class="docutils literal notranslate"><span class="pre">-n/--ntasks</span></code> option which indicates how many total cores you would
+like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks=&lt;number_of_cores&gt;</span></code></p>
+<p>or the <code class="docutils literal notranslate"><span class="pre">--ntasks-per-node=n</span></code> option whichindicates how many cores you
+would like <em>per node</em> and should always be used with the <a class="reference external" href="#number-of-nodes">Number of
+Nodes</a> option:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --nodes=&lt;number_of_nodes&gt;
+#SBATCH --ntasks-per-node=&lt;number_of_cores_per_node&gt;
+</pre></div>
+</div>
+<p>Although the number of cores is an optional setting whose default is 1,
+we strongly recommend always setting this value. Specifically, we
+recommend setting this value (to start) to</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks=1</span></code></p>
+<div class="line-block">
+<div class="line">The only situation in which <code class="docutils literal notranslate"><span class="pre">-n/--ntasks</span></code> should be greater than 1
+is if the application you are using has the capability to be
+parallelized. Many applications do <strong>not</strong> have this capability and
+therefore it is best to start of setting this value to 1. If your
+application is capable of parallelization, you will next want to
+determine what type of parallelization it uses in order to set this
+value correctly. For instance, if your application utilizes shared
+memory parallelization (OpenMP, R’s doParallel, Python’s
+multiprocessing, MATLAB local parpool, etc) then you can consider
+setting this value to be greater than 1. However, shared memory
+parallelization can only utilize CPUs <em>within a single computer</em> and
+CPUs allocated <em>across</em> computers will go unused. Therefore, if your
+code is parallelized in this manner, you must also specify</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--nodes=1</span></code></div>
+</div>
+<p>Finally, if you know that your application uses Message Passing
+Interface (MPI) to parallelize, then it can utilize CPUs
+allocated<em>across</em> computers and therefore setting <code class="docutils literal notranslate"><span class="pre">-n/--ntasks</span></code>
+without also setting <code class="docutils literal notranslate"><span class="pre">-N/--nodes</span></code> would make sense.</p>
+<p>A final consideration when selecting how many CPUs you want is how many
+CPUs are available on each of the different generations/families of
+compute nodes that make up Quest. Below is a table which summarizes the
+relevant information.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Node Family
+Name</p></th>
+<th class="head"><p>Number of CPUs</p></th>
+<th class="head"><p>Amount of
+*
+<em>Schedulable*</em>
+Memory/RAM</p></th>
+<th class="head"><p>Partitions
+with these
+Nodes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>quest7</p></td>
+<td><p>28</p></td>
+<td><p>116GB</p></td>
+<td><p>short/nor
+mal/long/buyin</p></td>
+</tr>
+<tr class="row-odd"><td><p>quest8
+(general
+access)</p></td>
+<td><p>28</p></td>
+<td><p>84GB</p></td>
+<td><p>short/nor
+mal/long/buyin</p></td>
+</tr>
+<tr class="row-even"><td><p>quest8 (buyin)</p></td>
+<td><p>28</p></td>
+<td><p>180GB</p></td>
+<td><p>buyin/short</p></td>
+</tr>
+<tr class="row-odd"><td><p>quest9</p></td>
+<td><p>40</p></td>
+<td><p>180GB</p></td>
+<td><p>buyin/short</p></td>
+</tr>
+<tr class="row-even"><td><p>quest10</p></td>
+<td><p>52</p></td>
+<td><p>180GB</p></td>
+<td><p>short/nor
+mal/long/buyin</p></td>
+</tr>
+</tbody>
+</table>
+<p>To drive home this point, imagine you made the following request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks-per-node=30</span>
+<span class="c1">#SBATCH --partition=short</span>
+</pre></div>
+</div>
+<p>This request would eliminate the Slurm’s ability to match you with any
+of the computers from generation quest7/8/9 and would increase the
+amount of time it will take to schedule your job as only one type of
+compute node is able to match your request.<a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">``</span></a></p>
+</section>
+<section id="required-memory">
+<span id="section-required-memory"></span><h3>Required memory<a class="headerlink" href="#required-memory" title="Permalink to this headline"></a></h3>
+<p>There are two methods for specifying how much memory/RAM you need, the
+<code class="docutils literal notranslate"><span class="pre">--mem</span></code> option which indicates how much memory you want<em>per node</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem=&lt;memory</span> <span class="pre">per</span> <span class="pre">node&gt;G</span></code></p>
+<p>or the <code class="docutils literal notranslate"><span class="pre">--mem-per-cpu</span></code> option which indicates how much memory/RAM you
+need <em>per CPU.</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem-per-cpu=&lt;memory</span> <span class="pre">per</span> <span class="pre">cpu&gt;G</span></code></p>
+<p>If your job submission script does not specify how much memory your job
+requires, then the default setting is 3.25 GB of memory per core.</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem-per-cpu=3256M</span></code></p>
+<p>Therefore, you submitted a job to run on 10 cores and did not specify
+your memory request in your job submission script, Slurm will allocate
+32.5 GB in total.</p>
+<p>The memory that is allocated to your job via this setting creates a
+<strong>hard upper limit</strong> and your application cannot access memory beyond
+what Slurm reserves for them; if your job tries to access more memory
+than has been reserved, it will be terminated.</p>
+<p>There is a special setting to request the entire memory of the computer.</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem=0</span></code></p>
+<p>How much memory this ends up being will depend on what generation/family
+of computer Slurm matches you to. The following is a table which
+summarizes the relevant information.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Node Family
+Name</p></th>
+<th class="head"><p>Number of CPUs</p></th>
+<th class="head"><p>Amount of
+*
+<em>Schedulable*</em>
+Memory/RAM</p></th>
+<th class="head"><p>Partitions
+with these
+Nodes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>quest7</p></td>
+<td><p>28</p></td>
+<td><p>116GB</p></td>
+<td><p>short/nor
+mal/long/buyin</p></td>
+</tr>
+<tr class="row-odd"><td><p>quest8
+(general
+access)</p></td>
+<td><p>28</p></td>
+<td><p>84GB</p></td>
+<td><p>short/nor
+mal/long/buyin</p></td>
+</tr>
+<tr class="row-even"><td><p>quest8 (buyin)</p></td>
+<td><p>28</p></td>
+<td><p>180GB</p></td>
+<td><p>buyin/short</p></td>
+</tr>
+<tr class="row-odd"><td><p>quest9</p></td>
+<td><p>40</p></td>
+<td><p>180GB</p></td>
+<td><p>buyin/short</p></td>
+</tr>
+<tr class="row-even"><td><p>quest10</p></td>
+<td><p>52</p></td>
+<td><p>180GB</p></td>
+<td><p>short/nor
+mal/long/buyin</p></td>
+</tr>
+</tbody>
+</table>
+<p>A final consideration when selecting how much memory/RAM you want ishow
+much memory/RAM is available on each of the different
+generations/families of compute nodes that make up Quest. To drive home
+this point, imagine you made the following request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --mem=130G</span>
+<span class="c1">#SBATCH --partition=short</span>
+</pre></div>
+</div>
+<p>This request would eliminate the Slurm’s ability to match you with any
+of the computers from generation quest7/8 and would increase the amount
+of time it will take to schedule your job as you will have reduced the
+pool of available compute nodes.</p>
+<section id="how-can-i-tell-if-my-job-needs-more-memory-to-run-successfully">
+<h4>How can I tell if my job needs more memory to run successfully?<a class="headerlink" href="#how-can-i-tell-if-my-job-needs-more-memory-to-run-successfully" title="Permalink to this headline"></a></h4>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-X</span></code> command to see information about your recent jobs,
+for example:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>$ sacct -X
+           JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+    ------------ ---------- ---------- ---------- ---------- ---------- --------
+    1273539      lammps-te+      short     p1234          40  COMPLETED      0:0
+    1273543      vasp-open+      short     p1234          40 OUT_OF_ME+    0:125
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line">The “State” field is the status of your job when it finished. Jobs
+with a “COMPLETED” state have run without system errors. Jobs with an
+“OUT_OF_ME+” state have run out of memory and failed. “OUT_OF_ME+”
+jobs need to request more memory in their job submission scripts to
+complete successfully.</div>
+<div class="line">If the job you’re investigating is not recent enough to be listed by
+<code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-X</span></code>, add date fields to the command to see jobs between
+specific start and end dates. For example, to see all jobs between
+September 15, 2019 and September 16, 2019:</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>$ sacct -X --starttime=091519 --endtime=091619
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line">Specify the date using MMDDYY. More information on sacct is available
+<a class="reference external" href="https://slurm.schedmd.com/sacct.html">here</a>.</div>
+</div>
+</section>
+<section id="my-job-ran-out-of-memory-and-failed-now-what">
+<h4>My job ran out of memory and failed, now what?<a class="headerlink" href="#my-job-ran-out-of-memory-and-failed-now-what" title="Permalink to this headline"></a></h4>
+<p>First, determine how much memory your job needs following the steps
+outlined below. Once you know how much memory your job needs, edit your
+job submission script to reserve that amount of memory + 10% for your
+job.</p>
+<section id="how-much-memory-does-my-job-need">
+<h5>How much memory does my job need?<a class="headerlink" href="#how-much-memory-does-my-job-need" title="Permalink to this headline"></a></h5>
+<p>To determine out how much memory your job uses on a compute node:</p>
+<ol class="arabic simple">
+<li><p>create a test job by editing your job’s submission script to reserve
+all of the memory of the node it runs on</p></li>
+<li><p>run your test job</p></li>
+<li><p>confirm your test job has completed successfully</p></li>
+<li><p>use <code class="docutils literal notranslate"><span class="pre">seff</span></code> to see how much memory your job actually used.</p></li>
+</ol>
+<p><em>Create a test job</em></p>
+<p>To profile your job’s memory usage, create a test job by modifying your
+job’s submission script to include the lines:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --mem=0
+#SBATCH --nodes=1
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Setting <code class="docutils literal notranslate"><span class="pre">--mem=0</span></code> reserves all of the memory on the node for your
+job; if you already have a <code class="docutils literal notranslate"><span class="pre">--mem=</span></code> directive in your job submission
+script, comment it out. Now your job will not run out of memory unless
+your job needs more memory than is on the node.</div>
+<div class="line">Setting <code class="docutils literal notranslate"><span class="pre">--nodes=1</span></code> reserves a single node for your job. For jobs
+that run on multiple nodes such as MPI-based programs, request the
+number of nodes that your job runs on. Be sure to specify a value for
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--nodes=</span></code> or the cores your job submission script reserves
+could end up on as many nodes as cores requested. Be aware that by
+setting <code class="docutils literal notranslate"><span class="pre">--mem=0</span></code>, you will be reserving all the memory on each of
+those nodes that your cores are reserved on.</div>
+</div>
+<div class="line-block">
+<div class="line">2) <a href="#id5"><span class="problematic" id="id6">*</span></a>Run your test job
+*</div>
+<div class="line">Submit your test job to the cluster with the <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command. For
+interactive jobs, use <code class="docutils literal notranslate"><span class="pre">srun</span></code> or <code class="docutils literal notranslate"><span class="pre">salloc</span></code>.</div>
+<div class="line">3) <em>Did your test job complete successfully?</em></div>
+<div class="line">When your job has stopped running use the sacct -X command to confirm
+your job finished with state “COMPLETED”. If your test job finishes
+with an “OUT_OF_ME+” state, confirm that you are submitting the
+modified job submission script that requests all of the memory on the
+node. If the “OUT_OF_ME+” errors persist, your job may require more
+memory than is available on the compute node it ran on. In this case,
+please email <a class="reference external" href="mailto:quest-help&#37;&#52;&#48;northwestern&#46;edu">quest-help<span>&#64;</span>northwestern<span>&#46;</span>edu</a> for assistance.</div>
+<div class="line">4) <em>How much memory did your job actually use?</em></div>
+<div class="line">To see how much memory it used run the command:
+<code class="docutils literal notranslate"><span class="pre">seff</span> <span class="pre">&lt;test_job_id_number&gt;</span></code>. This returns output similar to:</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>Job ID: 767731
+    Cluster: quest
+    User/Group: abc123/abc123
+    State: COMPLETED (exit code 0)
+    Cores: 1
+    CPU Utilized: 00:10:00
+    CPU Efficiency: 100.00% of 00:10:00 core-walltime
+    Job Wall-clock time: 00:10:00
+    Memory Utilized: 60.00 GB
+    Memory Efficiency: 50.00% of 120.00 GB
+</pre></div>
+</div>
+<p>Check the job State reported in the 4th line. If it is “COMPLETED (exit
+code 0)”, look at the last two lines. “Memory Utilized” is the amount of
+memory your job used, in this case 60Gb.</p>
+<p>If the job State is FAILED or CANCELLED, the Memory Efficiency
+percentage reported by seff will be extremely inaccurate. The seff
+command only works on jobs that have COMPLETED successfully.</p>
+</section>
+</section>
+<section id="how-much-memory-should-i-reserve-in-my-job-script">
+<h4>How much memory should I reserve in my job script?<a class="headerlink" href="#how-much-memory-should-i-reserve-in-my-job-script" title="Permalink to this headline"></a></h4>
+<p>It’s a good idea to reserve slightly more memory than your job utilized
+since the same job may require slightly different amounts of memory
+depending on variations in data it processes in each run of the job. To
+correctly reserve memory for this job, edit your test job submission
+script to modify the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem=</span></code> directive to reserve 10% more
+than 60Gb in the job submission script:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --mem=66G
+</pre></div>
+</div>
+<p>For jobs that use MPI, remove the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem=</span></code> directive from your
+job submission script. Now specify the amount of memory you’d like to
+reserve per core instead. For example, if your job uses 100Gb of memory
+total and runs on 10 cores, reserve 10Gb plus a safety factor per cpu:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --mem-per-cpu=11G
+</pre></div>
+</div>
+<p>If it doesn’t matter how many nodes your cores are distributed on you
+may remove the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--nodes=</span></code> directive as well.</p>
+<p>Be careful not to reserve significant amounts of memory beyond what your
+job requires as your job’s wait time will increase and reserving
+excessive memory also wastes shared resources that could be used by
+other researchers.</p>
+</section>
+</section>
+<section id="standard-output-error">
+<span id="section-output-error"></span><h3>Standard Output/Error<a class="headerlink" href="#standard-output-error" title="Permalink to this headline"></a></h3>
+<p>To specify a file into which <em>both</em> the standard output <em>and</em> standard
+error from your job will be written, please include <em>only</em> the
+<code class="docutils literal notranslate"><span class="pre">-o/--output</span></code> option in your job submission script:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-output=&lt;name</span> <span class="pre">of</span> <span class="pre">file&gt;.out</span></code></p>
+<p>This will cause a file to be created in the submission directory with
+this name. You may also specify filename which includes the absolute or
+full path to the file <strong>but you cannot just include a path to a
+directory</strong>. Please make sure that all directories in the file path name
+exist on Quest.</p>
+<p>To separate out the standard output and standard error into two separate
+files, please include <em>both</em> the <code class="docutils literal notranslate"><span class="pre">-o/--output</span></code> option <em>and</em> the
+<code class="docutils literal notranslate"><span class="pre">-e/--error</span></code> option in your job submission script:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH -output=&lt;name of file&gt;.out
+#SBATCH -error=&lt;name of file&gt;.err
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">If you do not include either option, the default setting with be to
+write both the standard output and standard error from your job in a
+file called</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">slurm-&lt;slurm</span> <span class="pre">jobid&gt;.out</span></code></p>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;slurm</span> <span class="pre">job</span> <span class="pre">id&gt;</span></code> is the ID given to your job by SLURM. You can
+replicate this default naming scheme yourself by providing the following
+option:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--output=slurm-%j.out</span></code></p>
+<p>In addition to <code class="docutils literal notranslate"><span class="pre">%j</span></code> which will add the job id to the name of your
+output file, there is also <code class="docutils literal notranslate"><span class="pre">%x</span></code> will add the job name to the name of
+your output file.</p>
+</section>
+<section id="job-name">
+<span id="section-job-name"></span><h3>Job Name<a class="headerlink" href="#job-name" title="Permalink to this headline"></a></h3>
+<p>To specify a name for your job, please include a <code class="docutils literal notranslate"><span class="pre">-J/--job-name</span></code>
+option in your job submission script:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;job</span> <span class="pre">name&gt;</span></code></p>
+<p>The default is to set this value to the name of the submission file, so
+we recommend that you set this to a memorable string because it can be
+useful when trying to identify a specific job among several running or
+completed jobs.</p>
+</section>
+<section id="sending-e-mail-alerts-about-your-job">
+<span id="section-email"></span><h3>Sending e-mail alerts about your job<a class="headerlink" href="#sending-e-mail-alerts-about-your-job" title="Permalink to this headline"></a></h3>
+<p>To receive e-mails regarding the status of your Slurm jobs, please
+include <em>both</em> the <code class="docutils literal notranslate"><span class="pre">--mail-type</span></code> option <em>and</em> the <code class="docutils literal notranslate"><span class="pre">--mail-user</span></code>
+option in your job submission script:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --mail-type=&lt;job state that triggers email&gt; ## BEGIN, END, FAIL or ALL
+#SBATCH --mail-user=&lt;email address&gt;
+</pre></div>
+</div>
+<p>If you do not include both of these options, then you will not receive
+emails from Slurm. Also, you can include any combination of BEGIN, END,
+FAIL as an argument for this option.</p>
+</section>
+<section id="constraints">
+<span id="section-constraints"></span><h3>Constraints<a class="headerlink" href="#constraints" title="Permalink to this headline"></a></h3>
+<p>To specify an architecture constraint for your job, please include a
+<code class="docutils literal notranslate"><span class="pre">-C/--constraint</span></code> option in your job submission script:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--constraint=&lt;name</span> <span class="pre">of</span> <span class="pre">compute</span> <span class="pre">node</span> <span class="pre">architecture&gt;</span></code></p>
+<div class="line-block">
+<div class="line">Not all Quest compute nodes are the same. We currently have four
+different generations or architectures of compute nodes which we refer
+to as quest7, quest8, quest9 and quest10 and detailed information on
+each of these architectures can be found
+<a class="reference external" href="https://www.it.northwestern.edu/research/user-services/quest/specs.html">here</a>.
+If you need to restrict your job to a particular architecture, you can
+do so through the constraint directive. For example,
+<code class="docutils literal notranslate"><span class="pre">--constraint=quest10</span></code> will cause the scheduler to only match you to
+compute nodes of the quest10 generation.</div>
+<div class="line">Moreover, if you would like to match to any generation of compute
+nodes, but would like all the compute nodes to be either of generation
+quest7 or quest8 or quest9 or quest10 and not a combination of
+generations, then you can set the following for constraint.</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--constraint=&quot;[quest7|quest8|quest9|quest10]&quot;</span></code></div>
+<div class="line">This can be a helpful setting for jobs that are parallelized using
+MPI.</div>
+</div>
+</section>
+<section id="all-slurm-configuration-options">
+<span id="section-all-slurm-options"></span><h3>All Slurm Configuration Options<a class="headerlink" href="#all-slurm-configuration-options" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Slurm (sbatch)</p></th>
+<th class="head"><p>Default/Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Account</p></td>
+<td><p>–account=&lt;account&gt;
+-A &lt;account&gt;</p></td>
+<td><p>Required: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Partition/queue</p></td>
+<td><p>–
+partition=&lt;partition&gt;</p></td>
+<td><p>Required: Not set by
+default</p></td>
+</tr>
+<tr class="row-even"><td><p>Wall time limit</p></td>
+<td><p>–time=&lt;hh:mm:ss&gt;
+-t&lt;hh:mm:ss&gt;</p></td>
+<td><p>Required: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Job name</p></td>
+<td><p>–job-name=&lt;name&gt;
+-J &lt;name&gt;</p></td>
+<td><p>Optional: Default is
+to set this value to
+the name of the
+submission file.</p></td>
+</tr>
+<tr class="row-even"><td><p>Node count</p></td>
+<td><p>–nodes=&lt;count&gt;
+-N &lt;count&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Core count</p></td>
+<td><p>-n &lt;count&gt;</p>
+<p>–ntasks=&lt;count&gt;</p>
+</td>
+<td><p>Optional: Default is
+1</p></td>
+</tr>
+<tr class="row-even"><td><p>Process count per
+node</p></td>
+<td><p>–nt
+asks-per-node=&lt;count&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Core count (per
+process)</p></td>
+<td><p>–
+cpus-per-task=&lt;cores&gt;</p></td>
+<td><p>Optional: Default is
+1</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory limit</p></td>
+<td><p>–mem=&lt;limit&gt; (Memory
+per node in MB)</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Minimum memory per
+processor</p></td>
+<td><p>–mem-per-cpu=&lt;memory&gt;</p></td>
+<td><p>Optional: Default is
+3.25GB</p></td>
+</tr>
+<tr class="row-even"><td><p>Request GPUs</p></td>
+<td><p>–gres=gpu:&lt;count&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Instead of specifying
+how many nodes you
+want,
+you could request a
+specific set of
+compute nodes.
+This cannot be used
+in combination with
+the <code class="docutils literal notranslate"><span class="pre">--nodes=</span></code>
+setting.</p></td>
+<td><p>-w,
+–nodelis
+t=&lt;node&gt;[,node2[,…]]&gt;
+-F, –nodefile=&lt;node
+file&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-even"><td><p>Job array</p></td>
+<td><p>-a &lt;array indices&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Standard output file</p></td>
+<td><p>–output=&lt;file path&gt;
+(path must exist)</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-even"><td><p>Standard error file</p></td>
+<td><p>–error=&lt;file path&gt;
+(path must exist)</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Combine stdout/stderr
+to stdout</p></td>
+<td><p>–output=&lt;combined out
+and err file path&gt;</p></td>
+<td><p>Optional: Set to
+<code class="docutils literal notranslate"><span class="pre">slurm-&lt;jobid&gt;.out</span></code>
+by default.</p></td>
+</tr>
+<tr class="row-even"><td><p>Architecture
+constraint</p></td>
+<td><p>–cons
+traint=&lt;architecture&gt;
+-C &lt;architecture&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Copy environment</p></td>
+<td><p>–export=ALL (default)
+–export=NONE ## to
+not export
+environment</p></td>
+<td><p>Optional: Default is
+to export ALL
+environmental
+settings from the
+submission
+environment to the
+runtime environment.</p></td>
+</tr>
+<tr class="row-even"><td><p>Copy environment
+variable</p></td>
+<td><p>–export
+=&lt;variable[=value][,v
+ariable2=value2[,…]]&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Job dependency</p></td>
+<td><p>–dependency
+=after:jobID[:jobID…]
+–dependency=a
+fterok:jobID[:jobID…]
+–dependency=afte
+rnotok:jobID[:jobID…]
+–dependency=af
+terany:jobID[:jobID…]</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-even"><td><p>Request event
+notification</p></td>
+<td><p>–mail-type=&lt;events&gt;
+Note: multiple
+mail-type requests
+may be specified in a
+comma separated list:
+–mai
+l-type=BEGIN,END,FAIL</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Email address</p></td>
+<td><p>–mail-user=&lt;email
+address&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-even"><td><p>Defer job until the
+specified time</p></td>
+<td><p>–begin=&lt;date/time&gt;</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+<tr class="row-odd"><td><p>Node exclusive job</p></td>
+<td><p>–exclusive</p></td>
+<td><p>Optional: Not set by
+default</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="environmental-variables-set-by-slurm">
+<span id="section-slurm-environmental-variables"></span><h3>Environmental Variables Set by Slurm<a class="headerlink" href="#environmental-variables-set-by-slurm" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Info</p></th>
+<th class="head"><p>Slurm</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Job name</p></td>
+<td><p>$SLURM_JOB_NAME</p></td>
+</tr>
+<tr class="row-odd"><td><p>Job ID</p></td>
+<td><p>$SLURM_JOB_ID</p></td>
+</tr>
+<tr class="row-even"><td><p>Submit directory</p></td>
+<td><p>$SLURM_SUBMIT_DIR</p></td>
+</tr>
+<tr class="row-odd"><td><p>Node list</p></td>
+<td><div class="line-block">
+<div class="line">$SLURM_JOB_NODELIST</div>
+<div class="line">$SLURM_NODELIST</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Job array index</p></td>
+<td><p>$SLURM_ARRAY_TASK_ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>Queue name</p></td>
+<td><p>$SLURM_JOB_PARTITION</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of nodes allocated</p></td>
+<td><p>$SLURM_JOB_NUM_NODES
+$SLURM_NNODES</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of processes</p></td>
+<td><p>$SLURM_NTASKS</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of processes per node</p></td>
+<td><p>$SLURM_TASKS_PER_NODE</p></td>
+</tr>
+<tr class="row-odd"><td><p>Requested tasks per node</p></td>
+<td><p>$SLURM_NTASKS_PER_NODE</p></td>
+</tr>
+<tr class="row-even"><td><p>Requested CPUs per task</p></td>
+<td><p>$SLURM_CPUS_PER_TASK</p></td>
+</tr>
+<tr class="row-odd"><td><p>Scheduling priority</p></td>
+<td><p>$SLURM_PRIO_PROCESS</p></td>
+</tr>
+<tr class="row-even"><td><p>Job user</p></td>
+<td><p>$SLURM_JOB_USER</p></td>
+</tr>
+<tr class="row-odd"><td><p>Log In Node from which this job
+was submitted.</p></td>
+<td><p>$SLURM_SUBMIT_HOST</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="slurm-commands-and-job-management">
+<span id="all-slurm-commands-and-submission-options"></span><h2>SLURM Commands and Job Management<a class="headerlink" href="#slurm-commands-and-job-management" title="Permalink to this headline"></a></h2>
+<p>In this section, we discuss how to manage batch jobs after they’ve been
+submitted on Quest. This includes how to monitor jobs currently pending
+or running, how to cancel jobs, and how to check on the status of past
+jobs.</p>
+<section id="table-of-common-slurm-commands">
+<span id="section-common-slurm-commands"></span><h3>Table of Common Slurm Commands<a class="headerlink" href="#table-of-common-slurm-commands" title="Permalink to this headline"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Slurm (sbatch)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Submit a job</p></td>
+<td><p>sbatch &lt;job script&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Delete a job</p></td>
+<td><p>scancel &lt;job ID&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>Job status (by job)</p></td>
+<td><p>squeue -j &lt;job ID&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Job status (by user)</p></td>
+<td><p>squeue -u &lt;netID&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>Job status (detailed)</p></td>
+<td><p>scontrol show job -dd &lt;job ID&gt;
+checkjob &lt;job ID&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Show expected start time</p></td>
+<td><p>squeue -j &lt;job ID&gt; –start</p></td>
+</tr>
+<tr class="row-even"><td><p>Queue list / info</p></td>
+<td><p>scontrol show partition [queue]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hold a job</p></td>
+<td><p>scontrol hold &lt;job ID&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>Release a job</p></td>
+<td><p>scontrol release &lt;job ID&gt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Start an interactive job</p></td>
+<td><p>salloc &lt;args&gt;
+srun –pty &lt;args&gt;</p></td>
+</tr>
+<tr class="row-even"><td><p>X forwarding</p></td>
+<td><p>srun –pty &lt;args&gt; –x11</p></td>
+</tr>
+<tr class="row-odd"><td><p>Monitor or review a job’s
+resource usage</p></td>
+<td><p>sacct -j &lt;job_num&gt; –format
+JobID,jobname,NTask
+s,nodelist,CPUTime,ReqMem,Elapsed
+(see sacct for all format
+options)</p></td>
+</tr>
+<tr class="row-even"><td><p>View job batch script</p></td>
+<td><p>scontrol write batch_script
+&lt;jobID&gt; [filename]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-squeue-command">
+<span id="squeue"></span><h3>The <code class="docutils literal notranslate"><span class="pre">squeue</span></code> Command<a class="headerlink" href="#the-squeue-command" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">squeue</span></code> command can be used display information about your
+current jobs on Quest.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>squeue -u &lt;NetID&gt;</p></td>
+<td><p>Show only jobs belonging to user specified</p></td>
+</tr>
+<tr class="row-odd"><td><p>squeue -A &lt;AllocationID&gt;</p></td>
+<td><p>Show only jobs belonging to account specified</p></td>
+</tr>
+<tr class="row-even"><td><p>squeue -j &lt;JobID&gt;</p></td>
+<td><p>Display the status of the specified job</p></td>
+</tr>
+<tr class="row-odd"><td><p>squeue -t R</p></td>
+<td><p>Show running jobs</p></td>
+</tr>
+<tr class="row-even"><td><p>squeue -t PD</p></td>
+<td><p>Show pending jobs</p></td>
+</tr>
+<tr class="row-odd"><td><p>squeue –help</p></td>
+<td><p>See documentation and additional options</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-sacct-command">
+<span id="sacct"></span><h3>The <code class="docutils literal notranslate"><span class="pre">sacct</span></code> Command<a class="headerlink" href="#the-sacct-command" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">sacct</span></code> command can be used display information about your past
+and current jobs on Quest.</p>
+<p>The standard output of sacct may not provide the information we want. To
+remedy this, we can use the <code class="docutils literal notranslate"><span class="pre">--format</span></code> flag to choose what we want in
+our output. The format flag is handled by a list of comma separated
+variables which specify output data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sacct --user=your_rc-username --format=var_1,var_2, ... ,var_N
+</pre></div>
+</div>
+<p>A chart of some variables is provided below:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 88%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>account</p></td>
+<td><p>Account the job ran under.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cputime</p></td>
+<td><p>Formatted (Elapsed time * CPU) count used by a job or step.</p></td>
+</tr>
+<tr class="row-even"><td><p>elapsed</p></td>
+<td><p>Jobs elapsed time formated as DD-HH:MM:SS.</p></td>
+</tr>
+<tr class="row-odd"><td><p>exitcode</p></td>
+<td><p>The exit code returned by the job script or salloc.</p></td>
+</tr>
+<tr class="row-even"><td><p>jobid</p></td>
+<td><p>The id of the Job.</p></td>
+</tr>
+<tr class="row-odd"><td><p>jobname</p></td>
+<td><p>The name of the Job.</p></td>
+</tr>
+<tr class="row-even"><td><p>ncpus</p></td>
+<td><p>Amount of allocated CPUs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nnodes</p></td>
+<td><p>The number of nodes used in a job.</p></td>
+</tr>
+<tr class="row-even"><td><p>ntasks</p></td>
+<td><p>Number of tasks in a job.</p></td>
+</tr>
+<tr class="row-odd"><td><p>priority</p></td>
+<td><p>Slurm priority.</p></td>
+</tr>
+<tr class="row-even"><td><p>qos</p></td>
+<td><p>Quality of service.</p></td>
+</tr>
+<tr class="row-odd"><td><p>user</p></td>
+<td><p>Username of the person who ran the job.</p></td>
+</tr>
+</tbody>
+</table>
+<p>As an example, suppose you want to find information about jobs that were
+run on March 12, 2018. You want to show information regarding the job
+name, the number of nodes used in the job, the number of cpus, and the
+elapsed time. Your command would look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sacct --jobs=your_job-id --starttime=2018-03-12 --format=jobname,nnodes,ncpus,elapsed
+</pre></div>
+</div>
+<p>A full list of variables that specify data handled by sacct can be found
+with the <code class="docutils literal notranslate"><span class="pre">--helpformat</span></code> flag or by <a class="reference external" href="https://slurm.schedmd.com/sacct.html">visiting the slurm page on
+sacct</a>.</p>
+</section>
+<section id="the-checkjob-command">
+<span id="checkjob"></span><h3>The checkjob Command<a class="headerlink" href="#the-checkjob-command" title="Permalink to this headline"></a></h3>
+<p>The checkjob command displays detailed information about a submitted
+job’s status and diagnostic information that can be useful for
+troubleshooting submission issues. It can also be used to obtain useful
+information about completed jobs such as the allocated nodes, resources
+used, and exit codes.</p>
+<p>Example usage:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>checkjob &lt;JobID&gt;
+</pre></div>
+</div>
+<p>where you can get your &lt;JobID&gt; using the squeue commands above.</p>
+<section id="example-for-a-successfully-running-job">
+<h4>Example for a Successfully Running Job<a class="headerlink" href="#example-for-a-successfully-running-job" title="Permalink to this headline"></a></h4>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@quser21 ~]$ checkjob 548867
+--------------------------------------------------------------------------------------------------------------------
+JOB INFORMATION
+--------------------------------------------------------------------------------------------------------------------
+JobId=548867 JobName=high-throughput-cpu_000094
+   UserId=abc123(123123) GroupId=abc123(123) MCS_label=N/A
+   Priority=1315 Nice=0 Account=p12345 QOS=normal
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:13:13 TimeLimit=00:40:00 TimeMin=N/A
+   SubmitTime=2019-01-22T12:51:42 EligibleTime=2019-01-22T12:51:43
+   AccrueTime=2019-01-22T12:51:43
+   StartTime=2019-01-22T15:52:20 EndTime=2019-01-22T16:32:20 Deadline=N/A
+   PreemptTime=None SuspendTime=None SecsPreSuspend=0
+   LastSchedEval=2019-01-22T15:52:20
+   Partition=short AllocNode:Sid=quser21:15454
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=qnode[5056-5060]
+   BatchHost=qnode5056
+   NumNodes=5 NumCPUs=120 NumTasks=120 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=120,mem=360G,node=5,billing=780
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryCPU=3G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=(null)
+   WorkDir=/projects/p12345/high-throughput
+   StdErr=/projects/p12345/high-throughput/lammps.error
+   StdIn=/dev/null
+   StdOut=/projects/p12345/high-throughput/lammps.output
+   Power=
+--------------------------------------------------------------------------------------------------------------------
+JOB SCRIPT
+--------------------------------------------------------------------------------------------------------------------
+#!/bin/bash
+#SBATCH --account=p12345
+#SBATCH --partition=normal
+#SBATCH --job-name=high-throughput-cpu
+#SBATCH --ntasks=120
+#SBATCH --mem-per-cpu=3G
+#SBATCH --time=00:40:00
+#SBATCH --error=lammps.error
+#SBATCH --output=lammps.output
+
+module purge
+module load lammps/lammps-22Aug18
+
+mpirun -n 120 lmp -in in.fcc
+</pre></div>
+</div>
+<p>Note in the output above that:</p>
+<ul class="simple">
+<li><p>The JobState is listed as RUNNING.</p></li>
+<li><p>The time passed after job start and the total walltime request are
+given with RunTime and TimeLimit.</p></li>
+<li><p>The node name(s) are listed after NodeList.</p></li>
+<li><p>The paths to job’s working directory (WorkDir), standard error
+(StdErr) and output (StdOut) files are given.</p></li>
+<li><p>If a batch job script is used for submission, the script is presented
+at the end.</p></li>
+</ul>
+</section>
+</section>
+<section id="cancelling-jobs">
+<span id="scancel"></span><h3>Cancelling Jobs<a class="headerlink" href="#cancelling-jobs" title="Permalink to this headline"></a></h3>
+<p>You can cancel one or all of your jobs with scancel. Proceed with
+caution, as this cannot be undone, and you will not be prompted for
+confirmation after issuing the command.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>scancel &lt;JobID&gt;</p></td>
+<td><p>Cancel the job with given ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>scancel -u &lt;NetID&gt;</p></td>
+<td><p>Cancel all the jobs of the user</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="holding-releasing-or-modifying-jobs">
+<h3>Holding, Releasing, or Modifying Jobs<a class="headerlink" href="#holding-releasing-or-modifying-jobs" title="Permalink to this headline"></a></h3>
+<p>Users can place their jobs in a “JobHeldUser” state while submitting the
+job or after the job has been queued. Running jobs cannot be placed on
+hold.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>#SBATCH -H</p></td>
+<td><p>Place hold within job script</p></td>
+</tr>
+<tr class="row-odd"><td><p>sbatch -H &lt;jobscript&gt;</p></td>
+<td><p>Place hold while submitting from command line</p></td>
+</tr>
+<tr class="row-even"><td><p>scontrol hold &lt;jobID&gt;</p></td>
+<td><p>Place hold on a queued job from command line</p></td>
+</tr>
+</tbody>
+</table>
+<p>The job status will be shown in the output of monitoring commands such
+as squeue or checkjob.</p>
+<p>To release a job from user hold state:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>scontrol release &lt;JobID&gt;
+</pre></div>
+</div>
+<p>The job control command (scontrol) can also be used for changing the
+parameters of a submitted job before it starts running. The following
+parameters can be modified safely:</p>
+<ul class="simple">
+<li><p>Job dependency (change to “none”)</p></li>
+<li><p>Partition (queue)</p></li>
+<li><p>Job name</p></li>
+<li><p>Wall clock limit</p></li>
+<li><p>Allocation</p></li>
+</ul>
+<p>The table below contains some useful examples of using scontrol to
+change a job’s parameters.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>scontrol update job=&lt;JobID&gt;
+dependency=afterok:1000</p></td>
+<td><p>Change job to depend successful
+completion of the job 1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>scontrol update job=&lt;JobID&gt;
+partition=short</p></td>
+<td><p>Change partition to short</p></td>
+</tr>
+<tr class="row-even"><td><p>scontrol update job=&lt;JobID&gt;
+name=myjob</p></td>
+<td><p>Change name to myjob</p></td>
+</tr>
+<tr class="row-odd"><td><p>scontrol update job=&lt;JobID&gt;
+timelimit=2:00:00</p></td>
+<td><p>Set job time limit to 2 hours</p></td>
+</tr>
+<tr class="row-even"><td><p>scontrol update job=&lt;JobID&gt;
+account=p12345</p></td>
+<td><p>Change the allocation to p12345</p></td>
+</tr>
+</tbody>
+</table>
+<p>For a complete listing of scontrol options, see the official <a class="reference external" href="https://slurm.schedmd.com/scontrol.html">scontrol
+documentation</a>.</p>
+</section>
+<section id="probing-priority">
+<h3>Probing Priority<a class="headerlink" href="#probing-priority" title="Permalink to this headline"></a></h3>
+<p>Slurm implements a multi-factor priority scheme for ordering the queue
+of jobs wauting to be run. sprio command is used to see the contribution
+of different factors to a pending job’s scheduling priority.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sprio</p></td>
+<td><p>Show scheduling priority for all pending jobs
+for the user</p></td>
+</tr>
+<tr class="row-odd"><td><p>sprio -j &lt;jobID&gt;</p></td>
+<td><p>Show scheduling priority of the defined job</p></td>
+</tr>
+</tbody>
+</table>
+<p>For running jobs, you can see the starting priority using checkjob
+&lt;jobID&gt; command.</p>
+</section>
+</section>
+<section id="special-types-of-job-submissions">
+<span id="h-90022083356871649361533121"></span><h2>Special Types of Job Submissions<a class="headerlink" href="#special-types-of-job-submissions" title="Permalink to this headline"></a></h2>
+<p>In this section, we provide details and examples of how to use Slurm to
+run interactive jobs, job arrays, and jobs that depend on each other.</p>
+<section id="interactive-job-examples">
+<span id="section-interactive-jobs"></span><h3>Interactive Job Examples<a class="headerlink" href="#interactive-job-examples" title="Permalink to this headline"></a></h3>
+<section id="submitting-an-interactive-job-to-run-an-application-without-graphical-user-interface">
+<span id="section-section-interactive-jobs-non-gui"></span><h4>Submitting an Interactive Job (to run an application <em>without</em> Graphical User Interface)<a class="headerlink" href="#submitting-an-interactive-job-to-run-an-application-without-graphical-user-interface" title="Permalink to this headline"></a></h4>
+<p>To launch an interactive job from the Quest log-in node in order to run
+an application <em>without</em> a GUI use either the
+<a class="reference external" href="https://slurm.schedmd.com/srun.html">srun</a> or
+<a class="reference external" href="https://slurm.schedmd.com/salloc.html">salloc</a> command. If you use
+<code class="docutils literal notranslate"><span class="pre">srun</span></code> to run an interactive job, then SLURM will automatically launch
+a terminal session on the compute node after it schedules the job and
+you simply need to wait for this to happen. <em>Due to the behavior of
+``srun``, if you lose connection to your interactive session, the
+interactive job will terminate.</em></p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[quser23 ~]$srun -N 1 -n 1 --account=&lt;account&gt; --mem=XXG --partition=&lt;partition&gt; --time=&lt;hh:mm:ss&gt; --pty bash -l
+srun: job 3201233 queued and waiting for resources
+srun: job 3201233 has been allocated resources
+----------------------------------------
+srun job start: Mon Mar 14 13:25:41 CDT 2022
+Job ID: 3201233
+Username: &lt;netid&gt;
+Queue: &lt;partition&gt;
+Account: &lt;account&gt;
+----------------------------------------
+The following variables are not
+guaranteed to be the same in
+prologue and the job run script
+----------------------------------------
+PATH (in prologue) : /hpc/usertools:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin
+WORKDIR is: /home/&lt;netid&gt;
+----------------------------------------
+[qnode0114 ~]$
+</pre></div>
+</div>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">salloc</span></code> instead, it will <em>not</em> automatically launch a
+terminal session on the compute node. Instead, after it schedules your
+job/request, it will tell you the name of the compute node at which
+point you can run <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">qnodeXXXX</span></code> to directly connect to the compute
+node. <em>Due to the behavior of ``salloc``, if you lose connection to your
+interactive session, the interactive job will</em><strong>not</strong><a href="#id7"><span class="problematic" id="id8">*</span></a>terminate.
+*</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[quser21 ~]$ salloc -N 1 -n 1 --account=&lt;account&gt; --mem=&lt;XXG&gt; --partition=&lt;partition&gt; --time=&lt;hh:mm:ss&gt;
+salloc: Pending job allocation 276305
+salloc: job 276305 queued and waiting for resources
+salloc: job 276305 has been allocated resources
+salloc: Granted job allocation 276305
+salloc: Waiting for resource configuration
+salloc: Nodes qnode8029 are ready for job
+[quser21 ~]$ ssh qnode8029
+Warning: Permanently added &#39;qnode8029,172.20.134.29&#39; (ECDSA) to the list of known hosts.
+[qnode8029 ~]$
+</pre></div>
+</div>
+</section>
+<section id="submitting-an-interactive-job-to-run-an-application-with-graphical-user-interface">
+<span id="section-section-interactive-jobs-gui"></span><h4>Submitting an Interactive Job (to run an application <em>with</em> Graphical User Interface)<a class="headerlink" href="#submitting-an-interactive-job-to-run-an-application-with-graphical-user-interface" title="Permalink to this headline"></a></h4>
+<p>To launch an interactive job from the Quest log-in node in order to run
+an application <em>with</em> a GUI, first you need to connect to Quest using an
+application with X11 forwarding support. We recommend <a class="reference external" href="https://kb.northwestern.edu/page.php?id=69237">using the FastX3
+client</a>. Once you have
+connected to Quest with X11 forwarding enabled, you can then use either
+the <a class="reference external" href="https://slurm.schedmd.com/srun.html">srun</a> or
+<a class="reference external" href="https://slurm.schedmd.com/salloc.html">salloc</a> command. If you use
+<code class="docutils literal notranslate"><span class="pre">srun</span></code> to run an interactive job, then SLURM will automatically launch
+a terminal session on the compute node after it schedules the job and
+you simply need to wait for this to happen. <em>Due to the behavior of
+``srun``, if you lose connection to your interactive session, the
+interactive job will terminate.</em></p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[quser23 ~]$srun --x11 -N 1 -n 1 --account=&lt;account&gt; --mem=XXG --partition=&lt;partition&gt; --time=&lt;hh:mm:ss&gt; --pty bash -l
+srun: job 3201233 queued and waiting for resources
+srun: job 3201233 has been allocated resources
+----------------------------------------
+srun job start: Mon Mar 14 13:25:41 CDT 2022
+Job ID: 3201233
+Username: &lt;netid&gt;
+Queue: &lt;partition&gt;
+Account: &lt;account&gt;
+----------------------------------------
+The following variables are not
+guaranteed to be the same in
+prologue and the job run script
+----------------------------------------
+PATH (in prologue) : /hpc/usertools:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin:/opt/ibutils/bin
+WORKDIR is: /home/&lt;netid&gt;
+----------------------------------------
+[qnode0114 ~]$
+</pre></div>
+</div>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">salloc</span></code> instead, it will <em>not</em> automatically launch a
+terminal session on the compute node. Instead, after it schedules your
+job/request, it will tell you the name of the compute node at which
+point you can run <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">qnodeXXXX</span></code> to directly connect to the compute
+node. <em>Due to the behavior of ``salloc``, if you lose connection to your
+interactive session, the interactive job will</em><strong>not</strong><em>terminate.</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[quser21 ~]$ salloc --x11 -N 1 -n 1 --account=&lt;account&gt; --mem=&lt;XXG&gt; --partition=&lt;partition&gt; --time=&lt;hh:mm:ss&gt;
+salloc: Pending job allocation 276305
+salloc: job 276305 queued and waiting for resources
+salloc: job 276305 has been allocated resources
+salloc: Granted job allocation 276305
+salloc: Waiting for resource configuration
+salloc: Nodes qnode8029 are ready for job
+[quser21 ~]$ ssh -X qnode8029
+Warning: Permanently added &#39;qnode8029,172.20.134.29&#39; (ECDSA) to the list of known hosts.
+[qnode8029 ~]$
+</pre></div>
+</div>
+</section>
+</section>
+<section id="job-array">
+<span id="section-job-array"></span><h3>Job Array<a class="headerlink" href="#job-array" title="Permalink to this headline"></a></h3>
+<p>Job arrays can be used to submit multiple jobs at once that use the same
+application script. This can be useful if you want to run the same
+script multiple times with different input parameters.</p>
+<p>In the example below, the –array option defines the job array, with a
+specification of the index numbers you want to use (in this case, 0
+through 9). The $SLURM_ARRAY_TASK_ID bash environmental variable takes
+on the value of the job array index for each job (so here, integer
+values 0 through 9, one value for each job). In this example, the value
+of $SLURM_ARRAY_TASK_ID is used to select the correct index from the
+input_args bash array which was constructed by reading in
+<em>input_args.txt</em>, each row of which is then passed on to a script as
+command line arguments.</p>
+<div class="highlight-filenameheader notranslate"><div class="highlight"><pre><span></span>jobsubmission.sh
+</pre></div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#SBATCH --account=w10001  ## YOUR ACCOUNT pXXXX or bXXXX
+#SBATCH --partition=w10001  ### PARTITION (buyin, short, normal, w10001, etc)
+#SBATCH --array=0-9 ## number of jobs to run &quot;in parallel&quot;
+#SBATCH --nodes=1 ## how many computers do you need
+#SBATCH --ntasks-per-node=1 ## how many cpus or processors do you need on each computer
+#SBATCH --time=00:10:00 ## how long does this need to run (remember different partitions have restrictions on this param)
+#SBATCH --mem-per-cpu=1G ## how much RAM do you need per CPU (this affects your FairShare score so be careful to not ask for more than you need))
+#SBATCH --job-name=&quot;sample_job_\${SLURM_ARRAY_TASK_ID}&quot; ## use the task id in the name of the job
+#SBATCH --output=sample_job.%A_%a.out ## use the jobid (A) and the specific job index (a) to name your log file
+#SBATCH --mail-type=ALL ## you can receive e-mail alerts from SLURM when your job begins and when your job finishes (completed, failed, etc)
+#SBATCH --mail-user=email@u.northwestern.edu  ## your email
+
+module purge all
+module load python-anaconda3
+source activate /projects/intro/envs/slurm-py37-test
+
+IFS=$&#39;\n&#39; read -d &#39;&#39; -r -a input_args &lt; input_args.txt
+
+python slurm_test.py --filename ${input_args[$SLURM_ARRAY_TASK_ID]}
+</pre></div>
+</div>
+<p>where <em>input_args.txt</em> contains the following:</p>
+<div class="highlight-filenameheader notranslate"><div class="highlight"><pre><span></span>input_args.txt
+</pre></div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>filename1.txt
+filename2.txt
+filename3.txt
+filename4.txt
+filename5.txt
+filename6.txt
+filename7.txt
+filename8.txt
+filename9.txt
+filename10.txt
+</pre></div>
+</div>
+<p>and <em>myscript.py</em> contains the following code:</p>
+<div class="highlight-filenameheader notranslate"><div class="highlight"><pre><span></span>myscript.py
+</pre></div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>import argparse
+import time
+
+def parse_commandline():
+    &quot;&quot;&quot;Parse the arguments given on the command-line.
+    &quot;&quot;&quot;
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&quot;--filename&quot;,
+                       help=&quot;Name of file&quot;,
+                       default=None)
+
+
+    args = parser.parse_args()
+
+    return args
+
+
+###############################################################################
+# BEGIN MAIN FUNCTION
+###############################################################################
+if __name__ == &#39;__main__&#39;:
+    args = parse_commandline()
+    #time.sleep(10) # Sleep for 3 seconds
+    print(args.filename)
+</pre></div>
+</div>
+<p>In this example, myscript.py will receive the values in input.csv as
+arguments: the first field will be sys.argv[1], the second field will be
+sys.argv[2], etc.</p>
+<p><strong>Note: make sure the number you specify for the –array parameter
+matches the number of lines in your input file!</strong></p>
+<p>Also, note that in this example standard output and error files are
+printed separately for each element of the job array with the –output
+and –error options. To avoid each element overwriting these files, tag
+them with jobID (%A) and elementID (%a) variables (which are
+automatically assigned by the scheduler) so elements have their own
+distinct output and error files.</p>
+<p>Submit this script with:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sbatch jobsubmission.sh
+</pre></div>
+</div>
+<p>The job array will then be submitted to the scheduler.</p>
+</section>
+<section id="dependent-jobs">
+<span id="section-dependent-jobs"></span><h3>Dependent Jobs<a class="headerlink" href="#dependent-jobs" title="Permalink to this headline"></a></h3>
+<p>Dependent jobs are a series of jobs which run or wait to run conditional
+on the state of another job. For instance, you may submit two jobs and
+you want the first job to complete successfully before the second job
+runs. In order to submit this type of workflow, you pass <em>sbatch</em> the
+jobid of the job that needs to finish before this job starts via the
+command line argument:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dependency</span><span class="o">=</span><span class="n">afterok</span><span class="p">:</span><span class="o">&lt;</span><span class="n">jobid</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To accomplish this, it is helpful to write all of your <em>sbatch</em> commands
+in bash script. You will notice that anything you can tell slurm via
+#SBATCH in the submission script itself, you can also pass to <em>sbatch</em>
+via the command line. The key here is that the bash variable <em>jid0,
+jid1, jid2</em> will contain the jobid that SLURM assigns after you run the
+<em>sbatch</em>command.</p>
+<div class="highlight-filenameheader notranslate"><div class="highlight"><pre><span></span>wrapper_script.sh
+</pre></div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+jid0=($(sbatch --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out example_submit.sh))
+
+echo &quot;jid0 ${jid0[-1]}&quot; &gt;&gt; slurm_ids
+
+jid1=($(sbatch --dependency=afterok:${jid0[-1]} --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out --export=DEPENDENTJOB=${jid0[-1]} example_submit.sh))
+
+echo &quot;jid1 ${jid1[-1]}&quot; &gt;&gt; slurm_ids
+
+jid2=($(sbatch --dependency=afterok:${jid1[-1]} --time=00:10:00 --account=w10001 --partition=w10001 --nodes=1 --ntasks-per-node=1 --mem=8G --job-name=example --output=job_%A.out --export=DEPENDENTJOB=${jid1[-1]} example_submit.sh))
+
+echo &quot;jid2 ${jid2[-1]}&quot; &gt;&gt; slurm_ids
+</pre></div>
+</div>
+<p>In the above, the second job will not start until the first job is
+finished and the third job will not start until the second one is
+finished. The actual submission script that is being run is below.</p>
+<div class="highlight-filenameheader notranslate"><div class="highlight"><pre><span></span>example_submit.sh
+</pre></div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#SBATCH --mail-type=ALL ## you can receive e-mail alerts from SLURM when your job begins and when your job finishes (completed, failed, etc)
+#SBATCH --mail-user=email@u.northwestern.edu ## your email
+
+if [[ -z &quot;${DEPENDENTJOB}&quot; ]]; then
+    echo &quot;First job in workflow&quot;
+else
+    echo &quot;Job started after &quot; $DEPENDENTJOB
+fi
+
+module purge all
+module load python-anaconda3
+source activate /projects/intro/envs/slurm-py37-test
+
+python --version
+python myscript.py --job-id $DEPENDENTJOB
+</pre></div>
+</div>
+<p>where <em>myscript.py</em> contains the following code:</p>
+<div class="highlight-filenameheader notranslate"><div class="highlight"><pre><span></span>myscript.py
+</pre></div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>import argparse
+import time
+
+
+def parse_commandline():
+    &quot;&quot;&quot;Parse the arguments given on the command-line.
+    &quot;&quot;&quot;
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(&quot;--job-id&quot;,
+                       help=&quot;Job number&quot;,
+                       default=0)
+
+    args = parser.parse_args()
+
+    return args
+
+
+###############################################################################
+# BEGIN MAIN FUNCTION
+###############################################################################
+if __name__ == &#39;__main__&#39;:
+    args = parse_commandline()
+    time.sleep(3) # Sleep for 3 seconds
+    print(args.job_id)
+</pre></div>
+</div>
+<p>In this example, we print the job id that had to finish in order for the
+dependent job to begin. Therefore, the very first job should print 0
+because it did not rely on any job to finish in order to run but the
+second job should print the jobid of the first job and so on.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>bash wrapper_script.sh
+</pre></div>
+</div>
+<p>This will submit the three jobs in sequence and you should see jobs 2
+and 3 pending for reason DEPENDENCY.</p>
+</section>
+</section>
+<section id="diagnosing-issues-with-your-job-submission-script-and-or-your-job-itself">
+<span id="section-diagnosing-jobs"></span><h2>Diagnosing Issues with Your Job Submission Script and/or Your Job Itself<a class="headerlink" href="#diagnosing-issues-with-your-job-submission-script-and-or-your-job-itself" title="Permalink to this headline"></a></h2>
+<section id="debugging-a-job-submission-script-rejected-by-the-scheduler">
+<span id="section-debugging-jobs"></span><h3>Debugging a Job Submission Script Rejected By The Scheduler<a class="headerlink" href="#debugging-a-job-submission-script-rejected-by-the-scheduler" title="Permalink to this headline"></a></h3>
+<p>If your job submission script generates an error when you submit it with
+the sbatch command, the problem in your script is in one or more of the
+lines that begin with #SBATCH. To debug job scripts that generate
+errors, look up the error message in the section below to identify the
+most likely reason your script received that error message. Once you
+have identified the mistake in your script, edit your script to correct
+it and re-submit your job. If you receive the same error message again,
+examine the error message and the mistake in your script more closely.
+Sometimes the same error message can be generated by two different
+mistakes in the same script, meaning it’s possible that you may resolve
+the first mistake but need to correct a second mistake to clear that
+particular error message. Mistakes can be difficult to identify, and
+often require careful reading of your #SBATCH lines.</p>
+<p>When you re-submit your job you may receive a new error message. This
+means the mistake that generated the first error message has been
+resolved, and now you need to fix a second mistake. Slurm returns up to
+two distinct error messages at a time. If your submission script has
+more than two mistakes, you will need to re-submit your job multiple
+times to identify and fix all of them.</p>
+<p>When Slurm encounters a mistake in your job submission script, it does
+not read the rest of your script that comes after the mistake. If the
+mistake generates an error, you can fix it and resubmit your job,
+however not all mistakes generate errors. If your script’s required
+elements (account, partition, nodes, cores, and wall time) have been
+read successfully before Slurm encounters your mistake, your job will be
+still be accepted by the scheduler and run, just not the way you expect
+it to. Scripts with mistakes that don’t generate errors still need to be
+debugged since the scheduler has ignored some of your #SBATCH lines. You
+can identify a script with mistakes if the output from your job is
+unexpected or incorrect.</p>
+<p>To use this reference: search for the exact error message generated by
+your job. Some error messages appear to be similar but are generated by
+different mistakes.</p>
+<p>Note that the errors listed in this document may also be generated by
+interactive job submissions using <code class="docutils literal notranslate"><span class="pre">srun</span></code> or <code class="docutils literal notranslate"><span class="pre">salloc</span></code>. In those
+cases, the error messages will begin with <code class="docutils literal notranslate"><span class="pre">srun</span></code> error or <code class="docutils literal notranslate"><span class="pre">salloc</span></code>
+error. The information about resolving these error messages is the same.</p>
+<p>With certain combinations of GUI editors and character sets on your
+personal computer, copying and pasting into Quest job submission scripts
+may bring in specific hidden characters that interfere with the
+scheduler’s ability to interpret the script. In these cases, #SBATCH
+lines will have no mistakes but still generate errors when submitted to
+the scheduler. To see all of the hidden characters in your job
+submission script, use the command cat -A &lt;script_name&gt;. To resolve
+this, you may need to type your submission script into a native unix
+editor like vi and not use copy and paste.</p>
+<section id="sbatch-error-account-option-required-or-sbatch-error-unable-to-allocate-resources-invalid-account-or-account-partition-combination-specified">
+<span id="section-error1"></span><h4>sbatch: error: –account option required or sbatch: error: Unable to allocate resources: Invalid account or account/partition combination specified<a class="headerlink" href="#sbatch-error-account-option-required-or-sbatch-error-unable-to-allocate-resources-invalid-account-or-account-partition-combination-specified" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">&lt;allocation&gt;</span></code></div>
+<div class="line">Example of correct account syntax:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=p12345</span></code></div>
+<div class="line">or</div>
+<div class="line">#SBATCH -A p12345</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: your script doesn’t have an <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line
+specifying account</div>
+<div class="line">Fix: confirm that <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> is in your
+script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–account=” or “-A” part of this
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: you are not a member of the allocation specified
+in your job submission script</div>
+<div class="line">Fix: confirm you are a member of the allocation by typing groups at
+the command line on Quest. If the allocation you have specified in
+your job submission script is not listed, you are not a member of
+this allocation. Use an allocation that you are a member of in your
+job submission script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different line
+of your script, the account line is correct and the mistake is
+elsewhere in your submission script. To resolve the new error,
+follow the debugging suggestions for the new error message.</div>
+</div>
+</div>
+</section>
+<section id="sbatch-error-your-allocation-has-expired-or-sbatch-error-unable-to-allocate-resources-invalid-qos-specification">
+<span id="section-error2"></span><h4>sbatch: error: Your allocation has expired or sbatch: error: Unable to allocate resources: Invalid qos specification<a class="headerlink" href="#sbatch-error-your-allocation-has-expired-or-sbatch-error-unable-to-allocate-resources-invalid-qos-specification" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">&lt;allocation&gt;</span></code></div>
+</div>
+<p>The allocation specified in your job submission script is no longer
+active.</p>
+<p>If you are a member of more than one allocation, you may wish to
+submit your job to an alternate allocation. To see a list your
+allocations, type groups at the command line on Quest.</p>
+<p>To renew your allocation or request a new one, please see <a class="reference external" href="65175">Managing
+an Allocation on Quest</a>.</p>
+</div>
+</section>
+<section id="srun-error-partition-option-required-or-srun-error-unable-to-allocate-resources-access-permission-denied">
+<span id="section-error3"></span><h4>srun: error: –partition option required or srun: error: Unable to allocate resources: Access/permission denied<a class="headerlink" href="#srun-error-partition-option-required-or-srun-error-unable-to-allocate-resources-access-permission-denied" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for general access allocations (“p”
+account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=short</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">short</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for buy-in allocations (“b” account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=buyin</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">buyin</span></code></div>
+</div>
+<p>Note that Slurm refers to queues as partitions.</p>
+<div class="line-block">
+<div class="line">Possible mistake: your script doesn’t have an <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line
+specifying partition</div>
+<div class="line">Fix: confirm that <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code> is in your script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–partition=” or “-p” part of this
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different line
+of your script, the account line is correct and the mistake is
+elsewhere in your submission script. To resolve the new error,
+follow the debugging suggestions for the new error message.</div>
+</div>
+</div>
+</section>
+<section id="sbatch-error-unable-to-allocate-resources-invalid-qos-specification">
+<span id="section-error4"></span><h4>sbatch: error: Unable to allocate resources: Invalid qos specification<a class="headerlink" href="#sbatch-error-unable-to-allocate-resources-invalid-qos-specification" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<p>The partition/queue name specified is not associated with the
+allocation in the line <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code>.</p>
+<p>Possible mistake: Your script specifies a buy-in allocation, and
+you’ve specified “short”, “normal” or “long” as your partition/queue.</p>
+<div class="line-block">
+<div class="line">Possible mistake: Your script specifies an allocation and partition
+combination which do not belong together.</div>
+<div class="line">Fix: Specify the correct partition/queue for your allocation. To
+see the allocations and partitions you have access to, use this
+version of the <code class="docutils literal notranslate"><span class="pre">sinfo</span></code> command:</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o &quot;%g %.10R %.20l&quot;
+GROUPS      PARTITION         TIMELIMIT
+b1234       buyin             168:00:00
+</pre></div>
+</div>
+<p>Note that “GROUPS” are allocations/accounts on Quest.
+In this example, valid lines in your job submission script that
+relate to account, partition and time would be:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --account=b1234
+#SBATCH --partition=buyin
+#SBATCH --time=168:00:00
+</pre></div>
+</div>
+</div>
+</section>
+<section id="sbatch-error-invalid-partition-specified-partition-name-or-sbatch-error-unable-to-allocate-resources-invalid-partition-name-specified">
+<span id="section-error5"></span><h4>sbatch: error: invalid partition specified: &lt;partition_name&gt; or sbatch: error: Unable to allocate resources: Invalid partition name specified<a class="headerlink" href="#sbatch-error-invalid-partition-specified-partition-name-or-sbatch-error-unable-to-allocate-resources-invalid-partition-name-specified" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for general access allocations (“p”
+account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=short</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">short</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for buy-in allocations (“b” account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=buyin</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">buyin</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–partition=” or “-p” part of this
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: Your script specifies a general access allocation
+(“p” account) with a queue that isn’t “short”, “normal” or “long”.</div>
+<div class="line">Fix: change your partition to be “short”, “normal” or “long”</div>
+</div>
+</div>
+</section>
+<section id="sbatch-error-unable-to-allocate-resources-invalid-account-or-account-partition-combination-specified-or-sbatch-error-unable-to-allocate-resources-users-group-not-permitted-to-use-this-partition">
+<span id="section-error6"></span><h4>sbatch: error: Unable to allocate resources: Invalid account or account/partition combination specified or sbatch: error: Unable to allocate resources: User’s group not permitted to use this partition<a class="headerlink" href="#sbatch-error-unable-to-allocate-resources-invalid-account-or-account-partition-combination-specified-or-sbatch-error-unable-to-allocate-resources-users-group-not-permitted-to-use-this-partition" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<p>This message can refer to mistakes on the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> lines
+specifying account or partition.</p>
+<div class="line-block">
+<div class="line">Possible location of mistake specifying account:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">&lt;allocation&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible location of mistake specifying partition</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the syntax in the #SBATCH line specifying account
+is incorrect</div>
+<div class="line">Fix: examine the account line closely to confirm the syntax is
+exactly correct. Example of correct account syntax:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=p12345</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">p12345</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: you are trying to run in a partition/queue that
+belongs to one account, while specifying a different account.</div>
+<div class="line">Fix: Specify the correct partition/queue for your allocation. To
+see the allocations and partitions you have access to, use this
+version of the <code class="docutils literal notranslate"><span class="pre">sinfo</span></code> command:</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o &quot;%g %.10R %.20l&quot;
+GROUPS      PARTITION         TIMELIMIT
+b1234       buyin             168:00:00
+</pre></div>
+</div>
+<p>Note that “GROUPS” are allocations/accounts on Quest.
+In this example, valid lines in your job submission script that
+relate to account, partition and time would be:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --account=b1234
+#SBATCH --partition=buyin
+#SBATCH --time=168:00:00
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different line
+of your script, the account line is correct and the mistake is
+elsewhere in your submission script. To resolve the new error,
+follow the debugging suggestions for the new error message.</div>
+</div>
+</div>
+</section>
+<section id="sbatch-error-time-limit-option-required-or-sbatch-error-unable-to-allocate-resources-requested-time-limit-is-invalid-missing-or-exceeds-some-limit">
+<span id="section-error7"></span><h4>sbatch: error: –time limit option required or sbatch: error: Unable to allocate resources: Requested time limit is invalid (missing or exceeds some limit)<a class="headerlink" href="#sbatch-error-time-limit-option-required-or-sbatch-error-unable-to-allocate-resources-requested-time-limit-is-invalid-missing-or-exceeds-some-limit" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=&lt;hours:minutes:seconds&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-t</span> <span class="pre">&lt;hours:minutes:seconds&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=10:00:00</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-t</span> <span class="pre">10:00:00</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: your script doesn’t have an <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line
+specifying time</div>
+<div class="line">Fix: confirm that <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=&lt;hh:mm:ss&gt;</span></code> is in your script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–time=” or “-t” part of this
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is correct.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the time request is too long for the partition
+(queue)</div>
+<div class="line">Fix: review the wall time limits of your partition and adjust the
+amount of time requested by your script. For general access users
+with allocations that begin with a “p”, please use this reference:</div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Walltime limit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>short</p></td>
+<td><p>4 hours</p></td>
+</tr>
+<tr class="row-odd"><td><p>normal</p></td>
+<td><p>48 hours</p></td>
+</tr>
+<tr class="row-even"><td><p>long</p></td>
+<td><p>7 days / 168 hours</p></td>
+</tr>
+<tr class="row-odd"><td><p>genhimem</p></td>
+<td><p>48 hours</p></td>
+</tr>
+<tr class="row-even"><td><p>gengpu</p></td>
+<td><p>48 hours</p></td>
+</tr>
+</tbody>
+</table>
+<p>Buy-in accounts that begin with a “b” have their own wall time
+limits. For information on the wall time of your partition, use the
+<code class="docutils literal notranslate"><span class="pre">sinfo</span></code> command:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o &quot;%g %.10R %.20l&quot;
+GROUPS      PARTITION         TIMELIMIT
+b1234       buyin             168:00:00
+</pre></div>
+</div>
+<p>To fix this error, set your wall time to be less than the time limit
+of your partition and re-submit your job.
+| Possible mistake: the mistake is on a line earlier in your job</p>
+<blockquote>
+<div><p>submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</p>
+</div></blockquote>
+<div class="line-block">
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=&lt;hh:mm::ss&gt;</span></code> line to be immediately
+after the line #!/bin/bash and submit your job again. If this
+generates a new error referencing a different line of your script,
+the account line is correct and the mistake is elsewhere in your
+submission script. To resolve the new error, follow the debugging
+suggestions for the new error message.</div>
+</div>
+</div>
+</section>
+<section id="sbatch-unrecognized-option-option">
+<span id="section-error8"></span><h4>sbatch: unrecognized option &lt;option&gt;<a class="headerlink" href="#sbatch-unrecognized-option-option" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Example:</div>
+<div class="line">Line in script: <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--n-tasks-per-node=1</span></code></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Error generated sbatch: unrecognized option ‘--n-tasks-per-node=1&#39;
+</pre></div>
+</div>
+<p>With an “unrecognized option” error, Slurm correctly read the first
+part of the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line but the option that follows it has
+generated the error. In this example, the option has a dash between
+“n” and “tasks” that should not be there. The correct option does not
+have a dash in that location. This line should be corrected to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --ntasks-per-node=1</span>
+</pre></div>
+</div>
+<p>To fix this error, locate the option specified in the error message
+and examine it carefully for errors. To see correct syntax for all
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> directives, see <a class="reference external" href="89454">Converting Moab/Torque scripts to
+Slurm</a>.</p>
+</div>
+</section>
+<section id="sbatch-error-cpu-count-per-node-can-not-be-satisfied-or-sbatch-error-batch-job-submission-failed-requested-node-configuration-is-not-available">
+<span id="section-error9"></span><h4>sbatch: error: CPU count per node can not be satisfied or sbatch: error: Batch job submission failed: Requested node configuration is not available<a class="headerlink" href="#sbatch-error-cpu-count-per-node-can-not-be-satisfied-or-sbatch-error-batch-job-submission-failed-requested-node-configuration-is-not-available" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks-per-node=&lt;CPU</span> <span class="pre">count&gt;</span></code></div>
+<div class="line">Example of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks-per-node=10000</span></code></div>
+</div>
+<p>This error is generated if your job requests more CPUs/cores than are
+available on the nodes in the partition your job submission script
+specified. CPU count is the number of cores requested by your job
+submission script. Cores are also called processors or CPUs.</p>
+<p>To fix this mistake, use the <code class="docutils literal notranslate"><span class="pre">sinfo</span></code> command to get the maximum
+number of cores available in the partitions you have access to:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o &quot;%g %.10R %.20l %.10c&quot;
+GROUPS      PARTITION       TIMELIMIT       CPUS
+b1234       buyin           2-00:00:00      20+
+</pre></div>
+</div>
+<p>In this example, your job submission script can request up to 20
+CPUs/cores per node like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH --ntasks-per-node=20</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="sbatch-error-batch-script-contains-dos-line-breaks-rn-or-sbatch-error-instead-of-expected-unix-line-breaks-n">
+<span id="section-error10"></span><h4>sbatch: error: Batch script contains DOS line breaks (rn) or sbatch: error: instead of expected UNIX line breaks (n).<a class="headerlink" href="#sbatch-error-batch-script-contains-dos-line-breaks-rn-or-sbatch-error-instead-of-expected-unix-line-breaks-n" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<p>Location of mistake:</p>
+<p>Hidden characters in your job submission script</p>
+<p>Mistake: your job submission script was created on a Windows machine
+and copied onto Quest without converting it into UNIX encoded
+characters.</p>
+<p>Fix: from the command line on Quest run the command
+<code class="docutils literal notranslate"><span class="pre">dos2unix</span> <span class="pre">&lt;submission_script</span></code>&gt; to correct your job submission
+script and re-submit your job to the scheduler.</p>
+</div>
+</section>
+</section>
+<section id="debugging-a-job-accepted-by-the-scheduler">
+<span id="h-94310085932911650907024000"></span><h3>Debugging a Job Accepted by the Scheduler<a class="headerlink" href="#debugging-a-job-accepted-by-the-scheduler" title="Permalink to this headline"></a></h3>
+<p>Once your job has been accepted, the Slurm scheduler will return a job
+id number. After waiting in the queue, your job will run. To see the
+status of your job, use the command <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-X</span></code>.</p>
+<p>For jobs with mistakes that do not give error messages, you will need to
+investigate if you notice something is wrong with how the job runs. If
+you notice a problem on the list below, click on it for debugging
+suggestions.</p>
+<section id="job-runs-very-slowly-or-dies-after-starting">
+<span id="section-error11"></span><h4>Job runs very slowly or dies after starting<a class="headerlink" href="#job-runs-very-slowly-or-dies-after-starting" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Problem: job runs very slowly, or dies after starting</div>
+<div class="line">Possible cause: job script is not reading the directive
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem=&lt;amount&gt;</span></code>.</div>
+</div>
+<p>All Slurm job scripts should specify the amount of memory your job
+needs to run. If your job runs very slowly or dies, investigate if it
+requests enough memory with the Slurm utility <code class="docutils literal notranslate"><span class="pre">seff</span></code>. For more
+information, see <a class="reference external" href="81074">Checking Processor and Memory Utilization for Jobs
+on Quest</a>.</p>
+</div>
+</section>
+<section id="job-name-is-name-of-job-submission-script-instead-of-name-in-submission-script">
+<span id="section-error12"></span><h4>Job name is name of job submission script instead of name in submission script<a class="headerlink" href="#job-name-is-name-of-job-submission-script-instead-of-name-in-submission-script" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Problem: job name is name of job submission script instead of name
+in submission script</div>
+<div class="line">Possible cause: job script is not reading the
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;job</span> <span class="pre">name&gt;</span></code> directive.</div>
+</div>
+<div class="line-block">
+<div class="line">Slurm is not reading the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> directive:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-J</span> <span class="pre">&lt;Job_Name&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;Job_Name&gt;</span></code></div>
+</div>
+<p>To see the name of your job, run <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-X</span></code>. If JOB NAME is the
+first eight characters of the name of your submission script, SLURM
+has not read the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> lines for job name.</p>
+<div class="line-block">
+<div class="line">Possible Mistake: a typo in the “–job-name=” or “-J” part of this
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;job</span> <span class="pre">name&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;job</span> <span class="pre">name&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different line
+of your script, the account line is correct and the mistake is
+elsewhere in your submission script. To resolve the new error,
+follow the debugging suggestions for the new error message.</div>
+</div>
+</div>
+</section>
+<section id="modules-or-environment-variables-are-inherited-from-the-login-session-by-a-running-job">
+<span id="section-error13"></span><h4>Modules or environment variables are inherited from the login session by a running job<a class="headerlink" href="#modules-or-environment-variables-are-inherited-from-the-login-session-by-a-running-job" title="Permalink to this headline"></a></h4>
+<div class="panel-content docutils container">
+<div class="line-block">
+<div class="line">Problem: modules or environmental variables are inherited from the
+login session by a running job</div>
+<div class="line">Possible cause: job script is not purging modules before beginning
+compute node session</div>
+</div>
+<p>Fix: after the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> directives in your job submission script,
+add the line</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>module purge all
+</pre></div>
+</div>
+<p>This will clear any modules inherited from your login session, and
+begin your job in a clean environment. You will need to load any
+necessary modules into your job submission script after this line.</p>
+<p class="rubric" id="job-immediately-fails-and-generates-no-output-or-error-file">Job immediately fails and generates no output or error
+file</p>
+<div class="line-block">
+<div class="line">Problem: job can’t write into output and/or error files so job
+immediately dies</div>
+<div class="line">Possible cause: job script specifies directory path for output
+and/or error files but does not provide a file name</div>
+<div class="line">Possible cause: job script specifies a directory that does not
+exist</div>
+</div>
+<p>Slurm is not getting a file name that it can write into in the SBATCH
+directive:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH –-output=/path/to/file/file_name
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --error=/path/to/file/file_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Possible Mistake: a typo in the “–output=” or “–error” part of this
+#SBATCH line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible Mistake: providing a directory but not a file name for
+output and/or error files</div>
+<div class="line">Fix: add a file name at the end of the specified path. For a file
+name in the format <code class="docutils literal notranslate"><span class="pre">&lt;job_name&gt;.o&lt;job_id&gt;</span></code>, use</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH –-output=/path/to/file/&quot;%x.o%j&quot;
+</pre></div>
+</div>
+<p>Note if a separate error file is not specified, errors and output
+will both be written into the output file. To generate a separate
+error file, include the line:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH –-error=/path/to/file/&quot;%x.e%j&quot;
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="factors-affecting-job-scheduling-on-quest">
+<span id="section-job-scheduling"></span><h2>Factors Affecting Job Scheduling on Quest<a class="headerlink" href="#factors-affecting-job-scheduling-on-quest" title="Permalink to this headline"></a></h2>
+<p>If your job is waiting on the queue, the reason is most probably one of
+the following:</p>
+<ul class="simple">
+<li><p>Your job’s score is lower compared to others</p></li>
+<li><p>Unavailable/occupied compute resources at that moment.</p></li>
+</ul>
+<section id="priority">
+<h3>Priority<a class="headerlink" href="#priority" title="Permalink to this headline"></a></h3>
+<p>Total priority score is combination of several factors. These factors
+are the following:</p>
+<p><strong>i. Fair Share</strong> Quest’s job scheduler uses a fair share mechanism to
+dynamically determine a score. The calculation is based on the
+comparison between your share of the resources and your actual usage of
+these resources. If you or other members of your allocation used large
+amounts of resources in the recent past, the priority of current jobs
+will be lower. Accordingly, your jobs will wait longer before they start
+if the scheduler queue is busy.</p>
+<p>On the other hand, if the job queue is empty and the compute resources
+are idling, regardless of the priority, your jobs will run. You will
+never run out of compute hours in this model.</p>
+<p>Fairshare also includes a recovery mechanism for job priority. The
+contribution of past resource usage to priority calculations decays over
+time. Without new usage, the job scores will be restored significantly
+within a month.</p>
+<p>If you are using a general access allocation, the fair share scores of
+your jobs will be affected from the overall resource usage by all
+members of the allocation. If you are using a buy-in allocation that has
+its own compute nodes, your own usage of the those nodes will be the
+determining factor for your job’s fair share score.</p>
+<p><strong>ii. Allocation Type</strong> There are two types of allocations for research
+projects on Quest. Research I allocations are ideal for small to
+moderate computational needs whereas Research II allocations require
+considerably more resources. Due to this difference in computational
+needs, a Research II allocation has a higher share of the system
+resources (or initial fairshare score) compared to a Research I
+allocation. This is equivalent to receiving more compute hours with a
+Research II than a Research I.</p>
+<p><strong>iii. Job Age</strong> Age is length of time an eligible job has been waiting
+in the queue. Jobs will accumulate priority proportional to their age.
+This can help overcome starting priority differences between jobs coming
+from other actors.</p>
+<p><strong>iv. Partition</strong> A priority score is associated with partition that the
+job uses. This is only applicable for certain buy-in allocations which
+have multiple partitions.</p>
+<p>More detailed information about Slurm’s multi-factor priority system,
+please see this
+<a class="reference external" href="https://slurm.schedmd.com/priority_multifactor.html">page</a>.</p>
+</section>
+<section id="backfill-scheduling">
+<h3>Backfill Scheduling<a class="headerlink" href="#backfill-scheduling" title="Permalink to this headline"></a></h3>
+<p>There is a secondary mechanism that starts lower priority jobs on slots
+reserved by higher priority jobs while these jobs are acquiring their
+full set of resources. This is called “backfill” scheduling which helps
+to increase the utilization of the compute nodes and guarantees no delay
+in starting the higher priority jobs. To benefit from this mechanism, it
+is important to accurately request resources (wall time, core, memory)
+so that the scheduler can find appropriate space on the resource map.
+Please review <a class="reference external" href="https://kb.northwestern.edu/81074#slurm">resource utilization
+page</a> for different methods
+you can use to identify your job’s needs.</p>
+<p>From time to time, compute resources cannot be backfilled effectively
+and nodes/cores may appear idle while jobs are waiting on the queue.</p>
+</section>
+</section>
+<section id="common-reasons-for-failed-jobs">
+<span id="section-job-failures"></span><h2>Common reasons for Failed Jobs<a class="headerlink" href="#common-reasons-for-failed-jobs" title="Permalink to this headline"></a></h2>
+<p>This section provides some common reasons for why your job may fail and
+how to go about fixing it.</p>
+<section id="job-exceeded-request-time-or-memory">
+<span id="h-28007174239751650907046424"></span><h3>Job Exceeded Request Time or Memory<a class="headerlink" href="#job-exceeded-request-time-or-memory" title="Permalink to this headline"></a></h3>
+<p>Besides errors in your script or hardware failure, your job may be
+aborted by the system if it is still running when the walltime limit you
+requested (or the upper walltime limit for the partition) is reached.
+You will see state for these jobs.</p>
+<p>If you use more cores than you requested, the system will again stop the
+job. This can happen with programs that are multi-threaded. Similarly,
+if the job exceeds the requested memory, the job will be terminated. Due
+to this, it is important to profile your code for the memory
+requirement.</p>
+<p>If you do not set the number of nodes/cores, memory or time in your job
+submission script, the default values will be assigned by the scheduler.</p>
+</section>
+<section id="out-of-disk-space">
+<span id="h-834160044061650907053691"></span><h3>Out of Disk Space<a class="headerlink" href="#out-of-disk-space" title="Permalink to this headline"></a></h3>
+<p>Your job could also fail if you exceed your storage quote in your home
+or projects directory.</p>
+<p>Check how much space you are using in your home directory with</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>homedu
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>du -h --max-depth=0 ~
+</pre></div>
+</div>
+<p>Check how much space is used in your projects directory with</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>checkproject &lt;allocationID&gt;
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Quest.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
