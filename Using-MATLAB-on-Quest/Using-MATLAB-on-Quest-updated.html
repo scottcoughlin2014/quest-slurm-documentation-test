@@ -1,0 +1,2361 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Using MATLAB on Quest &#8212; Quest v2023.01.18 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Python on Quest" href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html" />
+    <link rel="prev" title="Using Jupyter on the Quest Analytics Nodes" href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html" />
+
+
+
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=deep-purple data-md-color-accent=purple>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#Using-MATLAB-on-Quest/Using-MATLAB-on-Quest-updated" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="Quest v2023.01.18 documentation"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Research Computing Services Documentation</span>
+          <span class="md-header-nav__topic"> Using MATLAB on Quest </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">Quest v2023.01.18 documentation</a></li>
+            
+            <li class="md-tabs__item"><a href="https://www.it.northwestern.edu/departments/it-services-support/research/index.html" class="md-tabs__link">RCS Home Page</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="Quest v2023.01.18 documentation" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="Quest v2023.01.18 documentation">Research Computing Services Documentation</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../Advanced-Globus-Features/Advanced-Globus-Features-updated.html" class="md-nav__link">Advanced Globus Features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../AlphaFold-on-Quest/AlphaFold-on-Quest-updated.html" class="md-nav__link">AlphaFold on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html" class="md-nav__link">Checking Processor and Memory Utilization for Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-completed-jobs" class="md-nav__link">How to check resource utilization for completed jobs?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#profiling-your-processes-for-memory-and-cpu-usage-before-production" class="md-nav__link">Profiling your processes for memory and CPU usage before production</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-running-jobs" class="md-nav__link">How to check resource utilization for running jobs?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html" class="md-nav__link">Compiling Code on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#basic-compiling-strategies" class="md-nav__link">Basic Compiling Strategies</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html" class="md-nav__link">Connecting to NUworkspace</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#accounts" class="md-nav__link">Accounts</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#for-support-contactnuworkspace-support-center" class="md-nav__link">For Support, contactNuworkspace Support Center</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#software-installation" class="md-nav__link">Software Installation</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-Quest-with-FastX/Connecting-to-Quest-with-FastX-updated.html" class="md-nav__link">Connecting to Quest with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-a-Research-Data-Storage-Service-Share/Connecting-to-a-Research-Data-Storage-Service-Share-updated.html" class="md-nav__link">Connecting to a Research Data Storage Service Share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Creating-an-Amazon-S3-bucket/Creating-an-Amazon-S3-bucket-updated.html" class="md-nav__link">Creating an Amazon S3 bucket</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html" class="md-nav__link">Debugging your Slurm submission script on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#debugging-a-job-submission-script-rejected-by-the-scheduler" class="md-nav__link">Debugging a Job Submission Script Rejected By The Scheduler</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-generate-error-messages" class="md-nav__link">Mistakes That Generate Error Messages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-dont-generate-error-messages" class="md-nav__link">Mistakes That Don’t Generate Error Messages</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Disconnecting-from-a-RDSS-FSMResFiles-share/Disconnecting-from-a-RDSS-FSMResFiles-share-updated.html" class="md-nav__link">Disconnecting from a RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Everything-You-Need-to-Know-about-Using-Slurm-on-Quest/Everything-You-Need-to-Know-about-Using-Slurm-on-Quest-updated.html" class="md-nav__link">Everything You Need to Know about Using Slurm on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html" class="md-nav__link">Examples of Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#interactive-jobs" class="md-nav__link">Interactive Jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#batch-jobs" class="md-nav__link">Batch Jobs</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html" class="md-nav__link">Extended SLURM Job and Submission Options</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#job-submission-options" class="md-nav__link">Job Submission Options</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#common-job-commands" class="md-nav__link">Common Job Commands</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#script-variables" class="md-nav__link">Script Variables</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html" class="md-nav__link">Factors Affecting Job Scheduling on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#priority" class="md-nav__link">Priority</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#backfill-scheduling" class="md-nav__link">Backfill Scheduling</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html" class="md-nav__link">File Systems, Storage, and Permissions on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#summary-of-file-permissions" class="md-nav__link">Summary of File Permissions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#home-directories" class="md-nav__link">Home Directories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#project-space" class="md-nav__link">Project Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#scratch-space" class="md-nav__link">Scratch Space</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html" class="md-nav__link">Finding the full path to your RDSS share</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-1-identify-your-access-zone" class="md-nav__link">Step 1: Identify your access zone</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-2-identify-the-full-path-to-your-share" class="md-nav__link">Step 2: Identify the full path to your share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#multiple-shares" class="md-nav__link">Multiple Shares</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html" class="md-nav__link">GPUs on QUEST</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpus-are-available-on-quest" class="md-nav__link">What GPUs are available on QUEST?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#interactive-gpu-jobs" class="md-nav__link">Interactive GPU jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpu-software-is-available-on-quest" class="md-nav__link">What GPU software is available on QUEST?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html" class="md-nav__link">Generating a AWS IAM Access Key for Amazon S3</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#using-the-aws-management-console" class="md-nav__link">Using the AWS Management Console</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#creating-an-iam-user" class="md-nav__link">Creating an IAM user</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html" class="md-nav__link">Genomic Data Commons Data Transfer Tool on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html#genomic-data-commons" class="md-nav__link">Genomic Data Commons</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html" class="md-nav__link">Getting Started on the Genomics Compute Cluster (b1042) on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html#about-the-genomics-compute-cluster-on-quest" class="md-nav__link">About the Genomics Compute Cluster on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Globus-Endpoints-and-Collections/Globus-Endpoints-and-Collections-updated.html" class="md-nav__link">Globus Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-Software-on-Quest/Installing-Software-on-Quest-updated.html" class="md-nav__link">Installing Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html#installing-and-managing-r-packages-on-quest-1" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html" class="md-nav__link">Knitro on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#knitro-overview" class="md-nav__link">Knitro Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#matlab" class="md-nav__link">MATLAB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#r" class="md-nav__link">R</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#python" class="md-nav__link">Python</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#ampl" class="md-nav__link">AMPL</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html" class="md-nav__link">Logging in to Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-fastx" class="md-nav__link">Connecting with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-an-ssh-terminal" class="md-nav__link">Connecting with an SSH Terminal</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html" class="md-nav__link">Managing Full Access Allocations on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-jobs-in-queue" class="md-nav__link">Status of Allocation Jobs in Queue</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-nodes" class="md-nav__link">Status of Allocation Nodes</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#individual-node-status" class="md-nav__link">Individual Node Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#why-are-my-jobs-running-on-nodes-other-than-those-reserved-for-my-allocation" class="md-nav__link">Why are my jobs running on nodes other than those reserved for my allocation?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html" class="md-nav__link">Managing Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-id" class="md-nav__link">Job ID</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-status" class="md-nav__link">Job Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#commonly-used-commands" class="md-nav__link">Commonly Used Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares/Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares-updated.html" class="md-nav__link">Managing access to Research Data Storage Service (RDSS) Shares</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html" class="md-nav__link">Managing an Allocation on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#allocation-resource-management" class="md-nav__link">Allocation Resource Management</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#check-allocation-resources" class="md-nav__link">Check Allocation Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html" class="md-nav__link">Modules Software Environment Manager on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#available-modules" class="md-nav__link">Available Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#loading-a-module" class="md-nav__link">Loading a Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#module-versions" class="md-nav__link">Module Versions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#useful-module-commands" class="md-nav__link">Useful Module Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Opening-an-Archived-File-in-RDSS/Opening-an-Archived-File-in-RDSS-updated.html" class="md-nav__link">Opening an Archived File in RDSS</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html" class="md-nav__link">Parabricks on the Genomics Compute Cluster</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#checking-out-parabricks-licenses" class="md-nav__link">Checking out Parabricks Licenses</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#running-parabricks-on-quest" class="md-nav__link">Running Parabricks on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-FAQ/Quest-FAQ-updated.html" class="md-nav__link">Quest FAQ</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html" class="md-nav__link">Quest Partitions/Queues</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-general-access-p-and-e-accounts" class="md-nav__link">Partition Definitions: General Access (“p” and “e” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-full-access-buy-ins-or-b-accounts" class="md-nav__link">Partition Definitions: Full Access (buy-ins, or “b” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#notes" class="md-nav__link">Notes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html" class="md-nav__link">Quest Quick Start Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#navigating-quest" class="md-nav__link">Navigating Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#moving-files-onto-quest" class="md-nav__link">Moving Files onto Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#software-available-on-quest" class="md-nav__link">Software available on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#running-jobs-on-quest" class="md-nav__link">Running Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#managing-your-jobs-on-quest" class="md-nav__link">Managing Your Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#getting-help" class="md-nav__link">Getting Help</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html" class="md-nav__link">Quest Slurm Quick Start</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html#quick-start" class="md-nav__link">Quick Start</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Troubleshooting%3A-Checking-the-job-output-file/Quest-Troubleshooting%3A-Checking-the-job-output-file-updated.html" class="md-nav__link">Quest Troubleshooting: Checking the job output file</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html" class="md-nav__link">Quest User Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html#user-guides" class="md-nav__link">User Guides</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html" class="md-nav__link">Research Data Management Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#research-data-storage-service-rdss" class="md-nav__link">Research Data Storage Service (RDSS)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#globus-data-transfer-tool" class="md-nav__link">Globus data transfer tool</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Resolving-issues-accessing-a-Research-Data-Storage-Service-share/Resolving-issues-accessing-a-Research-Data-Storage-Service-share-updated.html" class="md-nav__link">Resolving issues accessing a Research Data Storage Service share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html" class="md-nav__link">Restoring a previous version of a file or folder from RDSS</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html#retrieving-older-versions-of-modified-deleted-files" class="md-nav__link">Retrieving older versions of modified/deleted files</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html" class="md-nav__link">Running GATK4 Spark on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#gatk4-spark-tools" class="md-nav__link">GATK4 SPARK tools</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#converting-fasta-files-for-parallel-runs" class="md-nav__link">Converting FASTA Files for Parallel Runs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#example-job-submission" class="md-nav__link">Example Job Submission</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html" class="md-nav__link">Running Jupyter Notebook on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#accessing-conda-environments-in-jupyter" class="md-nav__link">Accessing Conda Environments in Jupyter</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-ipython-kernel" class="md-nav__link">Create a iPython Kernel</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-r-kernel" class="md-nav__link">Create a R Kernel</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Software-on-Quest/Software-on-Quest-updated.html" class="md-nav__link">Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Specifying-Memory-for-Jobs-on-Quest/Specifying-Memory-for-Jobs-on-Quest-updated.html" class="md-nav__link">Specifying Memory for Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html" class="md-nav__link">Transferring Files to and from Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#globus" class="md-nav__link">Globus</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#other-data-transfer-options" class="md-nav__link">Other Data Transfer Options</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html" class="md-nav__link">Transferring files using Globus</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html#to-initiate-a-file-transfer" class="md-nav__link">To initiate a file transfer:</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html" class="md-nav__link">Troubleshooting Installing R Packages on Quest and Quest Analytics</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html#introduction" class="md-nav__link">Introduction</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html" class="md-nav__link">Troubleshooting Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#why-isnt-my-job-running" class="md-nav__link">Why isn’t my job running?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#check-the-output-file" class="md-nav__link">Check the Output File</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#resources-exceeded" class="md-nav__link">Resources Exceeded</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#out-of-disk-space" class="md-nav__link">Out of Disk Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html" class="md-nav__link">Troubleshooting R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html#common-issues" class="md-nav__link">Common Issues</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Amazon-S3-Storage/Using-Amazon-S3-Storage-updated.html" class="md-nav__link">Using Amazon S3 Storage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html" class="md-nav__link">Using Git on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#making-git-available" class="md-nav__link">Making Git Available</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#setting-up-git" class="md-nav__link">Setting up Git</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#repositories" class="md-nav__link">Repositories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#git-resources" class="md-nav__link">Git Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-Timer/Using-Globus-Timer-updated.html" class="md-nav__link">Using Globus Timer</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html" class="md-nav__link">Using Globus with Amazon S3 storage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using Jupyter on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#environments-and-packages" class="md-nav__link">Environments and Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-quest-analytics-nodes" class="md-nav__link">Issues or Problems with the Quest Analytics nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Using MATLAB on Quest </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Using MATLAB on Quest</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Using-MATLAB-on-Quest/Using-MATLAB-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html" class="md-nav__link">Using Python on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#python-package-management" class="md-nav__link">Python Package Management</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html" class="md-nav__link">Using QIIME2 on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html#installing-qiime2-on-quest" class="md-nav__link">Installing QIIME2 on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html" class="md-nav__link">Using R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#installing-and-managing-r-packages-on-quest" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using RStudio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#installing-packages" class="md-nav__link">Installing Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using SAS Studio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html" class="md-nav__link">Using Singularity on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#load-the-singularity-module" class="md-nav__link">Load the Singularity Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#getting-singularity-images-on-quest" class="md-nav__link">Getting Singularity Images On Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#running-singularity-containers" class="md-nav__link">Running Singularity Containers</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#best-practices" class="md-nav__link">Best Practices</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html" class="md-nav__link">Using the Globus Data Transfer Tool</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#restrictions" class="md-nav__link">Restrictions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#endpoints-and-collections" class="md-nav__link">Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#transferring-data" class="md-nav__link">Transferring data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#advanced-features" class="md-nav__link">Advanced features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#resources" class="md-nav__link">Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html" class="md-nav__link">Using the OneDrive/SharePoint Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#activating-the-onedrive-sharepoint-endpoint" class="md-nav__link">Activating the OneDrive/Sharepoint Endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#accessing-files" class="md-nav__link">Accessing files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#my-file-transfer-fails-because-of-a-checksum-error-when-i-try-to-send-a-microsoft-office-document-to-a-sharepoint-library" class="md-nav__link">My file transfer fails because of a checksum error when I try to send a Microsoft Office Document to a SharePoint library.</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#i-cant-see-a-sharepoint-library-i-have-access-to" class="md-nav__link">I can’t see a SharePoint Library I have access to.</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Quest-Globus-endpoint/Using-the-Quest-Globus-endpoint-updated.html" class="md-nav__link">Using the Quest Globus endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html" class="md-nav__link">Using the RDSS Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#mounting-your-rdss-fsmresfiles-share" class="md-nav__link">Mounting your RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#transferring-files-to-from-rdss-fsmresfiles" class="md-nav__link">Transferring files to/from RDSS<strong>/FSMResFiles</strong></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#extending-rdss-fsmresfiles-endpoint-activation" class="md-nav__link">Extending RDSS<strong>/FSMResFiles</strong> endpoint activation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#troubleshooting" class="md-nav__link">Troubleshooting</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Using-MATLAB-on-Quest/Using-MATLAB-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="using-matlab-on-quest">
+<h1 id="using-matlab-on-quest-using-matlab-on-quest-updated--page-root">Using MATLAB on Quest<a class="headerlink" href="#using-matlab-on-quest-using-matlab-on-quest-updated--page-root" title="Permalink to this heading">¶</a></h1>
+<p>Setup and reference instructions for running MATLAB on Quest.</p>
+<p>We provide a summary of the different ways to run MATLAB on Quest and
+which option is right for you will depend on the type of MATLAB code you
+are running and if parallelization (either explicit through the use of
+<code class="docutils literal notranslate"><span class="pre">parfor</span></code> or implicit through MATLAB’s internal multithreading) will
+provide impactful speeds up of your software.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#section-matlab-single-core">Submitting single core MATLAB jobs</a></p>
+<ul>
+<li><p>Simple SLURM Submission Script</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#section-matlab-job-array">Submitting many single core MATLAB jobs, changing only the input
+arguments</a></p>
+<ul>
+<li><p>SLURM Job Array (embarrassingly parallel)</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#section-matlab-multithreading">Submitting jobs which make use of MATLAB’s internal
+multithreading</a></p>
+<ul>
+<li><p>Cannot scale past 1 node and not all code/functions can be
+parallelized in this manner</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#section-matlab-scalable-jobs">Submitting Scalable Parallel MATLAB
+Jobs</a></p>
+<ul>
+<li><p>Scales from 1 computer to multiple computers seamlessly</p></li>
+</ul>
+</li>
+</ul>
+<p>Expand All Collapse All</p>
+<div class="panel panel-default docutils container">
+<div class="panel-heading docutils container">
+<p>Submitting single core MATLAB jobs</p>
+</div>
+<div class="panel panel-body js-panelnormalswitches0 collapse docutils container">
+<p>In many situations, it will be most beneficial to run a single
+core MATLAB job. Even when you are not explicitly parallelizing
+your code, you should be aware of <a class="reference external" href="#section-matlab-multithreading">MATLAB’s use of
+multithreading</a> which will need
+to be disabled by passing the command line argument
+<code class="docutils literal notranslate"><span class="pre">-singleCompThread</span></code> in order to run a single core MATLAB job.
+Below we provide an example submission script called
+<code class="docutils literal notranslate"><span class="pre">example_submit.sh</span></code> and an example MATLAB script called
+<code class="docutils literal notranslate"><span class="pre">simple.m</span></code>.</p>
+<p><strong>example_submit.sh</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --account=w10001 ## YOUR ACCOUNT pXXXX or bXXXX</span>
+<span class="c1">#SBATCH --partition=w10001 ### PARTITION (buyin, short, normal, w10001, etc)</span>
+<span class="c1">#SBATCH --nodes=1 ## Never need to change this</span>
+<span class="c1">#SBATCH --ntasks-per-node=1 ## Never need to change this</span>
+<span class="c1">#SBATCH --time=00:10:00 ## how long does this need to run (remember different partitions have restrictions on this param)</span>
+<span class="c1">#SBATCH --mem=4G ## how much RAM you need per computer (this effects your FairShare score so be careful to not ask for more than you need))</span>
+<span class="c1">#SBATCH --output=matlab_job.out ## standard out and standard error goes to this file</span>
+
+
+<span class="c1">## job commands; simple is the MATLAB .m file, specified without the .m extension</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">matlab</span><span class="o">/</span><span class="n">r2021b</span>
+<span class="n">matlab</span> <span class="o">-</span><span class="n">singleCompThread</span> <span class="o">-</span><span class="n">batch</span> <span class="s2">"input_arg1='arg1';input_arg2='arg2';input_arg3='arg3';simple"</span>
+</pre></div>
+</div>
+<p><strong>simple.m</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">input_arg1</span> <span class="ow">is</span> <span class="nb">set</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">submission</span> <span class="n">script</span> <span class="n">that</span> <span class="n">calls</span> <span class="n">this</span> <span class="n">file</span>
+<span class="o">%</span><span class="n">input_arg2</span> <span class="ow">is</span> <span class="nb">set</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">submission</span> <span class="n">script</span> <span class="n">that</span> <span class="n">calls</span> <span class="n">this</span> <span class="n">file</span>
+<span class="o">%</span><span class="n">input_arg3</span> <span class="ow">is</span> <span class="nb">set</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">submission</span> <span class="n">script</span> <span class="n">that</span> <span class="n">calls</span> <span class="n">this</span> <span class="n">file</span>
+
+
+<span class="n">disp</span><span class="p">(</span><span class="n">input_arg1</span><span class="p">)</span>
+<span class="n">disp</span><span class="p">(</span><span class="n">input_arg2</span><span class="p">)</span>
+<span class="n">disp</span><span class="p">(</span><span class="n">input_arg3</span><span class="p">)</span>
+
+
+<span class="n">disp</span><span class="p">(</span><span class="s1">'Start Sim'</span><span class="p">)</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">tic</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100000</span>
+<span class="n">A</span><span class="p">{</span><span class="n">i</span><span class="p">}</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">end</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">toc</span><span class="p">(</span><span class="n">t0</span><span class="p">);</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">sprintf</span><span class="p">(</span><span class="s1">'Simulation took </span><span class="si">%f</span><span class="s1"> seconds'</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="n">disp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If both of these files are in the same folder, you can run this
+MATLAB job through SLURM by running</p>
+<p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">example_submit.sh</span></code></p>
+</div>
+</div>
+<div class="panel panel-default docutils container">
+<div class="panel-heading docutils container">
+<p>Submitting many single core MATLAB jobs, changing only the input
+arguments</p>
+</div>
+<div class="panel panel-body js-panelnormalswitches1 collapse docutils container">
+<p>Let’s say that we want to submit the exact same single core MATLAB
+job many times over while only changing the arguments that are
+passed to <code class="docutils literal notranslate"><span class="pre">simple.m</span></code>. We can accomplish this through a using a
+<a class="reference external" href="https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=1551">SLURM Job
+Array</a>.
+In the example below, the <code class="docutils literal notranslate"><span class="pre">--array</span></code> option defines the job
+array, with a specification of the index numbers you want to use
+(in this case, 0 through 9). The <code class="docutils literal notranslate"><span class="pre">$SLURM_ARRAY_TASK_ID</span></code> bash
+environmental variable takes on the value of the job array index
+for each job (so here, integer values 0 through 9, one value for
+each job). In this example, the value of <code class="docutils literal notranslate"><span class="pre">$SLURM_ARRAY_TASK_ID</span></code>
+is used to select the correct index from the <code class="docutils literal notranslate"><span class="pre">input_args</span></code> bash
+array which was constructed by reading in <em>input_arguments.txt</em>,
+each row of which is then passed on to a script as command line
+arguments. Essentially, each row of <em>input_arguments.txt</em>
+represents a job in your job array and each column represents an
+input argument (in this example input_arguments[1-3]) to your
+script.</p>
+<p><strong>example_submit.sh</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#SBATCH --account=w10001 ## YOUR ACCOUNT pXXXX or bXXXX
+#SBATCH --partition=w10001 ### PARTITION (buyin, short, normal, w10001, etc)
+#SBATCH --array=0-9 ## number of jobs to run "in parallel"
+#SBATCH --nodes=1 ## Never need to change this
+#SBATCH --ntasks-per-node=1 ## Never need to change this
+#SBATCH --time=15:00:00 ## how long does this need to run (remember different partitions have restrictions on this param)
+#SBATCH --mem=8G ## how much RAM do you need per computer (this effects your FairShare score so be careful to not ask for more than you need))
+#SBATCH --job-name="sample_job_\${SLURM_ARRAY_TASK_ID}" ## use the task id in the name of the job
+#SBATCH --output=sample_job.%A_%a.out ## use the jobid (A) and the specific job index (a) to name your log file
+
+
+# read in each row of the input_arguments text file into an array called input_args
+IFS=$'\n' read -d '' -r -a input_arguments &lt; input_arguments.txt
+
+# Use the SLURM_ARRAY_TASK_ID varaible to select the correct index from input_arguments and then split the string by whatever delimiter you chose (in our case each input argument is split by a space)
+IFS=' ' read -r -a input_args &lt;&lt;&lt; "${input_arguments[$SLURM_ARRAY_TASK_ID]}"
+
+# Pass the input arguments associated with this SLURM_ARRAY_TASK_ID to your function.
+## job commands; job_array is the MATLAB .m file, specified without the .m extension
+module load matlab/r2021b
+matlab -singleCompThread -batch "input_arg1='${input_args[0]}';input_arg2='${input_args[1]}';input_arg3='${input_args[2]}';simple"
+</pre></div>
+</div>
+<p><strong>input_arguments.txt</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">job1_arg1</span> <span class="n">job1_arg2</span> <span class="n">job1_arg3</span>
+<span class="n">job2_arg1</span> <span class="n">job2_arg2</span> <span class="n">job2_arg3</span>
+<span class="n">job3_arg1</span> <span class="n">job3_arg2</span> <span class="n">job3_arg3</span>
+<span class="n">job4_arg1</span> <span class="n">job4_arg2</span> <span class="n">job4_arg3</span>
+<span class="n">job5_arg1</span> <span class="n">job5_arg2</span> <span class="n">job5_arg3</span>
+<span class="n">job6_arg1</span> <span class="n">job6_arg2</span> <span class="n">job6_arg3</span>
+<span class="n">job7_arg1</span> <span class="n">job7_arg2</span> <span class="n">job7_arg3</span>
+<span class="n">job8_arg1</span> <span class="n">job8_arg2</span> <span class="n">job8_arg3</span>
+<span class="n">job9_arg1</span> <span class="n">job9_arg2</span> <span class="n">job9_arg3</span>
+<span class="n">job10_arg1</span> <span class="n">job10_arg2</span> <span class="n">job10_arg3</span>
+</pre></div>
+</div>
+<p>If both of these files are in the same folder, you can run this
+MATLAB job array through SLURM by running</p>
+<p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">example_submit.sh</span></code></p>
+</div>
+</div>
+<div class="panel panel-default docutils container">
+<div class="panel-heading docutils container">
+<p>Multithreading (MATLAB Computational Threads)</p>
+</div>
+<div class="panel panel-body js-panelnormalswitches2 collapse docutils container">
+<p>MATLAB has built-in multithreading for some linear algebra and
+numerical functions. By default, MATLAB will try to use <em>all of
+the cores</em> on a machine to perform these computations. However, if
+a job you’ve submitted to Quest uses more cores than were
+requested, the job will be cancelled. If you want MATLAB to be
+able to use multiple cores for these calculations, then you can
+<strong>omit</strong> the <code class="docutils literal notranslate"><span class="pre">-singleCompThread</span></code> option when starting MATLAB and
+add the following line to the <strong>beginning</strong> of your main <em>.m</em>
+script.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>maxNumCompThreads(str2num(getenv('SLURM_NPROCS')));
+</pre></div>
+</div>
+<p>Adding this line to your <em>.m</em> script is to be used in combination
+with the following options below in your submission script or
+<code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=&lt;numberofcores&gt;
+</pre></div>
+</div>
+<p><strong>Example</strong></p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+</pre></div>
+</div>
+<p>This will allow MATLAB to spawn 8 parallel threads which is equal
+to the 8 CPU resources that you will have requested and received
+from the scheduler.</p>
+<p>Note: Setting the maximum number of computational threads using
+<code class="docutils literal notranslate"><span class="pre">maxNumCompThreads</span></code> does not propagate to your next MATLAB
+session and so if you are typing commands in the command window,
+then you must do this everytime you start a new MATLAB session.</p>
+<p>Below, we show both an example of a MATLAB program that <strong>would
+benefit</strong> from utilizing MATLAB’s internal multithreading and by
+exactly how much it would benefit and an example of a MATLAB
+program that <strong>would not benefit</strong> from utilizing MATLAB’s
+internal multithreading. In the following program(s), the MATLAB
+function that benefits from MATLAB’s auto-multithreading is
+<code class="docutils literal notranslate"><span class="pre">svd</span></code>. For both of the MATLAB programs below <code class="docutils literal notranslate"><span class="pre">threads_help.m</span></code>
+and <code class="docutils literal notranslate"><span class="pre">threads_do_not_help.m</span></code>, we make two different computing
+resource requests to highlight the impact of multithreading, 1 CPU
+on 1 computer and 8 CPUs on 1 computer. The former request will
+restrict <code class="docutils literal notranslate"><span class="pre">maxNumCompThreads</span></code> to be 1 which is equivalent to
+running MATLAB with the <code class="docutils literal notranslate"><span class="pre">-singleCompThread</span></code> option.</p>
+<p><strong>threads_help.m</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span><span class="p">(</span><span class="s1">'Start Sim'</span><span class="p">)</span>
+<span class="n">maxNumCompThreads</span><span class="p">(</span><span class="n">str2num</span><span class="p">(</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'SLURM_NPROCS'</span><span class="p">)));</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">tic</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">:</span><span class="mi">5100</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+  <span class="nb">max</span><span class="p">(</span><span class="n">svd</span><span class="p">(</span><span class="n">z</span><span class="p">));</span>
+<span class="n">end</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">toc</span><span class="p">(</span><span class="n">t0</span><span class="p">);</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">sprintf</span><span class="p">(</span><span class="s1">'Simulation took </span><span class="si">%f</span><span class="s1"> seconds'</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="n">disp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Due to the size of the matrices being passed to <code class="docutils literal notranslate"><span class="pre">svd</span></code> (somewhere
+between 5000x5000 and 5100x5100), we <strong>do find</strong> a substantive
+difference (~5 time faster) when <code class="docutils literal notranslate"><span class="pre">svd</span></code> is able to parallelize
+over 8 CPUs. <em>Note that the scaling is not 1 to 1 in terms of how
+much faster the simulations goes and how many CPUs you give MATLAB
+access to. In this case, access to 8 CPUs leads only to a 5X speed
+up, not 8.</em></p>
+<p>8 CPUs: Simulation took 1233.587702 seconds</p>
+<p>1 CPU: Simulation took 6446.807831 seconds</p>
+<p><strong>threads_do_not_help.m</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span><span class="p">(</span><span class="s1">'Start Sim'</span><span class="p">)</span>
+<span class="n">maxNumCompThreads</span><span class="p">(</span><span class="n">str2num</span><span class="p">(</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'SLURM_NPROCS'</span><span class="p">)));</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">tic</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">500</span><span class="p">:</span><span class="mi">510</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+  <span class="nb">max</span><span class="p">(</span><span class="n">svd</span><span class="p">(</span><span class="n">z</span><span class="p">));</span>
+<span class="n">end</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">toc</span><span class="p">(</span><span class="n">t0</span><span class="p">);</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">sprintf</span><span class="p">(</span><span class="s1">'Simulation took </span><span class="si">%f</span><span class="s1"> seconds'</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="n">disp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Due to the size of the matrices being passed to <code class="docutils literal notranslate"><span class="pre">svd</span></code> (somewhere
+between 500x500 and 510x510), we <strong>do not find</strong> a substantive
+difference (~1.5 time faster) when <code class="docutils literal notranslate"><span class="pre">svd</span></code> is able to parallelize
+over 8 CPUs.</p>
+<p>1 CPU: Simulation took 1.044554 seconds</p>
+<p>8 CPUs: Simulation took 0.683330 seconds</p>
+<p>A final note, it is very likely that if you run the same program
+on Quest as you do on your local labtop or workstation <a class="reference external" href="#section-matlab-single-core">in a
+single core configuration</a> you
+will find that it will take longer to run on Quest than on your
+laptop due to this automated multithreading behavior from MATLAB.
+That being said, enabling the multithreading behavior in MATLAB
+comes at a cost of needing to request more CPUs which may or may
+not being used efficiently by MATLAB depending on the exact
+functions you call and the size of the data/matrices being
+operated on as can be seen from the above example.</p>
+</div>
+</div>
+<div class="panel panel-default docutils container">
+<div class="panel-heading docutils container">
+<p>Submitting Scalable (Single or Multi node) Parallel MATLAB Jobs</p>
+</div>
+<div class="panel panel-body js-panelnormalswitches3 collapse docutils container">
+<p><em>Note that any version before 2017a (i.e. 2016a, 2015a, 2014b,
+2014a and 2013a) is not supported by Slurm scheduler for scalable
+parallelization.</em></p>
+<p>To run parallel jobs on Quest that use cores across multiple
+nodes, you need to create a parallel profile.</p>
+<p>Log in to Quest with X-forwarding enabled (use the -X option when
+connecting via ssh or connect with FastX to have X-forwarding
+enabled by default).</p>
+<p>Launch MATLAB on the login node you land on from your home
+directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">matlab</span><span class="o">/</span><span class="n">r2021b</span>
+<span class="n">matlab</span>
+</pre></div>
+</div>
+<p class="rubric" id="configuration-of-quest-cluster">CONFIGURATION OF QUEST CLUSTER</p>
+<p>We will configure MATLAB to run parallel jobs on Quest by calling
+<code class="docutils literal notranslate"><span class="pre">configCluster</span></code>. <code class="docutils literal notranslate"><span class="pre">configCluster</span></code> only needs to be called once
+per version of MATLAB. Please be aware that running
+<code class="docutils literal notranslate"><span class="pre">configCluster</span></code> more than once per version will reset your
+cluster profile back to default settings and erase any saved
+modifications to the profile.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">rehash</span> <span class="n">toolboxcache</span>
+<span class="o">&gt;&gt;</span> <span class="n">configCluster</span>
+</pre></div>
+</div>
+<p class="rubric" id="jobs-will-now-default-to-the-cluster-rather-than-submit-to-the-local-machine">Jobs will now default to the cluster rather than
+submit to the local machine.</p>
+<p><em>Although the Cluster Profile created by this script will work out
+of the box, we recommend slightly modifying the Cluster Profile.</em></p>
+<p>If you are using the MATLAB GUI on Quest, you should be able to
+see and modify new cluster profile by doing the following:
+Parallel &gt; Create and Manage Clusters). You should see that the
+default Cluster Profile is now quest R20XXa/b depending on what
+version of MATLAB &gt; r2017a you are using.</p>
+<p><a class="reference internal" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/FindClusterProfileManangerWindow.png"><img alt="find-cluster-profile-manager" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/FindClusterProfileManangerWindow.png" style="width: 599px; height: 394px;"/></a> <a class="reference internal" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/ClusterProfileManager.png"><img alt="clusterprofilemanager" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/ClusterProfileManager.png" style="width: 609px; height: 398px;"/></a></p>
+<p>Click <em>Edit</em> and change the <em>JobStorageLocation</em> entry and then
+click <em>Done</em>. We recommend updating the <em>JobStorageLocation</em> to be
+the default value of current working directory (which can be
+achieved by leaving the PATH blank).</p>
+<a class="reference internal image-reference" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Change-JobStorageLocation-to-default.png"><img alt="changeJobStorageLocation" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Change-JobStorageLocation-to-default.png" style="width: 619px; height: 401px;"/></a>
+<p class="rubric" id="configuring-jobs">CONFIGURING JOBS</p>
+<p>Prior to submitting the job, we can specify various parameters to
+pass to our jobs, such as partition, allocation, walltime, etc.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Get</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cluster</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">parcluster</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The following options are <em>required</em> in order to submit a MATLAB
+job to the cluster.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="n">the</span> <span class="n">walltime</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="mi">4</span> <span class="n">hours</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">WallTime</span> <span class="o">=</span> <span class="s1">'04:00:00'</span><span class="p">;</span>
+
+<span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="n">an</span> <span class="n">account</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">pXXXX</span><span class="p">,</span> <span class="n">bXXXX</span><span class="p">,</span> <span class="n">etc</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">AccountName</span> <span class="o">=</span> <span class="s1">'account-name'</span><span class="p">;</span>
+
+<span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="n">a</span> <span class="n">queue</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">short</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">long</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">QueueName</span> <span class="o">=</span> <span class="s1">'queue-name'</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The following arguments are <em>optional</em> but are worth considering
+when running MATLAB jobs on the cluster</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="n">memory</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span><span class="p">,</span> <span class="n">per</span> <span class="n">core</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">4</span><span class="n">gb</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">MemUsage</span> <span class="o">=</span> <span class="s1">'6gb'</span><span class="p">;</span>
+
+<span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="n">number</span> <span class="n">of</span> <span class="n">nodes</span> <span class="n">to</span> <span class="n">use</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">Nodes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Require</span> <span class="n">exclusive</span> <span class="n">node</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">RequireExclusiveNode</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+
+<span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="n">e</span><span class="o">-</span><span class="n">mail</span> <span class="n">address</span> <span class="n">to</span> <span class="n">receive</span> <span class="n">notifications</span> <span class="n">about</span> <span class="n">your</span> <span class="n">job</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">EmailAddress</span> <span class="o">=</span> <span class="s1">'user-id@northwestern.edu'</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The following arguments are apply when running GPU accelerated
+MATLAB jobs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="n">number</span> <span class="n">of</span> <span class="n">GPUs</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">GpusPerNode</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Specify</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">GPU</span> <span class="n">card</span> <span class="n">to</span> <span class="n">use</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">a100</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">GpuCard</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Save changes after modifying AdditionalProperties for the above
+changes to persist between MATLAB sessions.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">saveProfile</span>
+</pre></div>
+</div>
+<p>To see the values of the current configuration options, display
+AdditionalProperties.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">To</span> <span class="n">view</span> <span class="n">current</span> <span class="n">properties</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span>
+</pre></div>
+</div>
+<p>Unset a value when no longer needed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Turn</span> <span class="n">off</span> <span class="n">email</span> <span class="n">notifications</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">EmailAddress</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">saveProfile</span>
+</pre></div>
+</div>
+<p class="rubric" id="parallel-batch-job">PARALLEL BATCH JOB</p>
+<p>Users can submit parallel workflows with the <code class="docutils literal notranslate"><span class="pre">batch</span></code> command
+either with or without the MATLAB GUI. Let’s use the following
+example for a parallel job, which is saved
+as<code class="docutils literal notranslate"><span class="pre">quest_parallel_example.m</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">disp</span><span class="p">(</span><span class="s1">'Start Sim'</span><span class="p">)</span>
+
+<span class="nb">iter</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">;</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">tic</span><span class="p">;</span>
+<span class="n">parfor</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">iter</span>
+  <span class="n">A</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span>
+<span class="n">end</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">toc</span><span class="p">(</span><span class="n">t0</span><span class="p">);</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">sprintf</span><span class="p">(</span><span class="s1">'Simulation took </span><span class="si">%f</span><span class="s1"> seconds'</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="n">disp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">save</span> <span class="n">RESULTS</span> <span class="n">A</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p class="rubric" id="submitting-a-parallel-batch-job-through-the-matlab-gui">SUBMITTING A PARALLEL BATCH JOB THROUGH THE MATLAB GUI</p>
+<p>First, we will make a MATLAB script called <code class="docutils literal notranslate"><span class="pre">submit_matlab_job.m</span></code>
+which we will place in the same directory as
+<code class="docutils literal notranslate"><span class="pre">quest_parallel_example.m</span></code> and will look a lot like a SLURM
+submission script.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">Get</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cluster</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">parcluster</span><span class="p">;</span>
+
+<span class="o">%%</span> <span class="n">Required</span> <span class="n">arguments</span> <span class="ow">in</span> <span class="n">order</span> <span class="n">to</span> <span class="n">submit</span> <span class="n">MATLAB</span> <span class="n">job</span>
+
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">the</span> <span class="n">walltime</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="mi">4</span> <span class="n">hours</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">WallTime</span> <span class="o">=</span> <span class="s1">'01:00:00'</span><span class="p">;</span>
+
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">an</span> <span class="n">account</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">pXXXX</span><span class="p">,</span> <span class="n">bXXXX</span><span class="p">,</span> <span class="n">etc</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">AccountName</span> <span class="o">=</span> <span class="s1">'w10001'</span><span class="p">;</span>
+
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">a</span> <span class="n">queue</span><span class="o">/</span><span class="n">partition</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">short</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">long</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">QueueName</span> <span class="o">=</span> <span class="s1">'w10001'</span><span class="p">;</span>
+
+<span class="o">%%</span> <span class="n">optional</span> <span class="n">arguments</span> <span class="n">but</span> <span class="n">worth</span> <span class="n">considering</span>
+
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">memory</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span><span class="p">,</span> <span class="n">per</span> <span class="n">core</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">4</span><span class="n">gb</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">MemUsage</span> <span class="o">=</span> <span class="s1">'5gb'</span><span class="p">;</span>
+
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">number</span> <span class="n">of</span> <span class="n">nodes</span> <span class="n">to</span> <span class="n">use</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">Nodes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">e</span><span class="o">-</span><span class="n">mail</span> <span class="n">address</span> <span class="n">to</span> <span class="n">receive</span> <span class="n">notifications</span> <span class="n">about</span> <span class="n">your</span> <span class="n">job</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">EmailAddress</span> <span class="o">=</span> <span class="s1">'quest_demo@northwestern.edu'</span><span class="p">;</span>
+
+<span class="o">%</span> <span class="n">The</span> <span class="n">script</span> <span class="n">that</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">run</span> <span class="n">through</span> <span class="n">SLURM</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MATLAB</span> <span class="n">PATH</span>
+<span class="o">%</span> <span class="n">Here</span> <span class="n">we</span> <span class="n">assume</span> <span class="n">that</span> <span class="n">quest_parallel_example</span><span class="o">.</span><span class="n">m</span> <span class="n">lives</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">same</span> <span class="n">folder</span> <span class="k">as</span> <span class="n">submit_matlab_job</span><span class="o">.</span><span class="n">m</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span>
+
+<span class="o">%</span> <span class="n">Finally</span> <span class="n">we</span> <span class="n">will</span> <span class="n">submit</span> <span class="n">the</span> <span class="n">MATLAB</span> <span class="n">script</span> <span class="n">quest_parallel_example</span> <span class="n">to</span> <span class="n">SLURM</span> <span class="n">such</span> <span class="n">that</span> <span class="n">MATLAB</span>
+<span class="o">%</span> <span class="n">will</span> <span class="n">request</span> <span class="n">enough</span> <span class="n">resources</span> <span class="n">to</span> <span class="n">run</span> <span class="n">a</span> <span class="n">parallel</span> <span class="n">pool</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">4</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">parallelize</span> <span class="n">over</span> <span class="mi">4</span> <span class="n">CPUs</span><span class="p">)</span><span class="o">.</span><span class="p">,</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="s1">'quest_parallel_example'</span><span class="p">,</span> <span class="s1">'Pool'</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s1">'CurrentFolder'</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>After you have written your SLURM submission script like MATLAB
+program, run <code class="docutils literal notranslate"><span class="pre">submit_matlab_job.m</span></code> using the <em>Run</em> button in the
+MATLAB GUI.</p>
+<a class="reference internal image-reference" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Run-Submit-Matlab-Job.png"><img alt="run-matlab-job-through-gui" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Run-Submit-Matlab-Job.png" style="width: 704px; height: 332px;"/></a>
+<p>MATLAB should output the arguments that it passes to the
+<code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command used to submit a job to SLURM and which are
+based on the configuration settings in <code class="docutils literal notranslate"><span class="pre">submit_matlab_job.m.</span></code>
+<em>Note that the number of tasks submitted is the size of the
+parallel pool plus one</em>. This extra CPU is for the root or main
+MATLAB worker. You should also see a folder called JobX appear in
+your current working directory as can be seen in the screen shot
+below. This is the folder where the MATLAB job is running and
+where any print statements in your code will show up.</p>
+<a class="reference internal image-reference" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Result-Of-Running-submit_matlab_job.png"><img alt="submit-matlab-job-result" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Result-Of-Running-submit_matlab_job.png" style="width: 707px; height: 506px;"/></a>
+<div class="docutils container">
+<p>If we enter into the <em>Job1</em> folder, we will see that for every
+MATLAB task and/or worker there has a set of files associated
+with it. The most important file to keep in mind is
+<code class="docutils literal notranslate"><span class="pre">Task1.diary.txt</span></code> which is where any print or display
+statements that you have in your script will go. We demonstrate
+what <code class="docutils literal notranslate"><span class="pre">Task1.diary.txt</span></code> would contain based on our example job
+<code class="docutils literal notranslate"><span class="pre">quest_parallel_example.m</span></code>.</p>
+</div>
+<div class="docutils container">
+<p><a class="reference internal" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Job1-Folder-Results.png"><img alt="Job1-Folder" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Job1-Folder-Results.png" style="width: 547px; height: 389px;"/></a> <a class="reference internal" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Task1_dairy_txt.png"><img alt="task1-diary-txt" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Task1_dairy_txt.png" style="width: 543px; height: 389px;"/></a></p>
+</div>
+<p class="rubric" id="monitoring-your-job-through-the-job-monitor">MONITORING YOUR JOB THROUGH THE JOB MONITOR</p>
+<p>MATLAB provides an application called the Job Monitor which can
+also be a handy way of checking on the status of your MATLAB jobs.
+To launch Job Monitor from the MATLAB GUI, go to Parallel &gt; Job
+Monitor .</p>
+<p><a class="reference internal" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Another-Way-To-Monitor-Job.png"><img alt="job-monitor-find" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Another-Way-To-Monitor-Job.png" style="width: 628px; height: 411px;"/></a> <a class="reference internal" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Job-Monitor.png"><img alt="job-monitor" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Job-Monitor.png" style="width: 706px; height: 400px;"/></a></p>
+<p>Job Monitor allows you to…</p>
+<ul class="simple">
+<li><p>Check on the state of your MATLAB job (pending, running,
+finished).</p></li>
+<li><p>If the job failed, <strong>Show Errors</strong> will display any MATLAB
+error messages.</p></li>
+<li><p>If you had print statements in your MATLAB job (i.e. disp,
+fprintf, etc), then <strong>Show Diary</strong> will show all the standard
+output from your job.</p></li>
+<li><p>Finally, <strong>Load Variables</strong> will allow you to load all of the
+variables defined in your program to your current WorkSpace.</p></li>
+</ul>
+<a class="reference internal image-reference" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Job-Monitor-Options-Show-Diary-Load-Vairables.png"><img alt="job-monitor-options" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Job-Monitor-Options-Show-Diary-Load-Vairables.png" style="width: 598px; height: 341px;"/></a>
+<p>We demonstrate running <em>Show Diary</em> and <em>Load Variables</em> after
+successfully running the program <code class="docutils literal notranslate"><span class="pre">quest_parallel_example.m</span></code>.
+Note the variables added to our workspace after running <em>Load
+Variables</em>.</p>
+<a class="reference internal image-reference" href="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Result-of-Show-Diary-And-Load-Variables.png"><img alt="show-diary-and-load-variables" src="https://kb.northwestern.edu/images/group293/70716/matlab-cluster-2021b/Result-of-Show-Diary-And-Load-Variables.png" style="width: 744px; height: 487px;"/></a>
+<p class="rubric" id="submitting-a-parallel-batch-job-without-the-matlab-gui">SUBMITTING A PARALLEL BATCH JOB WITHOUT THE MATLAB GUI</p>
+<p>If you do not plan to use the MATLAB GUI to run
+<code class="docutils literal notranslate"><span class="pre">submit_matlab_job.m</span></code> then you will want to create a bash script
+which will load MATLAB and run MATLAB in command line only mode.</p>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">submit_matlab_job_wrapper.sh</span></code> which
+contains these two lines</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">matlab</span><span class="o">/</span><span class="n">r2021b</span>
+<span class="n">matlab</span> <span class="o">-</span><span class="n">singleCompThread</span> <span class="o">-</span><span class="n">batch</span> <span class="n">submit_matlab_job</span>
+</pre></div>
+</div>
+<p>All that is left to do is to submit the job by running</p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">bash</span> <span class="pre">submit_matlab_job_wrapper.sh</span></code></p>
+<p>on the command line. This will take a little while to run but you
+will know when MATLAB has submitted a job to SLURM when it outputs
+the <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command that it ran based on the configuration
+settings in <code class="docutils literal notranslate"><span class="pre">submit_matlab_job.m.</span></code> For example, the above MATLAB
+submission script would produce this output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bash submit_matlab_job_wrapper.sh
+
+additionalSubmitArgs =
+
+   '--ntasks=17 --cpus-per-task=1 --ntasks-per-core=1 -A w10001 -t 01:00:00 -p w10001 -N 1 --mem-per-cpu=5gb --mail-type=ALL --mail-user=quest_demo@northwestern.edu'
+</pre></div>
+</div>
+<p>Note that the number of tasks submitting is the size of the
+parallel pool plus one. This extra CPU is for the root or main
+MATLAB worker.</p>
+<p class="rubric" id="gpu-batch-job">GPU BATCH JOB</p>
+<p>Users can submit GPU workflows with the <code class="docutils literal notranslate"><span class="pre">batch</span></code> command either
+with or without the MATLAB GUI. Let’s use the following example
+for a GPU job, which is saved as<code class="docutils literal notranslate"><span class="pre">quest_gpu_example.m</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">gpuDevice</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">gpuArray</span><span class="p">([</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">2</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="mi">1</span> <span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+</pre></div>
+</div>
+<p class="rubric" id="submitting-a-gpu-batch-job-without-the-matlab-gui">SUBMITTING A GPU BATCH JOB WITHOUT THE MATLAB GUI</p>
+<p>In order to submit the above MATLAB job without the GUI, we will
+create two additional scripts, one BASH script and one MATLAB
+script.</p>
+<p>First, we will make a MATLAB script called <code class="docutils literal notranslate"><span class="pre">submit_matlab_job.m</span></code>
+which will look a lot like a GPU SLURM submission script.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">Get</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cluster</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">parcluster</span><span class="p">;</span>
+
+<span class="o">%%</span> <span class="n">Required</span> <span class="n">arguments</span> <span class="ow">in</span> <span class="n">order</span> <span class="n">to</span> <span class="n">submit</span> <span class="n">a</span> <span class="n">MATLAB</span> <span class="n">GPU</span> <span class="n">job</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">the</span> <span class="n">walltime</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="mi">4</span> <span class="n">hours</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">WallTime</span> <span class="o">=</span> <span class="s1">'01:00:00'</span><span class="p">;</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">an</span> <span class="n">account</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">pXXXX</span><span class="p">,</span> <span class="n">bXXXX</span><span class="p">,</span> <span class="n">etc</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">AccountName</span> <span class="o">=</span> <span class="s1">'w10001'</span><span class="p">;</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">a</span> <span class="n">queue</span><span class="o">/</span><span class="n">partition</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">short</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">long</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">QueueName</span> <span class="o">=</span> <span class="s1">'w10001'</span><span class="p">;</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">number</span> <span class="n">of</span> <span class="n">GPUs</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">GpusPerNode</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">GPU</span> <span class="n">card</span> <span class="n">to</span> <span class="n">use</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">a100</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">GpuCard</span> <span class="o">=</span> <span class="s1">'a100'</span><span class="p">;</span>
+
+<span class="o">%%</span> <span class="n">optional</span> <span class="n">arguments</span> <span class="n">but</span> <span class="n">worth</span> <span class="n">considering</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">memory</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">MATLAB</span> <span class="n">jobs</span><span class="p">,</span> <span class="n">per</span> <span class="n">core</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">4</span><span class="n">gb</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">MemUsage</span> <span class="o">=</span> <span class="s1">'5gb'</span><span class="p">;</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">number</span> <span class="n">of</span> <span class="n">nodes</span> <span class="n">to</span> <span class="n">use</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">Nodes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">%</span> <span class="n">Specify</span> <span class="n">e</span><span class="o">-</span><span class="n">mail</span> <span class="n">address</span> <span class="n">to</span> <span class="n">receive</span> <span class="n">notifications</span> <span class="n">about</span> <span class="n">your</span> <span class="n">job</span>
+<span class="n">c</span><span class="o">.</span><span class="n">AdditionalProperties</span><span class="o">.</span><span class="n">EmailAddress</span> <span class="o">=</span> <span class="s1">'quest_demo@northwestern.edu'</span><span class="p">;</span>
+
+<span class="o">%</span> <span class="n">The</span> <span class="n">script</span> <span class="n">that</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">run</span> <span class="n">through</span> <span class="n">SLURM</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MATLAB</span> <span class="n">PATH</span>
+<span class="o">%</span> <span class="n">Here</span> <span class="n">we</span> <span class="n">assume</span> <span class="n">that</span> <span class="n">quest_gpu_example</span><span class="o">.</span><span class="n">m</span> <span class="n">lives</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">same</span> <span class="n">folder</span> <span class="k">as</span> <span class="n">submit_matlab_job</span><span class="o">.</span><span class="n">m</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">pwd</span><span class="p">)</span>
+
+<span class="o">%</span> <span class="n">Finally</span> <span class="n">we</span> <span class="n">will</span> <span class="n">submit</span> <span class="n">the</span> <span class="n">MATLAB</span> <span class="n">script</span> <span class="n">quest_gpu_example</span> <span class="n">to</span> <span class="n">SLURM</span> <span class="n">such</span> <span class="n">that</span> <span class="n">MATLAB</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="s1">'quest_gpu_example'</span><span class="p">,</span> <span class="s1">'CurrentFolder'</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>After you have written your SLURM submission script like MATLAB
+program, we create a bash script which will simply run this MATLAB
+script which will submit a job to SLURM.</p>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">submit_matlab_job_wrapper.sh</span></code> which
+contains these two lines</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">matlab</span><span class="o">/</span><span class="n">r2021b</span>
+<span class="n">matlab</span> <span class="o">-</span><span class="n">singleCompThread</span> <span class="o">-</span><span class="n">batch</span> <span class="n">submit_matlab_job</span>
+</pre></div>
+</div>
+<p>All that is left to do is to submit the job by running</p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">bash</span> <span class="pre">submit_matlab_job_wrapper.sh</span></code></p>
+<p>on the command line. This will take a little while to run but you
+will know when MATLAB has submitted a job to SLURM when it outputs
+the <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command that it ran based on the configuration
+settings in <code class="docutils literal notranslate"><span class="pre">submit_matlab_job.m.</span></code> For example, the above MATLAB
+submission script would produce this output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ bash submit_matlab_job_wrapper.sh
+
+additionalSubmitArgs =
+
+   '--ntasks=1 --cpus-per-task=1 --ntasks-per-core=1 -A w10001 -t 01:00:00 -p w10001 -N 1 --gres=gpu:a100:1 --mem-per-cpu=5gb --mail-type=ALL --mail-user=quest_demo@northwestern.edu'
+</pre></div>
+</div>
+<p>Note the line <code class="docutils literal notranslate"><span class="pre">--gres=gpu:a100:1</span></code> which let’s you know that your
+have correctly requested for this job to run on a GPU resource.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">rubric</span><span class="p">::</span> <span class="n">INTERACTIVE</span> <span class="n">JOBS</span>
+</pre></div>
+</div>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">name<span class="colon">:</span></dt>
+<dd class="field-odd"><p>interactive-jobs</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>To run an interactive pool job on the cluster, continue to use
+<code class="docutils literal notranslate"><span class="pre">parpool</span></code> as you’ve done before.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Get</span> <span class="n">a</span> <span class="n">handle</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cluster</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">parcluster</span><span class="p">;</span>
+
+<span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Open</span> <span class="n">a</span> <span class="n">pool</span> <span class="n">of</span> <span class="mi">12</span> <span class="n">workers</span> <span class="n">on</span> <span class="n">the</span> <span class="n">cluster</span>
+<span class="o">&gt;&gt;</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">parpool</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the screenshot below, when you create the pool object MATLAB
+will show you the arugments that it is passing to SLURM in order
+to make running the pool on the cluster.</p>
+<p>Rather than running local on the local machine, the pool can now
+run across multiple nodes on the cluster.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt; % Run a parfor over 1000 iterations
+&gt;&gt; parfor idx = 1:1000
+a(idx) = …
+end
+</pre></div>
+</div>
+<p>Once we’re done with the pool, delete it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="o">%</span> <span class="n">Delete</span> <span class="n">the</span> <span class="n">pool</span>
+<span class="o">&gt;&gt;</span> <span class="n">pool</span><span class="o">.</span><span class="n">delete</span>
+</pre></div>
+</div>
+<p class="rubric" id="debugging">DEBUGGING</p>
+<p>If a serial job produces an error, call the getDebugLog method to
+view the error log file. When submitting independent jobs, with
+multiple tasks, specify the task number.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span> <span class="pre">c.getDebugLog(job.Tasks(3))</span></code></p>
+<p>For Pool jobs, only specify the job object.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span> <span class="pre">c.getDebugLog(job)</span></code></p>
+<p>When troubleshooting a job, the cluster admin may request the
+scheduler ID of the job. This can be derived by calling schedID</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">schedID</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+
+<span class="n">ans</span> <span class="o">=</span>
+
+<span class="mi">25539</span>
+</pre></div>
+</div>
+<p class="rubric" id="to-learn-more">TO LEARN MORE</p>
+<p>To learn more about the MATLAB Parallel Computing Toolbox, check
+out these resources:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.mathworks.com/help/parallel-computing/examples.html">Parallel Computing Coding
+Examples</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/help/parallel-computing/index.html">Parallel Computing
+Documentation</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/products/parallel-computing.html">Parallel Computing
+Overview</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/videos/series/parallel-and-gpu-computing-tutorials-97719.html">Parallel Computing
+Tutorials</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/videos/search.html?q=&amp;fq=product:DM&amp;page=1">Parallel Computing
+Videos</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/videos/search.html?q=&amp;fq%5B%5D=product:DM&amp;fq%5B%5D=video-external-category:recwebinar&amp;page=1">Parallel Computing
+Webinars</a></p></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html" title="Using Jupyter on the Quest Analytics Nodes"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Using Jupyter on the Quest Analytics Nodes </span>
+              </div>
+            </a>
+          
+          
+            <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html" title="Using Python on Quest"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Using Python on Quest </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Quest.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

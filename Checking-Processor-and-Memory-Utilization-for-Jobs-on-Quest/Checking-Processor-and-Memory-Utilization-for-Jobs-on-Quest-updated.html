@@ -1,0 +1,1986 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Checking Processor and Memory Utilization for Jobs on Quest &#8212; Quest v2023.01.18 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compiling Code on Quest" href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html" />
+    <link rel="prev" title="AlphaFold on Quest" href="../AlphaFold-on-Quest/AlphaFold-on-Quest-updated.html" />
+
+
+
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=deep-purple data-md-color-accent=purple>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="Quest v2023.01.18 documentation"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Research Computing Services Documentation</span>
+          <span class="md-header-nav__topic"> Checking Processor and Memory Utilization for Jobs on Quest </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">Quest v2023.01.18 documentation</a></li>
+            
+            <li class="md-tabs__item"><a href="https://www.it.northwestern.edu/departments/it-services-support/research/index.html" class="md-tabs__link">RCS Home Page</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="Quest v2023.01.18 documentation" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="Quest v2023.01.18 documentation">Research Computing Services Documentation</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../Advanced-Globus-Features/Advanced-Globus-Features-updated.html" class="md-nav__link">Advanced Globus Features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../AlphaFold-on-Quest/AlphaFold-on-Quest-updated.html" class="md-nav__link">AlphaFold on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Checking Processor and Memory Utilization for Jobs on Quest </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Checking Processor and Memory Utilization for Jobs on Quest</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#checking-processor-and-memory-utilization-for-jobs-on-quest-checking-processor-and-memory-utilization-for-jobs-on-quest-updated--page-root" class="md-nav__link">Checking Processor and Memory Utilization for Jobs on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#how-to-check-resource-utilization-for-completed-jobs" class="md-nav__link">How to check resource utilization for completed jobs?</a>
+        </li>
+        <li class="md-nav__item"><a href="#profiling-your-processes-for-memory-and-cpu-usage-before-production" class="md-nav__link">Profiling your processes for memory and CPU usage before production</a>
+        </li>
+        <li class="md-nav__item"><a href="#how-to-check-resource-utilization-for-running-jobs" class="md-nav__link">How to check resource utilization for running jobs?</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#how-to-check-resource-utilization-for-completed-jobs" class="md-nav__link">How to check resource utilization for completed jobs?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#profiling-your-processes-for-memory-and-cpu-usage-before-production" class="md-nav__link">Profiling your processes for memory and CPU usage before production</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#how-to-check-resource-utilization-for-running-jobs" class="md-nav__link">How to check resource utilization for running jobs?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html" class="md-nav__link">Compiling Code on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#basic-compiling-strategies" class="md-nav__link">Basic Compiling Strategies</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html" class="md-nav__link">Connecting to NUworkspace</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#accounts" class="md-nav__link">Accounts</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#for-support-contactnuworkspace-support-center" class="md-nav__link">For Support, contactNuworkspace Support Center</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#software-installation" class="md-nav__link">Software Installation</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-Quest-with-FastX/Connecting-to-Quest-with-FastX-updated.html" class="md-nav__link">Connecting to Quest with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-a-Research-Data-Storage-Service-Share/Connecting-to-a-Research-Data-Storage-Service-Share-updated.html" class="md-nav__link">Connecting to a Research Data Storage Service Share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Creating-an-Amazon-S3-bucket/Creating-an-Amazon-S3-bucket-updated.html" class="md-nav__link">Creating an Amazon S3 bucket</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html" class="md-nav__link">Debugging your Slurm submission script on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#debugging-a-job-submission-script-rejected-by-the-scheduler" class="md-nav__link">Debugging a Job Submission Script Rejected By The Scheduler</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-generate-error-messages" class="md-nav__link">Mistakes That Generate Error Messages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-dont-generate-error-messages" class="md-nav__link">Mistakes That Don’t Generate Error Messages</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Disconnecting-from-a-RDSS-FSMResFiles-share/Disconnecting-from-a-RDSS-FSMResFiles-share-updated.html" class="md-nav__link">Disconnecting from a RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Everything-You-Need-to-Know-about-Using-Slurm-on-Quest/Everything-You-Need-to-Know-about-Using-Slurm-on-Quest-updated.html" class="md-nav__link">Everything You Need to Know about Using Slurm on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html" class="md-nav__link">Examples of Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#interactive-jobs" class="md-nav__link">Interactive Jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#batch-jobs" class="md-nav__link">Batch Jobs</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html" class="md-nav__link">Extended SLURM Job and Submission Options</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#job-submission-options" class="md-nav__link">Job Submission Options</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#common-job-commands" class="md-nav__link">Common Job Commands</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#script-variables" class="md-nav__link">Script Variables</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html" class="md-nav__link">Factors Affecting Job Scheduling on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#priority" class="md-nav__link">Priority</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#backfill-scheduling" class="md-nav__link">Backfill Scheduling</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html" class="md-nav__link">File Systems, Storage, and Permissions on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#summary-of-file-permissions" class="md-nav__link">Summary of File Permissions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#home-directories" class="md-nav__link">Home Directories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#project-space" class="md-nav__link">Project Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#scratch-space" class="md-nav__link">Scratch Space</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html" class="md-nav__link">Finding the full path to your RDSS share</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-1-identify-your-access-zone" class="md-nav__link">Step 1: Identify your access zone</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-2-identify-the-full-path-to-your-share" class="md-nav__link">Step 2: Identify the full path to your share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#multiple-shares" class="md-nav__link">Multiple Shares</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html" class="md-nav__link">GPUs on QUEST</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpus-are-available-on-quest" class="md-nav__link">What GPUs are available on QUEST?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#interactive-gpu-jobs" class="md-nav__link">Interactive GPU jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpu-software-is-available-on-quest" class="md-nav__link">What GPU software is available on QUEST?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html" class="md-nav__link">Generating a AWS IAM Access Key for Amazon S3</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#using-the-aws-management-console" class="md-nav__link">Using the AWS Management Console</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#creating-an-iam-user" class="md-nav__link">Creating an IAM user</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html" class="md-nav__link">Genomic Data Commons Data Transfer Tool on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html#genomic-data-commons" class="md-nav__link">Genomic Data Commons</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html" class="md-nav__link">Getting Started on the Genomics Compute Cluster (b1042) on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html#about-the-genomics-compute-cluster-on-quest" class="md-nav__link">About the Genomics Compute Cluster on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Globus-Endpoints-and-Collections/Globus-Endpoints-and-Collections-updated.html" class="md-nav__link">Globus Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-Software-on-Quest/Installing-Software-on-Quest-updated.html" class="md-nav__link">Installing Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html#installing-and-managing-r-packages-on-quest-1" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html" class="md-nav__link">Knitro on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#knitro-overview" class="md-nav__link">Knitro Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#matlab" class="md-nav__link">MATLAB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#r" class="md-nav__link">R</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#python" class="md-nav__link">Python</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#ampl" class="md-nav__link">AMPL</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html" class="md-nav__link">Logging in to Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-fastx" class="md-nav__link">Connecting with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-an-ssh-terminal" class="md-nav__link">Connecting with an SSH Terminal</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html" class="md-nav__link">Managing Full Access Allocations on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-jobs-in-queue" class="md-nav__link">Status of Allocation Jobs in Queue</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-nodes" class="md-nav__link">Status of Allocation Nodes</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#individual-node-status" class="md-nav__link">Individual Node Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#why-are-my-jobs-running-on-nodes-other-than-those-reserved-for-my-allocation" class="md-nav__link">Why are my jobs running on nodes other than those reserved for my allocation?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html" class="md-nav__link">Managing Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-id" class="md-nav__link">Job ID</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-status" class="md-nav__link">Job Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#commonly-used-commands" class="md-nav__link">Commonly Used Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares/Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares-updated.html" class="md-nav__link">Managing access to Research Data Storage Service (RDSS) Shares</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html" class="md-nav__link">Managing an Allocation on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#allocation-resource-management" class="md-nav__link">Allocation Resource Management</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#check-allocation-resources" class="md-nav__link">Check Allocation Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html" class="md-nav__link">Modules Software Environment Manager on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#available-modules" class="md-nav__link">Available Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#loading-a-module" class="md-nav__link">Loading a Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#module-versions" class="md-nav__link">Module Versions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#useful-module-commands" class="md-nav__link">Useful Module Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Opening-an-Archived-File-in-RDSS/Opening-an-Archived-File-in-RDSS-updated.html" class="md-nav__link">Opening an Archived File in RDSS</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html" class="md-nav__link">Parabricks on the Genomics Compute Cluster</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#checking-out-parabricks-licenses" class="md-nav__link">Checking out Parabricks Licenses</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#running-parabricks-on-quest" class="md-nav__link">Running Parabricks on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-FAQ/Quest-FAQ-updated.html" class="md-nav__link">Quest FAQ</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html" class="md-nav__link">Quest Partitions/Queues</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-general-access-p-and-e-accounts" class="md-nav__link">Partition Definitions: General Access (“p” and “e” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-full-access-buy-ins-or-b-accounts" class="md-nav__link">Partition Definitions: Full Access (buy-ins, or “b” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#notes" class="md-nav__link">Notes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html" class="md-nav__link">Quest Quick Start Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#navigating-quest" class="md-nav__link">Navigating Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#moving-files-onto-quest" class="md-nav__link">Moving Files onto Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#software-available-on-quest" class="md-nav__link">Software available on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#running-jobs-on-quest" class="md-nav__link">Running Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#managing-your-jobs-on-quest" class="md-nav__link">Managing Your Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#getting-help" class="md-nav__link">Getting Help</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html" class="md-nav__link">Quest Slurm Quick Start</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html#quick-start" class="md-nav__link">Quick Start</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Troubleshooting%3A-Checking-the-job-output-file/Quest-Troubleshooting%3A-Checking-the-job-output-file-updated.html" class="md-nav__link">Quest Troubleshooting: Checking the job output file</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html" class="md-nav__link">Quest User Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html#user-guides" class="md-nav__link">User Guides</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html" class="md-nav__link">Research Data Management Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#research-data-storage-service-rdss" class="md-nav__link">Research Data Storage Service (RDSS)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#globus-data-transfer-tool" class="md-nav__link">Globus data transfer tool</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Resolving-issues-accessing-a-Research-Data-Storage-Service-share/Resolving-issues-accessing-a-Research-Data-Storage-Service-share-updated.html" class="md-nav__link">Resolving issues accessing a Research Data Storage Service share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html" class="md-nav__link">Restoring a previous version of a file or folder from RDSS</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html#retrieving-older-versions-of-modified-deleted-files" class="md-nav__link">Retrieving older versions of modified/deleted files</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html" class="md-nav__link">Running GATK4 Spark on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#gatk4-spark-tools" class="md-nav__link">GATK4 SPARK tools</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#converting-fasta-files-for-parallel-runs" class="md-nav__link">Converting FASTA Files for Parallel Runs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#example-job-submission" class="md-nav__link">Example Job Submission</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html" class="md-nav__link">Running Jupyter Notebook on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#accessing-conda-environments-in-jupyter" class="md-nav__link">Accessing Conda Environments in Jupyter</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-ipython-kernel" class="md-nav__link">Create a iPython Kernel</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-r-kernel" class="md-nav__link">Create a R Kernel</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Software-on-Quest/Software-on-Quest-updated.html" class="md-nav__link">Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Specifying-Memory-for-Jobs-on-Quest/Specifying-Memory-for-Jobs-on-Quest-updated.html" class="md-nav__link">Specifying Memory for Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html" class="md-nav__link">Transferring Files to and from Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#globus" class="md-nav__link">Globus</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#other-data-transfer-options" class="md-nav__link">Other Data Transfer Options</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html" class="md-nav__link">Transferring files using Globus</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html#to-initiate-a-file-transfer" class="md-nav__link">To initiate a file transfer:</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html" class="md-nav__link">Troubleshooting Installing R Packages on Quest and Quest Analytics</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html#introduction" class="md-nav__link">Introduction</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html" class="md-nav__link">Troubleshooting Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#why-isnt-my-job-running" class="md-nav__link">Why isn’t my job running?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#check-the-output-file" class="md-nav__link">Check the Output File</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#resources-exceeded" class="md-nav__link">Resources Exceeded</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#out-of-disk-space" class="md-nav__link">Out of Disk Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html" class="md-nav__link">Troubleshooting R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html#common-issues" class="md-nav__link">Common Issues</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Amazon-S3-Storage/Using-Amazon-S3-Storage-updated.html" class="md-nav__link">Using Amazon S3 Storage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html" class="md-nav__link">Using Git on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#making-git-available" class="md-nav__link">Making Git Available</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#setting-up-git" class="md-nav__link">Setting up Git</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#repositories" class="md-nav__link">Repositories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#git-resources" class="md-nav__link">Git Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-Timer/Using-Globus-Timer-updated.html" class="md-nav__link">Using Globus Timer</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html" class="md-nav__link">Using Globus with Amazon S3 storage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using Jupyter on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#environments-and-packages" class="md-nav__link">Environments and Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-quest-analytics-nodes" class="md-nav__link">Issues or Problems with the Quest Analytics nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-MATLAB-on-Quest/Using-MATLAB-on-Quest-updated.html" class="md-nav__link">Using MATLAB on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html" class="md-nav__link">Using Python on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#python-package-management" class="md-nav__link">Python Package Management</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html" class="md-nav__link">Using QIIME2 on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html#installing-qiime2-on-quest" class="md-nav__link">Installing QIIME2 on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html" class="md-nav__link">Using R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#installing-and-managing-r-packages-on-quest" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using RStudio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#installing-packages" class="md-nav__link">Installing Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using SAS Studio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html" class="md-nav__link">Using Singularity on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#load-the-singularity-module" class="md-nav__link">Load the Singularity Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#getting-singularity-images-on-quest" class="md-nav__link">Getting Singularity Images On Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#running-singularity-containers" class="md-nav__link">Running Singularity Containers</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#best-practices" class="md-nav__link">Best Practices</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html" class="md-nav__link">Using the Globus Data Transfer Tool</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#restrictions" class="md-nav__link">Restrictions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#endpoints-and-collections" class="md-nav__link">Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#transferring-data" class="md-nav__link">Transferring data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#advanced-features" class="md-nav__link">Advanced features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#resources" class="md-nav__link">Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html" class="md-nav__link">Using the OneDrive/SharePoint Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#activating-the-onedrive-sharepoint-endpoint" class="md-nav__link">Activating the OneDrive/Sharepoint Endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#accessing-files" class="md-nav__link">Accessing files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#my-file-transfer-fails-because-of-a-checksum-error-when-i-try-to-send-a-microsoft-office-document-to-a-sharepoint-library" class="md-nav__link">My file transfer fails because of a checksum error when I try to send a Microsoft Office Document to a SharePoint library.</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#i-cant-see-a-sharepoint-library-i-have-access-to" class="md-nav__link">I can’t see a SharePoint Library I have access to.</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Quest-Globus-endpoint/Using-the-Quest-Globus-endpoint-updated.html" class="md-nav__link">Using the Quest Globus endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html" class="md-nav__link">Using the RDSS Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#mounting-your-rdss-fsmresfiles-share" class="md-nav__link">Mounting your RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#transferring-files-to-from-rdss-fsmresfiles" class="md-nav__link">Transferring files to/from RDSS<strong>/FSMResFiles</strong></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#extending-rdss-fsmresfiles-endpoint-activation" class="md-nav__link">Extending RDSS<strong>/FSMResFiles</strong> endpoint activation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#troubleshooting" class="md-nav__link">Troubleshooting</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#checking-processor-and-memory-utilization-for-jobs-on-quest-checking-processor-and-memory-utilization-for-jobs-on-quest-updated--page-root" class="md-nav__link">Checking Processor and Memory Utilization for Jobs on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#how-to-check-resource-utilization-for-completed-jobs" class="md-nav__link">How to check resource utilization for completed jobs?</a>
+        </li>
+        <li class="md-nav__item"><a href="#profiling-your-processes-for-memory-and-cpu-usage-before-production" class="md-nav__link">Profiling your processes for memory and CPU usage before production</a>
+        </li>
+        <li class="md-nav__item"><a href="#how-to-check-resource-utilization-for-running-jobs" class="md-nav__link">How to check resource utilization for running jobs?</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="checking-processor-and-memory-utilization-for-jobs-on-quest">
+<h1 id="checking-processor-and-memory-utilization-for-jobs-on-quest-checking-processor-and-memory-utilization-for-jobs-on-quest-updated--page-root">Checking Processor and Memory Utilization for Jobs on Quest<a class="headerlink" href="#checking-processor-and-memory-utilization-for-jobs-on-quest-checking-processor-and-memory-utilization-for-jobs-on-quest-updated--page-root" title="Permalink to this heading">¶</a></h1>
+<p>This page provides commands for checking processor (core) and RAM memory
+utilization for jobs that run on Quest.</p>
+<p>Understanding the memory and CPU requirements of your jobs will help you
+to utilize Quest resources more efficiently. Below are some methods you
+can apply to measure a job’s CPU and RAM usage.</p>
+<section id="how-to-check-resource-utilization-for-completed-jobs">
+<h2 id="how-to-check-resource-utilization-for-completed-jobs">How to check resource utilization for completed jobs?<a class="headerlink" href="#how-to-check-resource-utilization-for-completed-jobs" title="Permalink to this heading">¶</a></h2>
+<p>Slurm provides a tool called<code class="docutils literal notranslate"><span class="pre">seff</span></code>to check the memory utilization
+and CPU efficiency for completed jobs. Note that for running and failed
+jobs, the efficiency numbers reported by<code class="docutils literal notranslate"><span class="pre">seff</span></code>are not reliable so
+please use this tool only for successfully completed jobs.</p>
+<p>We are going to look at a finished job that was submitted using the
+script below:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#SBATCH --account=p12345
+#SBATCH --job-name=lmp-cpu
+#SBATCH --ntasks=10
+#SBATCH --ntasks-per-node=10
+#SBATCH --mem-per-cpu=100M
+#SBATCH --time=01:02:00
+
+module purge
+module load lammps/lammps-22Aug18
+
+mpirun -n 10 lmp -in in.fcc
+</pre></div>
+</div>
+<p>This job submission script requests 10 tasks in a node. The scheduler
+assigns one core to one task so 10 cores were assigned for this job. The
+script also requests 100 megabytes per core. As a result, 1000 megabytes
+were reserved for this job.</p>
+<p>After the job is completed, we can examine the utilization report
+produced by the<code class="docutils literal notranslate"><span class="pre">seff</span> <span class="pre">&lt;jobid&gt;</span></code>command.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@quser24 ~]$ seff 549437
+Job ID: 549437
+Cluster: quest
+User/Group: abc123/abc123
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 10
+CPU Utilized: 01:06:22
+CPU Efficiency: 103.16% of 01:04:20 core-walltime
+Job Wall-clock time: 00:06:26
+Memory Utilized: 287.50 MB
+Memory Efficiency: 28.75% of 1000.00 MB
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CPU</span> <span class="pre">Efficiency</span></code>is calculated as the ratio of the actual core time
+from all cores divided by the number of cores requested divided by the
+run time. Here, we see that the<code class="docutils literal notranslate"><span class="pre">CPU</span> <span class="pre">Efficiency</span></code>is 103% which means
+that the job utilized all 10 cores fully during the run time.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Memory</span> <span class="pre">Efficiency</span></code>is calculated as the ratio of the high-water mark
+of memory used by all tasks divided by the memory requested for the job.
+The total memory request for this job was 1000 megabytes and only 287.5
+megabytes were used. Thus the memory efficiency is calculated as 28.75%.</p>
+</section>
+<section id="profiling-your-processes-for-memory-and-cpu-usage-before-production">
+<h2 id="profiling-your-processes-for-memory-and-cpu-usage-before-production">Profiling your processes for memory and CPU usage before production<a class="headerlink" href="#profiling-your-processes-for-memory-and-cpu-usage-before-production" title="Permalink to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">time</span></code> command is provided with Quest’s operating system. You can
+launch a program with <code class="docutils literal notranslate"><span class="pre">/usr/bin/time</span></code> in front of it so that the
+system will watch your program and provide statistics about the CPU and
+RAM usage.</p>
+<p>To test your code, it is recommended that you start an interactive
+session reserving a compute node. Here is an example test for an MPI
+parallelized code (namely <code class="docutils literal notranslate"><span class="pre">lmp</span></code>):</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@qnode4233 ~]$ /usr/bin/time -v mpirun -n 10 lmp -in in.fcc &gt; lmp.out
+</pre></div>
+</div>
+<p>The output of this command is as follows:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>Command being timed: "mpirun -n 10 lmp -in in.fcc"
+User time (seconds): 3682.19
+System time (seconds): 1.41
+Percent of CPU this job got: 999%
+Elapsed (wall clock) time (h:mm:ss or m:ss): 6:25.64
+Average shared text size (kbytes): 0
+Average unshared data size (kbytes): 0
+Average stack size (kbytes): 0
+Average total size (kbytes): 0
+Maximum resident set size (kbytes): 31050
+Average resident set size (kbytes): 0
+Major (requiring I/O) page faults: 51
+Minor (reclaiming a frame) page faults: 408429
+Voluntary context switches: 11770
+Involuntary context switches: 2159
+Swaps: 0
+File system inputs: 0
+File system outputs: 181592
+Socket messages sent: 0
+Socket messages received: 0
+Signals delivered: 0
+Page size (bytes): 4096
+Exit status: 0
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Percent</span> <span class="pre">of</span> <span class="pre">CPU</span> <span class="pre">this</span> <span class="pre">job</span> <span class="pre">got</span></code> line reports core utilization. A
+value around 100% means that the job run on 1 core. In this case, 999%
+means that the job used about 10 cores. The number reported for
+<code class="docutils literal notranslate"><span class="pre">Maximum</span> <span class="pre">resident</span> <span class="pre">set</span> <span class="pre">size</span></code> will inform you about how much RAM your
+task has used at most. Since the example program is using MPI
+parallelization with 10 tasks and one task of the program used maximum
+31050 kilobytes of memory, we can estimate that the whole job needs a
+bit more than 310 megabytes.</p>
+<p>The information gathered from this test will be helpful estimating the
+memory/cpu needs of similar jobs in the future. When submitting a job, a
+good practice is to request 10-15% more memory than the finding in your
+memory profiling as a safety factor.</p>
+<p>Here is another profiling example for a program (<code class="docutils literal notranslate"><span class="pre">pi_red</span></code>) that is
+parallelized using OpenMP threads:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@qnode4233 ~]$ /usr/bin/time -v ./pi_red
+Command being timed: "./pi_red"
+User time (seconds): 22547.96
+System time (seconds): 0.79
+Percent of CPU this job got: 996%
+Elapsed (wall clock) time (h:mm:ss or m:ss): 37:42.85
+Average shared text size (kbytes): 0
+Average unshared data size (kbytes): 0
+Average stack size (kbytes): 0
+Average total size (kbytes): 0
+Maximum resident set size (kbytes): 832
+Average resident set size (kbytes): 0
+Major (requiring I/O) page faults: 0
+Minor (reclaiming a frame) page faults: 305
+Voluntary context switches: 19
+Involuntary context switches: 67224
+Swaps: 0
+File system inputs: 0
+File system outputs: 0
+Socket messages sent: 0
+Socket messages received: 0
+Signals delivered: 0
+Page size (bytes): 4096
+Exit status: 0
+</pre></div>
+</div>
+<p>The program used 832 kilobytes of memory and about 10 CPU cores with its
+threads. Unlike MPI tasks, threads share a common memory space, thus the
+whole job used 832 kilobytes in this case.</p>
+</section>
+<section id="how-to-check-resource-utilization-for-running-jobs">
+<h2 id="how-to-check-resource-utilization-for-running-jobs">How to check resource utilization for running jobs?<a class="headerlink" href="#how-to-check-resource-utilization-for-running-jobs" title="Permalink to this heading">¶</a></h2>
+<p>While your job is running, you can examine the instantaneous memory and
+CPU utilization from the compute node(s) directly. You can find out
+which node(s) is (are) working on your job by using
+<code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-j</span> <span class="pre">&lt;jobID&gt;</span></code> command. Let’s look at the MPI parallelized lmp
+program which is submitted as a batch job:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@quser21 ~]$ squeue -j 549437
+   JOBID PARTITION     NAME     USER  ST       TIME  NODES NODELIST(REASON)
+  549437     short  lmp-cpu   abc123   R       2:34      1 qnode4233
+</pre></div>
+</div>
+<p>Once you have identified the name of the node that your job is running
+on, you can connect to this node directly:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@quser21 ~]$ ssh qnode4233
+[abc123@qnode4233 ~]$
+</pre></div>
+</div>
+<p>You will see your command prompt name changes from the login node
+(quser21 in this example) to the compute node (qnode4233 in this case).
+There are two useful commands that will inform you about the resource
+utilization of your program. The first one is <code class="docutils literal notranslate"><span class="pre">ps</span></code> which gives a
+snapshot of the running processes on the node.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@qnode4233 ~]$ ps -u$USER -o %cpu,rss,args
+</pre></div>
+</div>
+<p>In the command above, we request <code class="docutils literal notranslate"><span class="pre">ps</span></code> to report %cpu and resident set
+size (rss) utilized for the running processes (args). The output is
+obtained as follows:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>%CPU   RSS COMMAND
+ 0.0  1576 /bin/bash /var/spool/slurmd/job549437/slurm_script
+ 0.4  5504 mpirun -n 10 lmp -in in.fcc
+ 100 30248 lmp -in in.fcc
+ 100 28384 lmp -in in.fcc
+ 100 28524 lmp -in in.fcc
+ 100 28632 lmp -in in.fcc
+ 100 28512 lmp -in in.fcc
+ 100 28264 lmp -in in.fcc
+ 100 28064 lmp -in in.fcc
+ 100 28084 lmp -in in.fcc
+ 100 28140 lmp -in in.fcc
+ 100 28668 lmp -in in.fcc
+ 0.0  2124 sshd: abc123@pts/10
+ 0.1  2140 -bash
+ 0.0  1572 ps -uabc123 -o %cpu,rss,argsK
+</pre></div>
+</div>
+<p>The output shows 10 lmp tasks each using 100% of a CPU core and about 30
+megabytes (default units for rss in <code class="docutils literal notranslate"><span class="pre">ps</span></code> command is kilobytes). In
+total, this job has been using 10 CPU cores and around 300 megabytes of
+memory when <code class="docutils literal notranslate"><span class="pre">ps</span></code> command was issued.</p>
+<p>A similar result can be obtained from <code class="docutils literal notranslate"><span class="pre">top</span></code> (i.e. short for table of
+processes) command which shows live data instead of a snapshot.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@qnode4233 ~]$ top -u$USER
+</pre></div>
+</div>
+<p>The command will start the live task manager. Memory and CPU usages can
+be tracked from RES and %CPU columns respectively. We see 10 lmp tasks,
+each consuming around 30000 kilobytes of memory and 99.9% of one CPU.
+Once you have gathered the necessary information, press <code class="docutils literal notranslate"><span class="pre">q</span></code> to quit
+the task manager.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>top - 01:07:31 up 168 days, 18:08,  1 user,  load average: 7.15, 2.42, 1.84
+Threads: 1332 total,  11 running, 1321 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 50.3 us,  0.2 sy,  0.0 ni, 49.4 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem : 13183529+total, 11912448+free,  6916132 used,  5794680 buff/cache
+KiB Swap:        0 total,        0 free,        0 used. 12324249+avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+16234 abc123    20   0  613580  28668  11948 R 99.9  0.0   1:15.64 lmp
+16223 abc123    20   0  629792  30700  12108 R 99.9  0.0   1:15.64 lmp
+16225 abc123    20   0  613220  28796  12276 R 99.9  0.0   1:15.67 lmp
+16229 abc123    20   0  612824  28560  12260 R 99.9  0.0   1:15.65 lmp
+16230 abc123    20   0  612824  28332  12232 R 99.9  0.0   1:15.66 lmp
+16232 abc123    20   0  612812  28116  11872 R 99.9  0.0   1:15.66 lmp
+16233 abc123    20   0  612804  28152  11920 R 99.9  0.0   1:15.66 lmp
+16226 abc123    20   0  612836  28536  12312 R 99.7  0.0   1:15.66 lmp
+16228 abc123    20   0  613184  28636  11988 R 99.7  0.0   1:15.66 lmp
+16231 abc123    20   0  612416  28088  11968 R 99.7  0.0   1:15.63 lmp
+</pre></div>
+</div>
+<p>Now, let’s examine what we see for another job running the <code class="docutils literal notranslate"><span class="pre">pi_red</span></code>
+program. Note that this program is using threading for parallelization.
+The <code class="docutils literal notranslate"><span class="pre">ps</span></code> reports 999% CPU (translates to utilizing 10 cores) and 620
+kilobytes of memory (RSS).</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@qnode4233 ~]$ ps -u$USER -o %cpu,rss,args
+%CPU   RSS COMMAND
+ 0.0  1468 /bin/bash /var/spool/slurmd/job549441/slurm_script
+ 999   620 ./pi_red
+ 0.0  2120 sshd: abc123@pts/0
+ 0.0  2192 -bash
+ 0.0  1572 ps -uabc123 -o %cpu,rss,args
+</pre></div>
+</div>
+<p>The same information could be obtained from RES and %CPU columns of
+<code class="docutils literal notranslate"><span class="pre">top</span></code> command for <code class="docutils literal notranslate"><span class="pre">pi_red</span></code> program.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>[abc123@qnode4233 ~]$ top -u$USER
+top - 15:49:20 up 123 days,  8:50,  1 user,  load average: 9.30, 4.14, 1.61
+Tasks: 279 total,   2 running, 277 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 50.0 us,  0.0 sy,  0.0 ni, 49.9 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem : 13183529+total, 10491147+free,  6206644 used, 20717172 buff/cache
+KiB Swap:        0 total,        0 free,        0 used. 12455683+avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 2068 abc123    20   0   29220    620    516 R  1000  0.0  27:01.04 pi_red
+ 2357 abc123    20   0  157836   2376   1560 R   0.7  0.0   0:00.07 top
+ 1876 abc123    20   0  113120   1468   1212 S   0.0  0.0   0:00.00 slurm_script
+ 2082 abc123    20   0  130612   2120    936 S   0.0  0.0   0:00.00 sshd
+ 2083 abc123    20   0  115516   2192   1672 S   0.0  0.0   0:00.02 bash
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="../AlphaFold-on-Quest/AlphaFold-on-Quest-updated.html" title="AlphaFold on Quest"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> AlphaFold on Quest </span>
+              </div>
+            </a>
+          
+          
+            <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html" title="Compiling Code on Quest"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Compiling Code on Quest </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Quest.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

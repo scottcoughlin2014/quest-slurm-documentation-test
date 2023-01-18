@@ -1,0 +1,2533 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>File Systems, Storage, and Permissions on Quest &#8212; Quest v2023.01.18 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Finding the full path to your RDSS share" href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html" />
+    <link rel="prev" title="Factors Affecting Job Scheduling on Quest" href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html" />
+
+
+
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=deep-purple data-md-color-accent=purple>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="Quest v2023.01.18 documentation"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Research Computing Services Documentation</span>
+          <span class="md-header-nav__topic"> File Systems, Storage, and Permissions on Quest </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">Quest v2023.01.18 documentation</a></li>
+            
+            <li class="md-tabs__item"><a href="https://www.it.northwestern.edu/departments/it-services-support/research/index.html" class="md-tabs__link">RCS Home Page</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="Quest v2023.01.18 documentation" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="Quest v2023.01.18 documentation">Research Computing Services Documentation</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../Advanced-Globus-Features/Advanced-Globus-Features-updated.html" class="md-nav__link">Advanced Globus Features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../AlphaFold-on-Quest/AlphaFold-on-Quest-updated.html" class="md-nav__link">AlphaFold on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html" class="md-nav__link">Checking Processor and Memory Utilization for Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-completed-jobs" class="md-nav__link">How to check resource utilization for completed jobs?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#profiling-your-processes-for-memory-and-cpu-usage-before-production" class="md-nav__link">Profiling your processes for memory and CPU usage before production</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-running-jobs" class="md-nav__link">How to check resource utilization for running jobs?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html" class="md-nav__link">Compiling Code on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#basic-compiling-strategies" class="md-nav__link">Basic Compiling Strategies</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html" class="md-nav__link">Connecting to NUworkspace</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#accounts" class="md-nav__link">Accounts</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#for-support-contactnuworkspace-support-center" class="md-nav__link">For Support, contactNuworkspace Support Center</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#software-installation" class="md-nav__link">Software Installation</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-Quest-with-FastX/Connecting-to-Quest-with-FastX-updated.html" class="md-nav__link">Connecting to Quest with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-a-Research-Data-Storage-Service-Share/Connecting-to-a-Research-Data-Storage-Service-Share-updated.html" class="md-nav__link">Connecting to a Research Data Storage Service Share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Creating-an-Amazon-S3-bucket/Creating-an-Amazon-S3-bucket-updated.html" class="md-nav__link">Creating an Amazon S3 bucket</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html" class="md-nav__link">Debugging your Slurm submission script on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#debugging-a-job-submission-script-rejected-by-the-scheduler" class="md-nav__link">Debugging a Job Submission Script Rejected By The Scheduler</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-generate-error-messages" class="md-nav__link">Mistakes That Generate Error Messages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-dont-generate-error-messages" class="md-nav__link">Mistakes That Don’t Generate Error Messages</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Disconnecting-from-a-RDSS-FSMResFiles-share/Disconnecting-from-a-RDSS-FSMResFiles-share-updated.html" class="md-nav__link">Disconnecting from a RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Everything-You-Need-to-Know-about-Using-Slurm-on-Quest/Everything-You-Need-to-Know-about-Using-Slurm-on-Quest-updated.html" class="md-nav__link">Everything You Need to Know about Using Slurm on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html" class="md-nav__link">Examples of Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#interactive-jobs" class="md-nav__link">Interactive Jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#batch-jobs" class="md-nav__link">Batch Jobs</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html" class="md-nav__link">Extended SLURM Job and Submission Options</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#job-submission-options" class="md-nav__link">Job Submission Options</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#common-job-commands" class="md-nav__link">Common Job Commands</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#script-variables" class="md-nav__link">Script Variables</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html" class="md-nav__link">Factors Affecting Job Scheduling on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#priority" class="md-nav__link">Priority</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#backfill-scheduling" class="md-nav__link">Backfill Scheduling</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> File Systems, Storage, and Permissions on Quest </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">File Systems, Storage, and Permissions on Quest</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#file-systems-and-storage-on-quest-file-systems-and-storage-on-quest-updated--page-root" class="md-nav__link">File Systems, Storage, and Permissions on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#summary-of-file-permissions" class="md-nav__link">Summary of File Permissions</a>
+        </li>
+        <li class="md-nav__item"><a href="#home-directories" class="md-nav__link">Home Directories</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#check-home-spaceutilization" class="md-nav__link">Check Home SpaceUtilization</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#project-space" class="md-nav__link">Project Space</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#check-project-space-utilization" class="md-nav__link">Check Project Space Utilization</a>
+        </li>
+        <li class="md-nav__item"><a href="#project-space-permissions" class="md-nav__link">Project Space Permissions</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#scratch-space" class="md-nav__link">Scratch Space</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#global-scratch-settings" class="md-nav__link">Global Scratch Settings</a>
+        </li>
+        <li class="md-nav__item"><a href="#check-scratch-space-utilization" class="md-nav__link">Check Scratch Space Utilization</a>
+        </li>
+        <li class="md-nav__item"><a href="#scratch-space-permissions" class="md-nav__link">Scratch Space Permissions</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#summary-of-file-permissions" class="md-nav__link">Summary of File Permissions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#home-directories" class="md-nav__link">Home Directories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#project-space" class="md-nav__link">Project Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#scratch-space" class="md-nav__link">Scratch Space</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html" class="md-nav__link">Finding the full path to your RDSS share</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-1-identify-your-access-zone" class="md-nav__link">Step 1: Identify your access zone</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-2-identify-the-full-path-to-your-share" class="md-nav__link">Step 2: Identify the full path to your share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#multiple-shares" class="md-nav__link">Multiple Shares</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html" class="md-nav__link">GPUs on QUEST</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpus-are-available-on-quest" class="md-nav__link">What GPUs are available on QUEST?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#interactive-gpu-jobs" class="md-nav__link">Interactive GPU jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpu-software-is-available-on-quest" class="md-nav__link">What GPU software is available on QUEST?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html" class="md-nav__link">Generating a AWS IAM Access Key for Amazon S3</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#using-the-aws-management-console" class="md-nav__link">Using the AWS Management Console</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#creating-an-iam-user" class="md-nav__link">Creating an IAM user</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html" class="md-nav__link">Genomic Data Commons Data Transfer Tool on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html#genomic-data-commons" class="md-nav__link">Genomic Data Commons</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html" class="md-nav__link">Getting Started on the Genomics Compute Cluster (b1042) on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html#about-the-genomics-compute-cluster-on-quest" class="md-nav__link">About the Genomics Compute Cluster on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Globus-Endpoints-and-Collections/Globus-Endpoints-and-Collections-updated.html" class="md-nav__link">Globus Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-Software-on-Quest/Installing-Software-on-Quest-updated.html" class="md-nav__link">Installing Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html#installing-and-managing-r-packages-on-quest-1" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html" class="md-nav__link">Knitro on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#knitro-overview" class="md-nav__link">Knitro Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#matlab" class="md-nav__link">MATLAB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#r" class="md-nav__link">R</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#python" class="md-nav__link">Python</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#ampl" class="md-nav__link">AMPL</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html" class="md-nav__link">Logging in to Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-fastx" class="md-nav__link">Connecting with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-an-ssh-terminal" class="md-nav__link">Connecting with an SSH Terminal</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html" class="md-nav__link">Managing Full Access Allocations on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-jobs-in-queue" class="md-nav__link">Status of Allocation Jobs in Queue</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-nodes" class="md-nav__link">Status of Allocation Nodes</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#individual-node-status" class="md-nav__link">Individual Node Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#why-are-my-jobs-running-on-nodes-other-than-those-reserved-for-my-allocation" class="md-nav__link">Why are my jobs running on nodes other than those reserved for my allocation?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html" class="md-nav__link">Managing Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-id" class="md-nav__link">Job ID</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-status" class="md-nav__link">Job Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#commonly-used-commands" class="md-nav__link">Commonly Used Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares/Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares-updated.html" class="md-nav__link">Managing access to Research Data Storage Service (RDSS) Shares</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html" class="md-nav__link">Managing an Allocation on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#allocation-resource-management" class="md-nav__link">Allocation Resource Management</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#check-allocation-resources" class="md-nav__link">Check Allocation Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html" class="md-nav__link">Modules Software Environment Manager on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#available-modules" class="md-nav__link">Available Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#loading-a-module" class="md-nav__link">Loading a Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#module-versions" class="md-nav__link">Module Versions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#useful-module-commands" class="md-nav__link">Useful Module Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Opening-an-Archived-File-in-RDSS/Opening-an-Archived-File-in-RDSS-updated.html" class="md-nav__link">Opening an Archived File in RDSS</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html" class="md-nav__link">Parabricks on the Genomics Compute Cluster</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#checking-out-parabricks-licenses" class="md-nav__link">Checking out Parabricks Licenses</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#running-parabricks-on-quest" class="md-nav__link">Running Parabricks on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-FAQ/Quest-FAQ-updated.html" class="md-nav__link">Quest FAQ</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html" class="md-nav__link">Quest Partitions/Queues</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-general-access-p-and-e-accounts" class="md-nav__link">Partition Definitions: General Access (“p” and “e” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-full-access-buy-ins-or-b-accounts" class="md-nav__link">Partition Definitions: Full Access (buy-ins, or “b” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#notes" class="md-nav__link">Notes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html" class="md-nav__link">Quest Quick Start Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#navigating-quest" class="md-nav__link">Navigating Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#moving-files-onto-quest" class="md-nav__link">Moving Files onto Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#software-available-on-quest" class="md-nav__link">Software available on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#running-jobs-on-quest" class="md-nav__link">Running Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#managing-your-jobs-on-quest" class="md-nav__link">Managing Your Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#getting-help" class="md-nav__link">Getting Help</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html" class="md-nav__link">Quest Slurm Quick Start</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html#quick-start" class="md-nav__link">Quick Start</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Troubleshooting%3A-Checking-the-job-output-file/Quest-Troubleshooting%3A-Checking-the-job-output-file-updated.html" class="md-nav__link">Quest Troubleshooting: Checking the job output file</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html" class="md-nav__link">Quest User Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html#user-guides" class="md-nav__link">User Guides</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html" class="md-nav__link">Research Data Management Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#research-data-storage-service-rdss" class="md-nav__link">Research Data Storage Service (RDSS)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#globus-data-transfer-tool" class="md-nav__link">Globus data transfer tool</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Resolving-issues-accessing-a-Research-Data-Storage-Service-share/Resolving-issues-accessing-a-Research-Data-Storage-Service-share-updated.html" class="md-nav__link">Resolving issues accessing a Research Data Storage Service share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html" class="md-nav__link">Restoring a previous version of a file or folder from RDSS</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html#retrieving-older-versions-of-modified-deleted-files" class="md-nav__link">Retrieving older versions of modified/deleted files</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html" class="md-nav__link">Running GATK4 Spark on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#gatk4-spark-tools" class="md-nav__link">GATK4 SPARK tools</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#converting-fasta-files-for-parallel-runs" class="md-nav__link">Converting FASTA Files for Parallel Runs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#example-job-submission" class="md-nav__link">Example Job Submission</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html" class="md-nav__link">Running Jupyter Notebook on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#accessing-conda-environments-in-jupyter" class="md-nav__link">Accessing Conda Environments in Jupyter</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-ipython-kernel" class="md-nav__link">Create a iPython Kernel</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-r-kernel" class="md-nav__link">Create a R Kernel</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Software-on-Quest/Software-on-Quest-updated.html" class="md-nav__link">Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Specifying-Memory-for-Jobs-on-Quest/Specifying-Memory-for-Jobs-on-Quest-updated.html" class="md-nav__link">Specifying Memory for Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html" class="md-nav__link">Transferring Files to and from Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#globus" class="md-nav__link">Globus</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#other-data-transfer-options" class="md-nav__link">Other Data Transfer Options</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html" class="md-nav__link">Transferring files using Globus</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html#to-initiate-a-file-transfer" class="md-nav__link">To initiate a file transfer:</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html" class="md-nav__link">Troubleshooting Installing R Packages on Quest and Quest Analytics</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html#introduction" class="md-nav__link">Introduction</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html" class="md-nav__link">Troubleshooting Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#why-isnt-my-job-running" class="md-nav__link">Why isn’t my job running?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#check-the-output-file" class="md-nav__link">Check the Output File</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#resources-exceeded" class="md-nav__link">Resources Exceeded</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#out-of-disk-space" class="md-nav__link">Out of Disk Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html" class="md-nav__link">Troubleshooting R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html#common-issues" class="md-nav__link">Common Issues</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Amazon-S3-Storage/Using-Amazon-S3-Storage-updated.html" class="md-nav__link">Using Amazon S3 Storage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html" class="md-nav__link">Using Git on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#making-git-available" class="md-nav__link">Making Git Available</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#setting-up-git" class="md-nav__link">Setting up Git</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#repositories" class="md-nav__link">Repositories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#git-resources" class="md-nav__link">Git Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-Timer/Using-Globus-Timer-updated.html" class="md-nav__link">Using Globus Timer</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html" class="md-nav__link">Using Globus with Amazon S3 storage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using Jupyter on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#environments-and-packages" class="md-nav__link">Environments and Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-quest-analytics-nodes" class="md-nav__link">Issues or Problems with the Quest Analytics nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-MATLAB-on-Quest/Using-MATLAB-on-Quest-updated.html" class="md-nav__link">Using MATLAB on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html" class="md-nav__link">Using Python on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#python-package-management" class="md-nav__link">Python Package Management</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html" class="md-nav__link">Using QIIME2 on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html#installing-qiime2-on-quest" class="md-nav__link">Installing QIIME2 on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html" class="md-nav__link">Using R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#installing-and-managing-r-packages-on-quest" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using RStudio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#installing-packages" class="md-nav__link">Installing Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using SAS Studio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html" class="md-nav__link">Using Singularity on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#load-the-singularity-module" class="md-nav__link">Load the Singularity Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#getting-singularity-images-on-quest" class="md-nav__link">Getting Singularity Images On Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#running-singularity-containers" class="md-nav__link">Running Singularity Containers</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#best-practices" class="md-nav__link">Best Practices</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html" class="md-nav__link">Using the Globus Data Transfer Tool</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#restrictions" class="md-nav__link">Restrictions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#endpoints-and-collections" class="md-nav__link">Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#transferring-data" class="md-nav__link">Transferring data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#advanced-features" class="md-nav__link">Advanced features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#resources" class="md-nav__link">Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html" class="md-nav__link">Using the OneDrive/SharePoint Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#activating-the-onedrive-sharepoint-endpoint" class="md-nav__link">Activating the OneDrive/Sharepoint Endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#accessing-files" class="md-nav__link">Accessing files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#my-file-transfer-fails-because-of-a-checksum-error-when-i-try-to-send-a-microsoft-office-document-to-a-sharepoint-library" class="md-nav__link">My file transfer fails because of a checksum error when I try to send a Microsoft Office Document to a SharePoint library.</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#i-cant-see-a-sharepoint-library-i-have-access-to" class="md-nav__link">I can’t see a SharePoint Library I have access to.</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Quest-Globus-endpoint/Using-the-Quest-Globus-endpoint-updated.html" class="md-nav__link">Using the Quest Globus endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html" class="md-nav__link">Using the RDSS Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#mounting-your-rdss-fsmresfiles-share" class="md-nav__link">Mounting your RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#transferring-files-to-from-rdss-fsmresfiles" class="md-nav__link">Transferring files to/from RDSS<strong>/FSMResFiles</strong></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#extending-rdss-fsmresfiles-endpoint-activation" class="md-nav__link">Extending RDSS<strong>/FSMResFiles</strong> endpoint activation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#troubleshooting" class="md-nav__link">Troubleshooting</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#file-systems-and-storage-on-quest-file-systems-and-storage-on-quest-updated--page-root" class="md-nav__link">File Systems, Storage, and Permissions on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#summary-of-file-permissions" class="md-nav__link">Summary of File Permissions</a>
+        </li>
+        <li class="md-nav__item"><a href="#home-directories" class="md-nav__link">Home Directories</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#check-home-spaceutilization" class="md-nav__link">Check Home SpaceUtilization</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#project-space" class="md-nav__link">Project Space</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#check-project-space-utilization" class="md-nav__link">Check Project Space Utilization</a>
+        </li>
+        <li class="md-nav__item"><a href="#project-space-permissions" class="md-nav__link">Project Space Permissions</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#scratch-space" class="md-nav__link">Scratch Space</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#global-scratch-settings" class="md-nav__link">Global Scratch Settings</a>
+        </li>
+        <li class="md-nav__item"><a href="#check-scratch-space-utilization" class="md-nav__link">Check Scratch Space Utilization</a>
+        </li>
+        <li class="md-nav__item"><a href="#scratch-space-permissions" class="md-nav__link">Scratch Space Permissions</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="file-systems-storage-and-permissions-on-quest">
+<h1 id="file-systems-and-storage-on-quest-file-systems-and-storage-on-quest-updated--page-root">File Systems, Storage, and Permissions on Quest<a class="headerlink" href="#file-systems-and-storage-on-quest-file-systems-and-storage-on-quest-updated--page-root" title="Permalink to this heading">¶</a></h1>
+<p>Tips on managing storage and file permissions on Quest.</p>
+<p>For further information on storage limits and access expiration, please
+refer to the <a class="reference external" href="https://it.northwestern.edu/departments/it-services-support/research/computing/quest/storage-data-policy.html">Quest Storage and Data
+Policy</a>.</p>
+<p>Quest has three locations where you may store files: <code class="docutils literal notranslate"><span class="pre">/home/&lt;netid&gt;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">/projects/&lt;allocationID&gt;</span></code>, and if you make a request following the
+instructions
+<a class="reference external" href="https://it.northwestern.edu/departments/it-services-support/research/computing/quest/quest-storage.html">here</a>,
+<code class="docutils literal notranslate"><span class="pre">/scratch/&lt;netid&gt;</span></code>. These locations serve different purposes, have
+different disk quotas, and have different behavior when it comes to
+permissions. We summarize these in the form of a table up top, before
+going into more details below.</p>
+<div class="table-responsive docutils container">
+<table>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>S
+torage
+Name</strong></p></th>
+<th class="head"><ul class="simple">
+<li></li>
+</ul>
+<p><em>Where
+is
+this
+l
+ocated
+on
+Qu
+est?*</em></p>
+</th>
+<th class="head"><p><strong>What
+should
+go
+h
+ere?</strong></p></th>
+<th class="head"><p><strong>What
+are
+the
+d
+efault
+pe
+rmissi
+ons?</strong></p></th>
+<th class="head"><p><strong>How
+much
+disk
+sp
+ace?</strong></p></th>
+<th class="head"><p>**
+Number
+of
+Files?
+**</p></th>
+<th class="head"><p><a href="#id1"><span class="problematic" id="id2">**</span></a>How
+do you
+get
+a
+ccess?
+**</p></th>
+<th class="head"><p><strong>How
+do I
+check
+disk
+space
+ut
+ilizat
+ion?</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="#home">Home
+Dire
+ctorie
+s</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/ho</span>
+<span class="pre">me/&lt;ne</span>
+<span class="pre">tid&gt;</span></code></p></td>
+<td><p>Subm
+ission
+sc
+ripts,
+job
+log
+files,
+and
+local
+p
+ackage
+and
+so
+ftware
+i
+nstall
+ations</p></td>
+<td><p>Only
+the
+user
+has
+read,
+write
+and
+e
+xecute
+permis
+sions.</p></td>
+<td><p>80GB</p></td>
+<td><p><em>Unli
+mited</em></p></td>
+<td><p>Your
+home
+dir
+ectory
+is
+a
+utomat
+ically
+c
+reated
+the
+first
+time
+you
+are
+given
+access
+to
+Quest
+via
+j
+oining
+an
+ex
+isting
+re
+search
+allo
+cation
+or
+cr
+eating
+a new
+one.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ho</span>
+<span class="pre">medu</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="#projects">Allo
+cation
+or
+P
+roject
+Di
+rector
+ies</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/pr</span>
+<span class="pre">ojects</span>
+<span class="pre">/&lt;allo</span>
+<span class="pre">cation</span>
+<span class="pre">_id&gt;</span></code></p></td>
+<td><p>High
+-speed
+s
+torage
+which
+should
+be
+used
+for
+compu
+tation
+Input/
+Output
+(IO)
+and/or
+data
+ana
+lyses.</p></td>
+<td><p>All
+m
+embers
+of the
+allo
+cation
+will
+have
+read,
+write
+and/or
+e
+xecute
+permi
+ssions
+on
+files
+and
+direc
+tories
+c
+reated
+in the
+allo
+cation
+dire
+ctory.</p></td>
+<td><p>1TB
+with a
+Re
+search
+Allo
+cation
+I and
+2 TB
+with a
+Re
+search
+Allo
+cation
+II.</p>
+<p>buyin
+alloc
+ations
+can
+<a href="#id15"><span class="problematic" id="id16">`pu
+rchase
+s
+torage
+by the
+TB &lt;
+https:
+//it.n
+orthwe
+stern.
+edu/de
+partme
+nts/it
+-servi
+ces-su
+pport/
+resear
+ch/com
+puting
+/quest
+/quest
+-stora
+ge.htm
+l&gt;`__</span></a>.</p>
+</td>
+<td><p><em>Unli
+mited</em></p></td>
+<td><p>Join
+an
+ex
+isting
+re
+search
+allo
+cation
+or
+create
+a new
+one to
+get
+a
+ccess.</p></td>
+<td><p>``
+checkp
+roject</p>
+<blockquote>
+<div><p>&lt;allo</p>
+</div></blockquote>
+<p>cation
+_id&gt;``</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><a href="#id15"><span class="problematic" id="id17">`S
+cratch
+Space
+D
+irecto
+ries &lt;
+#scrat
+ch&gt;`__</span></a></p></td>
+<td><p>``
+/scrat
+ch/&lt;ne
+tid&gt;``</p></td>
+<td><p>High
+-speed
+s
+torage
+which
+should
+be
+used
+for
+s
+toring
+tem
+porary
+files
+from
+r
+unning
+jobs,
+downl
+oading
+data
+for
+proce
+ssing,
+and
+shor
+t-term
+s
+torage
+for
+large
+dat
+asets.</p></td>
+<td><p>Only
+the
+user
+has
+read,
+write
+and
+e
+xecute
+permis
+sions.</p></td>
+<td><p>5TB</p></td>
+<td><p><a href="#id3"><span class="problematic" id="id4">*</span></a>5
+M
+illion
+*</p></td>
+<td><p>S
+cratch
+is
+unique
+in
+that
+you do
+not
+have
+access
+to it
+be
+d
+efault
+after
+j
+oining
+an
+ex
+isting
+re
+search
+allo
+cation
+or
+cr
+eating
+a new
+one.</p>
+<p><a href="#id5"><span class="problematic" id="id6">**</span></a>To
+get
+a
+ccess,
+make a
+r
+equest
+fol
+lowing
+the
+i
+nstruc
+tions</p>
+<blockquote>
+<div><p><a href="#id7"><span class="problematic" id="id8">**</span></a>`</p>
+</div></blockquote>
+<p>here &lt;
+https:
+//it.n
+orthwe
+stern.
+edu/de
+partme
+nts/it
+-servi
+ces-su
+pport/
+resear
+ch/com
+puting
+/quest
+/quest
+-stora
+ge.htm
+l&gt;`__</p>
+<blockquote>
+<div><p><a href="#id9"><span class="problematic" id="id10">**</span></a>.</p>
+</div></blockquote>
+<p><a href="#id11"><span class="problematic" id="id12">**</span></a></p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ch</span>
+<span class="pre">eckscr</span>
+<span class="pre">atch</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="summary-of-file-permissions">
+<h2 id="summary-of-file-permissions">Summary of File Permissions<a class="headerlink" href="#summary-of-file-permissions" title="Permalink to this heading">¶</a></h2>
+<p>Understanding how file permissions work in Linux is critical to
+understanding who has access to files in each of the storage types.
+Users get access to files in three different ways:</p>
+<ul class="simple">
+<li><p><strong>user</strong>: Your account.</p></li>
+<li><p><strong>group</strong>: A specific permissions group that your account belongs to.</p></li>
+<li><p><strong>other</strong>: Any account that is not yours and that does not belong to
+a permissions group that your account belongs to.</p></li>
+</ul>
+<p>There are three basic types of permissions which can be assigned <em>by the
+owner of the file or directory</em> to each of these three access points:
+<strong>read (r)</strong> <strong>write (w) and</strong> <strong>execute (x)</strong>.</p>
+<p>What does read, write and execute mean for a directory?</p>
+<ul class="simple">
+<li><p><strong>read</strong>: Allowed to list the contents of the directory</p></li>
+<li><p><strong>write</strong>: Allowed to create, modify or delete files in the directory</p></li>
+<li><p><strong>execute</strong>: Allowed to access a file in the directory if you know
+the name of the file</p></li>
+</ul>
+<p>What does read, write and execute mean for a file?</p>
+<ul class="simple">
+<li><p><strong>read</strong>: Allowed to read the contents of the file</p></li>
+<li><p><strong>write</strong>: Allowed to modify or delete the file</p></li>
+<li><p><strong>execute</strong>: Allowed to run the file as a process, if possible</p></li>
+</ul>
+<p>How do I view permissions on a file or directory? You use the utility
+<code class="docutils literal notranslate"><span class="pre">ls</span></code>. For example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[quest_demo@quser10 ~]$ ls -ltd /home/quest_demo/
+drwx------ 40 quest_demo quest_demo 16384 May 4 14:57 /home/quest_demo/
+</pre></div>
+</div>
+</section>
+<section id="home-directories">
+<span id="home"></span><h2 id="home-directories">Home Directories<a class="headerlink" href="#home-directories" title="Permalink to this heading">¶</a></h2>
+<p>As a Quest account holder, you will be given a home directory
+(<code class="docutils literal notranslate"><span class="pre">/home/&lt;netid&gt;</span></code>) the first time you log in to the system. All home
+directories have a fixed quota of 80GB. <strong>Your home directory is only
+available to you and may not be shared</strong>.</p>
+<p>Your home directory is a good place to store submission scripts, job log
+files, and local package and software installations.</p>
+<p>Home directories (unlike any other storage volume) are backed up. If you
+inadvertently delete a file from your home directory, immediately
+contact <a class="reference external" href="mailto:quest-help%40northwestern.edu">quest-help<span>@</span>northwestern<span>.</span>edu</a> as it may be possible to restore it.
+<em>As long as the file or directory in question was not created and
+deleted within 24 hours, any files or directory can be recovered for up
+to 4 weeks.</em></p>
+<section id="check-home-spaceutilization">
+<h3 id="check-home-spaceutilization">Check Home SpaceUtilization<a class="headerlink" href="#check-home-spaceutilization" title="Permalink to this heading">¶</a></h3>
+<p>You can check how much space you’re using in your home directory with
+<code class="docutils literal notranslate"><span class="pre">homedu</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ homedu
+
+Beginning detailed disk usage report for /home/&lt;netid&gt;.
+Please be patient - this can be a time-consuming operation.
+
+GPFS quota for /home/&lt;netid&gt;
+
+24.22 GB used in 240098 files (30.28% of 80 GB quota)
+</pre></div>
+</div>
+<p><strong>If you leave the University, your NetID will expire. In this
+circumstance, your home directory will be deleted and cannot be
+restored.</strong></p>
+<p>Before leaving the university and well ahead of your NetID expiration,
+we recommend moving the files in your home directory. Solutions include:</p>
+<ul class="simple">
+<li><p>Backup all the files you need from your home directory in a place you
+will maintain access to after your NetID expires.</p></li>
+<li><p>Copy files that your colleagues need access to into a shared project
+directory.</p></li>
+</ul>
+<p>If you need help backing up or copying your data to locations accessible
+by your colleagues, please email
+<a class="reference external" href="mailto:quest-help%40northwestern.edu">quest-help<span>@</span>northwestern<span>.</span>edu<span>.</span></a></p>
+</section>
+</section>
+<section id="project-space">
+<span id="projects"></span><h2 id="project-space">Project Space<a class="headerlink" href="#project-space" title="Permalink to this heading">¶</a></h2>
+<p>The projects volume consists of high-speed storage and should be used
+for computation Input/Output (IO) and/or data analyses. While project
+and home directories are both reachable by a compute node, the home
+directory provides much smaller storage than your allocation directory
+provides.</p>
+<p>The size of your project directory is determined by the details of your
+allocation type. A Research Allocation I is usually set up with a 1TB
+quota on the projects space, and a Research Allocation II may have up to
+2TB of space. Researchers requiring additional storage may <a class="reference external" href="https://it.northwestern.edu/departments/it-services-support/research/computing/quest/quest-storage.html">purchase it
+by the
+TB</a>.</p>
+<section id="check-project-space-utilization">
+<h3 id="check-project-space-utilization">Check Project Space Utilization<a class="headerlink" href="#check-project-space-utilization" title="Permalink to this heading">¶</a></h3>
+<p>Check how much space is used in your projects directory with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ checkproject &lt;allocation_id&gt;
+
+====================================
+Reporting for project &lt;allocation_id&gt;
+------------------------------------
+1 GB in 4623 files (0% of 1000 GB quota)
+Allocation Type: Allocation I
+Expiration Date: 2022-12-01
+Status: ACTIVE
+Compute and storage allocation - when status is ACTIVE, this allocation has compute node access and can submit jobs
+------------------------------------
+====================================
+</pre></div>
+</div>
+</section>
+<section id="project-space-permissions">
+<h3 id="project-space-permissions">Project Space Permissions<a class="headerlink" href="#project-space-permissions" title="Permalink to this heading">¶</a></h3>
+<p>Each Quest allocation has a projects directory:
+<code class="docutils literal notranslate"><span class="pre">/projects/&lt;allocationID&gt;</span></code>. In the projects space anyone belonging to
+an allocation may be able to read, write, and execute files that belong
+to other users of that same allocation. There are exceptions to this
+rule. For example, if you <em>copy</em> data from your home directory into your
+project space it will inherit the permissions of the directory it is
+being copied into as expected, but if you <em>move</em> data from your home
+directory into your project space, the data retains the original
+permissions and so the ownership and group ownership will belong to you.
+No one else will be able to read your files in project space unless you
+change the file permissions or the group ownership of your files is
+changed.</p>
+<p>Below, we show the default permissions for a file in your allocation
+directory and then provide an example of modifying those default
+permissions.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /projects/&lt;pXXXXX&gt;/
+$ touch myfile.txt
+$ ls -l myfile.txt
+-rw-rw-r-- 1 &lt;netid&gt; &lt;pXXXXX&gt; 0 May 24 14:58 myfile.txt
+</pre></div>
+</div>
+<p>The above file can be modified (the write (w) permission), by anyone in
+your allocation. If you would like to leave the file as being able to be
+read (r) by anyone in the allocation but want to remove the ability for
+it to be modified by anyone in the allocation, you can use the <code class="docutils literal notranslate"><span class="pre">chmod</span></code>
+command to remove the `w` permission for the <em>group</em>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ chmod g-w myfile.txt
+$ ls -l myfile.txt
+-rw-r--r-- 1 &lt;netid&gt; &lt;pXXXXX&gt; 0 May 24 14:58 myfile.txt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="scratch-space">
+<span id="scratch"></span><h2 id="scratch-space">Scratch Space<a class="headerlink" href="#scratch-space" title="Permalink to this heading">¶</a></h2>
+<p>The scratch volume consists of high-speed storage that provides
+temporary storage for actively used research data at no cost to the
+user. Appropriate use of scratch could reduce storage costs to
+researchers and provide better data lifecycle management with less
+storage resource waste. Some scratch storage use cases include:</p>
+<ul class="simple">
+<li><p>storing temporary files created while running jobs,</p></li>
+<li><p>downloading/staging data for processing soon to be performed,</p></li>
+<li><p>large data transfers,</p></li>
+<li><p>short-term storage for large datasets</p></li>
+</ul>
+<p>Scratch directories are available to any Quest users currently in an
+active allocation. You can apply by making a request following the
+instructions
+<a class="reference external" href="https://it.northwestern.edu/departments/it-services-support/research/computing/quest/quest-storage.html">here</a>.
+Access to Quest scratch space will typically be granted within one week
+of completing the application. Once you have been approved, you will be
+allocated a directory at the following location: <code class="docutils literal notranslate"><span class="pre">/scratch/&lt;netid&gt;</span></code>.
+You scratch directories can be accessed from all Quest nodes including
+login nodes, compute nodes, and the Quest Analytics Nodes.</p>
+<p>Quest scratch space is not backed up and files stored there are deleted
+regularly. It is not appropriate for long-term storage or as the sole
+location for research data that cannot be regenerated. Reference files,
+datasets, software and scripts should be stored in a user’s allocation
+directory rather than in scratch to avoid accidental deletion.</p>
+<p><a href="#id13"><span class="problematic" id="id14">*</span></a>When downloading data or transferring data to scratch, please carefully
+note the last modified date of the file. Under certain download or
+transfer conditions, the data will retain its original “last modified”
+date and not receive a new “last modified” date. For example,
+*</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ date
+Mon Oct 31 11:54:57 CDT 2022
+$ wget https://github.com/pytorch/pytorch/releases/download/v1.12.0/pytorch-v1.12.0.tar.gz
+$ ls -lt pytorch-v1.12.0.tar.gz
+-rw-rw-r-- 1 &lt;netid&gt; &lt;netid&gt; 206507948 Jun 28 11:51 pytorch-v1.12.0.tar.gz
+</pre></div>
+</div>
+<p><em>In this situation, under the default retention period of 30 days, this
+file would be deleted within the day. Although you
+are</em><strong>not</strong><em>allowed to use</em> <code class="docutils literal notranslate"><span class="pre">touch</span></code>, <em>to continually update the
+last modification dates of files in an effort to save them from
+deletion, you may use</em> <code class="docutils literal notranslate"><span class="pre">touch</span></code> <em>to ensure that a file’s initial
+modification date reflects the time the file first lands in scratch.</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ touch pytorch-v1.12.0.tar.gz
+$ ls -lt pytorch-v1.12.0.tar.gz
+-rw-rw-r-- 1 &lt;netid&gt; &lt;netid&gt; 206507948 Oct 31 11:59 pytorch-v1.12.0.tar.gz
+</pre></div>
+</div>
+<p>Note that jobs can access multiple directories when they run, and jobs
+that write their temporary files into scratch can also access reference
+files and write results in <code class="docutils literal notranslate"><span class="pre">/projects</span></code> or <code class="docutils literal notranslate"><span class="pre">/home</span></code>.</p>
+<section id="global-scratch-settings">
+<h3 id="global-scratch-settings">Global Scratch Settings<a class="headerlink" href="#global-scratch-settings" title="Permalink to this heading">¶</a></h3>
+<p>To ensure scratch space availability for everyone, global scratch limits
+may be adjusted by Northwestern IT if storage utilization is over a
+critical threshold. When a change is required, scratch space users will
+receive an advance notice. The current deletion period can be viewed
+through the <code class="docutils literal notranslate"><span class="pre">checkscratch</span></code> command or in Quest’s Message Of The Day
+(MOTD), which is displayed at the top of your terminal when you login to
+Quest via SSH.</p>
+<p>During normal operation conditions, the global scratch settings are
+given in the table below. These limits cannot be adjusted for and
+individual or upon request.</p>
+<div class="table-responsive docutils container">
+<table>
+<tbody>
+<tr class="row-odd"><td><p>Storage quota per user</p></td>
+<td><p>5 TB</p></td>
+</tr>
+<tr class="row-even"><td><p>File retention period</p></td>
+<td><p>30 days after last edit</p></td>
+</tr>
+<tr class="row-odd"><td><p>Maximum number of files per user</p></td>
+<td><p>5,000,000</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="check-scratch-space-utilization">
+<span id="checkscratch"></span><h3 id="check-scratch-space-utilization">Check Scratch Space Utilization<a class="headerlink" href="#check-scratch-space-utilization" title="Permalink to this heading">¶</a></h3>
+<p>You can use the utility <code class="docutils literal notranslate"><span class="pre">checkscratch</span></code> to monitor how much scratch
+space you are using, show the current deletion period for scratch, and
+determine which of your files, if any, will be deleted in the coming XX
+days.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ checkscratch --help
+checkscratch reports a list of your scratch files that will be deleted in the upcoming days and your scratch utilization.
+
+Usage: checkscratch &lt;days&gt;, where &lt;days&gt; is the integer number of days from now to check.
+
+Example: checkscratch 3
+
+reports which files, if any, will be deleted within the next three days from now. The command writes the list of files to an output file called checkscratch.out in your scratch folder.
+
+checkscratch.out is overwritten each time you run it and search for same &lt;days&gt; cannot be repeated for a period of 1 hour; to save the output file you must move it or rename it.
+</pre></div>
+</div>
+<p>For example, if you would like to know if you have any files that will
+be deleted in the next 20 days, you would run and receive the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ checkscratch 20
+The current retention period of files in /scratch is 30 days.
+
+You have 2 files that will be deleted within the next 20 days (OLDER than 10 days) in /scratch/&lt;netid&gt; and are listed in the file /scratch/&lt;netid&gt;/checkscratch.out.
+
+Checkscratch's output file is overwritten each time you run it; to save the checkscratch output file you must move it or rename it.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">checkscratch</span></code> will create a file in your scratch folder with a
+summary of any files (and their size) which are older than 10 days (30
+day retention period - will be deleted in 20 days).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /scratch/&lt;netid&gt;/checkscratch.out
+You currently have 4 files using 12 GB of space in /scratch/&lt;netid&gt;
+
+Displaying files in scratch/&lt;netid&gt; that are last modified 10 or more days ago
+
+# PERMS  : SIZE KB :  MOD. DATE : FILENAME ############################################################
+</pre></div>
+</div>
+<p>In this case, you have no files that are older than 10 days. So you
+might try to now run <code class="docutils literal notranslate"><span class="pre">checkscratch</span> <span class="pre">28</span></code> and see if you have any files
+older than 2 days.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ checkscratch 28
+The current retention period of files in /scratch is 30 days.
+
+You have 1 files that will be deleted within the next 28 days (OLDER than 2 days) in /scratch/&lt;netid&gt; and are listed in the file /scratch/&lt;netid&gt;/checkscratch.out.
+
+Checkscratch's output file is overwritten each time you run it; to save the checkscratch output file you must move it or rename it.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">checkscratch</span></code> is now telling you that you have 1 file that is older
+than 2 days. To find out what file it is, you would look in
+<code class="docutils literal notranslate"><span class="pre">/scratch/&lt;netid&gt;/checkscratch.out</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat /scratch/&lt;netid&gt;/checkscratch.out
+You currently have 4 files using 12 GB of space in /scratch/&lt;netid&gt;
+
+Displaying files in scratch/&lt;netid&gt; that are last modified 2 or more days ago
+
+# PERMS  : SIZE KB :  MOD. DATE : FILENAME ############################################################
+-rw-rw-r--:0:2022-08-03:/scratch/&lt;netid&gt;/myfile.txt
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">checkscratch.out</span></code> will tell you both how large the file is in KB,
+when the file was last modified, and the name of the file.</p>
+</section>
+<section id="scratch-space-permissions">
+<h3 id="scratch-space-permissions">Scratch Space Permissions<a class="headerlink" href="#scratch-space-permissions" title="Permalink to this heading">¶</a></h3>
+<p>Only the user can write to their scratch directory. However, the user
+can allow other users to read/execute their files. Below, we provide an
+example of the default file permissions and how to provide others with
+read/execute access.</p>
+<p>First, we must modify the default permissions of your scratch directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Default permissions of scratch directory
+$ ls -ld /scratch/&lt;netid&gt;/
+drwx------ 3 &lt;netid&gt; &lt;netid&gt; 4096 May 26 12:46 /scratch/&lt;netid&gt;/
+</pre></div>
+</div>
+<p>We must take two steps to allow users in a specific allocation to be
+able to read/execute files in our scratch space.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Navigate to the scratch
+$ cd /scratch
+# use the `chown` command to change the user:group of your scratch directory to &lt;netid&gt;:&lt;allocation_id&gt;
+$ chown &lt;netid&gt;:&lt;pXXXXX&gt; &lt;netid&gt;
+# Now we need to allow the `group` to have read (r) and execute (x) permissions on our scratch directory
+$ chmod g+rx &lt;netid&gt;
+# verify that the group setting and permissions for your scratch were updated correctly.
+$ ls -ld /scratch/&lt;netid&gt;/
+drwxr-x--- 3 &lt;netid&gt; &lt;allocation_id&gt; 4096 May 26 12:46 /scratch/&lt;netid&gt;/
+</pre></div>
+</div>
+<p>Now we provide an example of how to change the `group` on a file
+created inside of your scratch directory which will enable other members
+of that allocation to read your file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /scratch/&lt;netid&gt;/
+$ touch myfile.txt
+$ ls -l myfile.txt
+-rw-rw-r-- 1 &lt;netid&gt; &lt;netid&gt; 0 May 24 14:53 myfile.txt
+</pre></div>
+</div>
+<p>To give access to other allocations members, we need to modify the
+<em>group</em> setting of this file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Find out what allocations I am a part of.
+$ groups
+&lt;netid&gt; &lt;pXXXXX&gt;
+# use the `chown` command to change the user:group to &lt;netid&gt;:&lt;allocation&gt;
+$ chown &lt;netid&gt;:&lt;pXXXXX&gt; myfile.txt
+# verify that the group setting for your file has updated to your allocation
+$ ls -l myfile.txt
+-rw-rw-r-- 1 &lt;netid&gt; &lt;pXXXXX&gt; 0 May 24 14:53 myfile.txt
+</pre></div>
+</div>
+<p>You can always revert the <em>group</em> setting on your files and directories
+in scratch back to your netid so that only you have read, write and
+execute permission.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ chown &lt;netid&gt;:&lt;netid&gt; myfile.txt
+$ ls -l myfile.txt
+-rw-rw-r-- 1 &lt;netid&gt; &lt;netid&gt; 0 May 24 14:53 myfile.txt
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html" title="Factors Affecting Job Scheduling on Quest"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Factors Affecting Job Scheduling on Quest </span>
+              </div>
+            </a>
+          
+          
+            <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html" title="Finding the full path to your RDSS share"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Finding the full path to your RDSS share </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Quest.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

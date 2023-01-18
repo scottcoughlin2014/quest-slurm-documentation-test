@@ -1,0 +1,2123 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Knitro on Quest &#8212; Quest v2023.01.18 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Logging in to Quest" href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html" />
+    <link rel="prev" title="Installing and Managing R Packages on Quest" href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html" />
+
+
+
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=deep-purple data-md-color-accent=purple>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#Knitro-on-Quest/Knitro-on-Quest-updated" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="Quest v2023.01.18 documentation"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Research Computing Services Documentation</span>
+          <span class="md-header-nav__topic"> Knitro on Quest </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">Quest v2023.01.18 documentation</a></li>
+            
+            <li class="md-tabs__item"><a href="https://www.it.northwestern.edu/departments/it-services-support/research/index.html" class="md-tabs__link">RCS Home Page</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="Quest v2023.01.18 documentation" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="Quest v2023.01.18 documentation">Research Computing Services Documentation</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../Advanced-Globus-Features/Advanced-Globus-Features-updated.html" class="md-nav__link">Advanced Globus Features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../AlphaFold-on-Quest/AlphaFold-on-Quest-updated.html" class="md-nav__link">AlphaFold on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html" class="md-nav__link">Checking Processor and Memory Utilization for Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-completed-jobs" class="md-nav__link">How to check resource utilization for completed jobs?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#profiling-your-processes-for-memory-and-cpu-usage-before-production" class="md-nav__link">Profiling your processes for memory and CPU usage before production</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-running-jobs" class="md-nav__link">How to check resource utilization for running jobs?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html" class="md-nav__link">Compiling Code on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#basic-compiling-strategies" class="md-nav__link">Basic Compiling Strategies</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html" class="md-nav__link">Connecting to NUworkspace</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#accounts" class="md-nav__link">Accounts</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#for-support-contactnuworkspace-support-center" class="md-nav__link">For Support, contactNuworkspace Support Center</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#software-installation" class="md-nav__link">Software Installation</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-Quest-with-FastX/Connecting-to-Quest-with-FastX-updated.html" class="md-nav__link">Connecting to Quest with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-a-Research-Data-Storage-Service-Share/Connecting-to-a-Research-Data-Storage-Service-Share-updated.html" class="md-nav__link">Connecting to a Research Data Storage Service Share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Creating-an-Amazon-S3-bucket/Creating-an-Amazon-S3-bucket-updated.html" class="md-nav__link">Creating an Amazon S3 bucket</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html" class="md-nav__link">Debugging your Slurm submission script on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#debugging-a-job-submission-script-rejected-by-the-scheduler" class="md-nav__link">Debugging a Job Submission Script Rejected By The Scheduler</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-generate-error-messages" class="md-nav__link">Mistakes That Generate Error Messages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.html#mistakes-that-dont-generate-error-messages" class="md-nav__link">Mistakes That Don’t Generate Error Messages</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Disconnecting-from-a-RDSS-FSMResFiles-share/Disconnecting-from-a-RDSS-FSMResFiles-share-updated.html" class="md-nav__link">Disconnecting from a RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Everything-You-Need-to-Know-about-Using-Slurm-on-Quest/Everything-You-Need-to-Know-about-Using-Slurm-on-Quest-updated.html" class="md-nav__link">Everything You Need to Know about Using Slurm on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html" class="md-nav__link">Examples of Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#interactive-jobs" class="md-nav__link">Interactive Jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#batch-jobs" class="md-nav__link">Batch Jobs</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html" class="md-nav__link">Extended SLURM Job and Submission Options</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#job-submission-options" class="md-nav__link">Job Submission Options</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#common-job-commands" class="md-nav__link">Common Job Commands</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#script-variables" class="md-nav__link">Script Variables</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html" class="md-nav__link">Factors Affecting Job Scheduling on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#priority" class="md-nav__link">Priority</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#backfill-scheduling" class="md-nav__link">Backfill Scheduling</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html" class="md-nav__link">File Systems, Storage, and Permissions on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#summary-of-file-permissions" class="md-nav__link">Summary of File Permissions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#home-directories" class="md-nav__link">Home Directories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#project-space" class="md-nav__link">Project Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#scratch-space" class="md-nav__link">Scratch Space</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html" class="md-nav__link">Finding the full path to your RDSS share</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-1-identify-your-access-zone" class="md-nav__link">Step 1: Identify your access zone</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-2-identify-the-full-path-to-your-share" class="md-nav__link">Step 2: Identify the full path to your share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#multiple-shares" class="md-nav__link">Multiple Shares</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html" class="md-nav__link">GPUs on QUEST</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpus-are-available-on-quest" class="md-nav__link">What GPUs are available on QUEST?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#interactive-gpu-jobs" class="md-nav__link">Interactive GPU jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpu-software-is-available-on-quest" class="md-nav__link">What GPU software is available on QUEST?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html" class="md-nav__link">Generating a AWS IAM Access Key for Amazon S3</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#using-the-aws-management-console" class="md-nav__link">Using the AWS Management Console</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#creating-an-iam-user" class="md-nav__link">Creating an IAM user</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html" class="md-nav__link">Genomic Data Commons Data Transfer Tool on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html#genomic-data-commons" class="md-nav__link">Genomic Data Commons</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html" class="md-nav__link">Getting Started on the Genomics Compute Cluster (b1042) on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html#about-the-genomics-compute-cluster-on-quest" class="md-nav__link">About the Genomics Compute Cluster on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Globus-Endpoints-and-Collections/Globus-Endpoints-and-Collections-updated.html" class="md-nav__link">Globus Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-Software-on-Quest/Installing-Software-on-Quest-updated.html" class="md-nav__link">Installing Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html#installing-and-managing-r-packages-on-quest-1" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Knitro on Quest </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Knitro on Quest</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#knitro-on-quest-knitro-on-quest-updated--page-root" class="md-nav__link">Knitro on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#knitro-overview" class="md-nav__link">Knitro Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#matlab" class="md-nav__link">MATLAB</a>
+        </li>
+        <li class="md-nav__item"><a href="#r" class="md-nav__link">R</a>
+        </li>
+        <li class="md-nav__item"><a href="#python" class="md-nav__link">Python</a>
+        </li>
+        <li class="md-nav__item"><a href="#ampl" class="md-nav__link">AMPL</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Knitro-on-Quest/Knitro-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#knitro-overview" class="md-nav__link">Knitro Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#matlab" class="md-nav__link">MATLAB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#r" class="md-nav__link">R</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#python" class="md-nav__link">Python</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#ampl" class="md-nav__link">AMPL</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html" class="md-nav__link">Logging in to Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-fastx" class="md-nav__link">Connecting with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-an-ssh-terminal" class="md-nav__link">Connecting with an SSH Terminal</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html" class="md-nav__link">Managing Full Access Allocations on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-jobs-in-queue" class="md-nav__link">Status of Allocation Jobs in Queue</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-nodes" class="md-nav__link">Status of Allocation Nodes</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#individual-node-status" class="md-nav__link">Individual Node Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#why-are-my-jobs-running-on-nodes-other-than-those-reserved-for-my-allocation" class="md-nav__link">Why are my jobs running on nodes other than those reserved for my allocation?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html" class="md-nav__link">Managing Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-id" class="md-nav__link">Job ID</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-status" class="md-nav__link">Job Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#commonly-used-commands" class="md-nav__link">Commonly Used Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares/Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares-updated.html" class="md-nav__link">Managing access to Research Data Storage Service (RDSS) Shares</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html" class="md-nav__link">Managing an Allocation on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#allocation-resource-management" class="md-nav__link">Allocation Resource Management</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#check-allocation-resources" class="md-nav__link">Check Allocation Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html" class="md-nav__link">Modules Software Environment Manager on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#available-modules" class="md-nav__link">Available Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#loading-a-module" class="md-nav__link">Loading a Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#module-versions" class="md-nav__link">Module Versions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#useful-module-commands" class="md-nav__link">Useful Module Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Opening-an-Archived-File-in-RDSS/Opening-an-Archived-File-in-RDSS-updated.html" class="md-nav__link">Opening an Archived File in RDSS</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html" class="md-nav__link">Parabricks on the Genomics Compute Cluster</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#checking-out-parabricks-licenses" class="md-nav__link">Checking out Parabricks Licenses</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#running-parabricks-on-quest" class="md-nav__link">Running Parabricks on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-FAQ/Quest-FAQ-updated.html" class="md-nav__link">Quest FAQ</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html" class="md-nav__link">Quest Partitions/Queues</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-general-access-p-and-e-accounts" class="md-nav__link">Partition Definitions: General Access (“p” and “e” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-full-access-buy-ins-or-b-accounts" class="md-nav__link">Partition Definitions: Full Access (buy-ins, or “b” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#notes" class="md-nav__link">Notes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html" class="md-nav__link">Quest Quick Start Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#navigating-quest" class="md-nav__link">Navigating Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#moving-files-onto-quest" class="md-nav__link">Moving Files onto Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#software-available-on-quest" class="md-nav__link">Software available on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#running-jobs-on-quest" class="md-nav__link">Running Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#managing-your-jobs-on-quest" class="md-nav__link">Managing Your Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#getting-help" class="md-nav__link">Getting Help</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html" class="md-nav__link">Quest Slurm Quick Start</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html#quick-start" class="md-nav__link">Quick Start</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Troubleshooting%3A-Checking-the-job-output-file/Quest-Troubleshooting%3A-Checking-the-job-output-file-updated.html" class="md-nav__link">Quest Troubleshooting: Checking the job output file</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html" class="md-nav__link">Quest User Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html#user-guides" class="md-nav__link">User Guides</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html" class="md-nav__link">Research Data Management Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#research-data-storage-service-rdss" class="md-nav__link">Research Data Storage Service (RDSS)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#globus-data-transfer-tool" class="md-nav__link">Globus data transfer tool</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Resolving-issues-accessing-a-Research-Data-Storage-Service-share/Resolving-issues-accessing-a-Research-Data-Storage-Service-share-updated.html" class="md-nav__link">Resolving issues accessing a Research Data Storage Service share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html" class="md-nav__link">Restoring a previous version of a file or folder from RDSS</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html#retrieving-older-versions-of-modified-deleted-files" class="md-nav__link">Retrieving older versions of modified/deleted files</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html" class="md-nav__link">Running GATK4 Spark on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#gatk4-spark-tools" class="md-nav__link">GATK4 SPARK tools</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#converting-fasta-files-for-parallel-runs" class="md-nav__link">Converting FASTA Files for Parallel Runs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#example-job-submission" class="md-nav__link">Example Job Submission</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html" class="md-nav__link">Running Jupyter Notebook on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#accessing-conda-environments-in-jupyter" class="md-nav__link">Accessing Conda Environments in Jupyter</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-ipython-kernel" class="md-nav__link">Create a iPython Kernel</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-r-kernel" class="md-nav__link">Create a R Kernel</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Software-on-Quest/Software-on-Quest-updated.html" class="md-nav__link">Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Specifying-Memory-for-Jobs-on-Quest/Specifying-Memory-for-Jobs-on-Quest-updated.html" class="md-nav__link">Specifying Memory for Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html" class="md-nav__link">Transferring Files to and from Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#globus" class="md-nav__link">Globus</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#other-data-transfer-options" class="md-nav__link">Other Data Transfer Options</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html" class="md-nav__link">Transferring files using Globus</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html#to-initiate-a-file-transfer" class="md-nav__link">To initiate a file transfer:</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html" class="md-nav__link">Troubleshooting Installing R Packages on Quest and Quest Analytics</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html#introduction" class="md-nav__link">Introduction</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html" class="md-nav__link">Troubleshooting Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#why-isnt-my-job-running" class="md-nav__link">Why isn’t my job running?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#check-the-output-file" class="md-nav__link">Check the Output File</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#resources-exceeded" class="md-nav__link">Resources Exceeded</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#out-of-disk-space" class="md-nav__link">Out of Disk Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html" class="md-nav__link">Troubleshooting R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html#common-issues" class="md-nav__link">Common Issues</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Amazon-S3-Storage/Using-Amazon-S3-Storage-updated.html" class="md-nav__link">Using Amazon S3 Storage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html" class="md-nav__link">Using Git on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#making-git-available" class="md-nav__link">Making Git Available</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#setting-up-git" class="md-nav__link">Setting up Git</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#repositories" class="md-nav__link">Repositories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#git-resources" class="md-nav__link">Git Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-Timer/Using-Globus-Timer-updated.html" class="md-nav__link">Using Globus Timer</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html" class="md-nav__link">Using Globus with Amazon S3 storage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using Jupyter on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#environments-and-packages" class="md-nav__link">Environments and Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-quest-analytics-nodes" class="md-nav__link">Issues or Problems with the Quest Analytics nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-MATLAB-on-Quest/Using-MATLAB-on-Quest-updated.html" class="md-nav__link">Using MATLAB on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html" class="md-nav__link">Using Python on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#python-package-management" class="md-nav__link">Python Package Management</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html" class="md-nav__link">Using QIIME2 on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html#installing-qiime2-on-quest" class="md-nav__link">Installing QIIME2 on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html" class="md-nav__link">Using R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#installing-and-managing-r-packages-on-quest" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using RStudio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#installing-packages" class="md-nav__link">Installing Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using SAS Studio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html" class="md-nav__link">Using Singularity on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#load-the-singularity-module" class="md-nav__link">Load the Singularity Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#getting-singularity-images-on-quest" class="md-nav__link">Getting Singularity Images On Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#running-singularity-containers" class="md-nav__link">Running Singularity Containers</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#best-practices" class="md-nav__link">Best Practices</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html" class="md-nav__link">Using the Globus Data Transfer Tool</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#restrictions" class="md-nav__link">Restrictions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#endpoints-and-collections" class="md-nav__link">Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#transferring-data" class="md-nav__link">Transferring data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#advanced-features" class="md-nav__link">Advanced features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#resources" class="md-nav__link">Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html" class="md-nav__link">Using the OneDrive/SharePoint Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#activating-the-onedrive-sharepoint-endpoint" class="md-nav__link">Activating the OneDrive/Sharepoint Endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#accessing-files" class="md-nav__link">Accessing files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#my-file-transfer-fails-because-of-a-checksum-error-when-i-try-to-send-a-microsoft-office-document-to-a-sharepoint-library" class="md-nav__link">My file transfer fails because of a checksum error when I try to send a Microsoft Office Document to a SharePoint library.</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#i-cant-see-a-sharepoint-library-i-have-access-to" class="md-nav__link">I can’t see a SharePoint Library I have access to.</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Quest-Globus-endpoint/Using-the-Quest-Globus-endpoint-updated.html" class="md-nav__link">Using the Quest Globus endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html" class="md-nav__link">Using the RDSS Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#mounting-your-rdss-fsmresfiles-share" class="md-nav__link">Mounting your RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#transferring-files-to-from-rdss-fsmresfiles" class="md-nav__link">Transferring files to/from RDSS<strong>/FSMResFiles</strong></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#extending-rdss-fsmresfiles-endpoint-activation" class="md-nav__link">Extending RDSS<strong>/FSMResFiles</strong> endpoint activation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#troubleshooting" class="md-nav__link">Troubleshooting</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#knitro-on-quest-knitro-on-quest-updated--page-root" class="md-nav__link">Knitro on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#knitro-overview" class="md-nav__link">Knitro Overview</a>
+        </li>
+        <li class="md-nav__item"><a href="#matlab" class="md-nav__link">MATLAB</a>
+        </li>
+        <li class="md-nav__item"><a href="#r" class="md-nav__link">R</a>
+        </li>
+        <li class="md-nav__item"><a href="#python" class="md-nav__link">Python</a>
+        </li>
+        <li class="md-nav__item"><a href="#ampl" class="md-nav__link">AMPL</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Knitro-on-Quest/Knitro-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="knitro-on-quest">
+<h1 id="knitro-on-quest-knitro-on-quest-updated--page-root">Knitro on Quest<a class="headerlink" href="#knitro-on-quest-knitro-on-quest-updated--page-root" title="Permalink to this heading">¶</a></h1>
+<p>Instructions for using Knitro on Quest with <a class="reference external" href="#matlab">MATLAB</a>,
+<a class="reference external" href="#r">R</a>, <a class="reference external" href="#python">Python</a>, and <a class="reference external" href="#ampl">AMPL</a>.</p>
+<section id="knitro-overview">
+<h2 id="knitro-overview">Knitro Overview<a class="headerlink" href="#knitro-overview" title="Permalink to this heading">¶</a></h2>
+<p>Knitro is a software library used to find solutions of continuous and
+discrete optimization models. It is designed for general, nonlinear
+optimization problems and can be used for a wide range of cases such as
+systems of non-linear equations, least square problems, convex and
+non-convex quadratic problems etc. Please refer to the <a class="reference external" href="https://www.artelys.com/tools/knitro_doc/index.html">user
+manual</a> for a
+complete set of instructions on how to use Knitro. Knitro is not a
+standalone program. It provides a programmable API to be used within
+other software such MATLAB, Python, and R.</p>
+<p>Knitro is installed on Quest. There are multiple versions, with 12.4
+being the latest. You can check by typing the following command on
+terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ module spider knitro
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ knitro:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Versions:
+    knitro/8
+    knitro/9.1.orig
+    knitro/9.1
+    knitro/10.0
+    knitro/10.3
+    knitro/12.4
+</pre></div>
+</div>
+<p>If users need a newer version of knitro then is available on Quest
+current, please fill out the <a class="reference external" href="https://services.northwestern.edu/TDClient/30/Portal/Requests/ServiceOfferingDet?ID=66">Software Installation
+Request</a>
+form.</p>
+</section>
+<section id="matlab">
+<h2 id="matlab">MATLAB<a class="headerlink" href="#matlab" title="Permalink to this heading">¶</a></h2>
+<p>Knitro is loaded by each version of MATLAB. The path to the Knitro
+installation is automatically added when the application starts. If
+users want to have a different version of knitro loaded they must modify
+the search path within their MATLAB code. Instructions on how to do this
+are included at the end of this section.</p>
+<p>knitromatlab is the interface used to call Knitro from the MATLAB
+environment. To test that the installation exists, and to find out the
+version of knitro loaded, a user can run a test function on MATLAB’s
+command line as shown (find the minimum value of cos(x)):</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>&gt;&gt; [x fval] = knitromatlab(@(x)cos(x),1)
+
+=======================================
+           Academic License
+       (NOT FOR COMMERCIAL USE)
+         Artelys Knitro 10.0.0
+=======================================
+
+Knitro presolve eliminated 0 variables and 0 constraints.
+
+algorithm:            1
+gradopt:              4
+hessopt:              2
+honorbnds:            1
+maxit:                10000
+outlev:               1
+par_concurrent_evals: 0
+The problem is identified as unconstrained.
+Knitro changing bar_initpt from AUTO to 3.
+Knitro changing bar_murule from AUTO to 4.
+Knitro changing bar_penaltycons from AUTO to 1.
+Knitro changing bar_penaltyrule from AUTO to 2.
+Knitro changing bar_switchrule from AUTO to 1.
+Knitro changing linsolver from AUTO to 2.
+
+Problem Characteristics                    ( Presolved)
+-----------------------
+Objective goal:  Minimize
+Number of variables:                     1 (         1)
+    bounded below:                       0 (         0)
+    bounded above:                       0 (         0)
+    bounded below and above:             0 (         0)
+    fixed:                               0 (         0)
+    free:                                1 (         1)
+Number of constraints:                   0 (         0)
+    linear equalities:                   0 (         0)
+    nonlinear equalities:                0 (         0)
+    linear inequalities:                 0 (         0)
+    nonlinear inequalities:              0 (         0)
+    range:                               0 (         0)
+Number of nonzeros in Jacobian:          0 (         0)
+Number of nonzeros in Hessian:           1 (         1)
+
+EXIT: Locally optimal solution found.
+
+Final Statistics
+----------------
+Final objective value               =  -1.00000000000000e+00
+Final feasibility error (abs / rel) =   0.00e+00 / 0.00e+00
+Final optimality error  (abs / rel) =   2.37e-09 / 2.37e-09
+# of iterations                     =          7
+# of CG iterations                  =          0
+# of function evaluations           =         22
+# of gradient evaluations           =          0
+Total program time (secs)           =       0.46135 (     0.092 CPU time)
+Time spent in evaluations (secs)    =       0.04807
+
+===============================================================================
+
+
+x =
+
+    3.1416
+fval =
+
+   -1.0000
+</pre></div>
+</div>
+<p>Users can access different versions of kntiromatlab by updating their
+path to the relevant location. Please query the knitro module to find
+the installation directory. For example, MATLAB 2020b loads by default
+<code class="docutils literal notranslate"><span class="pre">knitro/10.0</span></code>. To use version 12.4 type in the command line:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>module load matlab/r2020b
+module load knitro/12.4
+</pre></div>
+</div>
+<p>Querying the 12.4 knitro module shows:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>$ module show knitro/12.4
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ /software/Modules/3.2.9/modulefiles/knitro/12.4:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+whatis("Artelys Knitro is a commercial software package for solving large scale nonlinear mathematical optimization problems. ")
+whatis("KNITRO – (the original solver name) short for 'Nonlinear Interior point Trust Region Optimization' (the 'K' is silent) – was co-created by Richard Waltz, Jorge Nocedal, Todd Plantenga and Richard Byrd. ")
+whatis("It was first introduced in 2001, as a derivative of academic research at Northwestern University (through Ziena Optimization LLC), and has since been continually improved by developers at Artelys. ")
+prepend_path("KNITRODIR","/software/knitro/12.4")
+prepend_path("PATH","/software/knitro/12.4/knitroampl:/software/knitro/12.4/knitromatlab")
+prepend_path("LD_LIBRARY_PATH","/software/knitro/12.4/lib")
+setenv("ARTELYS_LICENSE_NETWORK_ADDR","129.105.119.173:8349")
+help([[Optimization problems must be presented to Knitro in mathematical form, and should provide a way of computing function derivatives using sparse matrices (Knitro can compute derivatives approximation but in most cases providing the exact derivatives is beneficial).
+An often easier approach is to develop the optimization problem in an algebraic modeling language.
+]])
+</pre></div>
+</div>
+<p>Therefore the path to the <code class="docutils literal notranslate"><span class="pre">knitromatlab</span></code> API is available on Quest in:
+<code class="docutils literal notranslate"><span class="pre">/software/knitro/12.4/knitromatlab</span></code>. You can now start MATLAB. At the
+MATLAB command prompt you can type:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>&gt;&gt; addpath('/hpc/software/knitro/12.4/knitromatlab')
+&gt;&gt; savepath
+</pre></div>
+</div>
+<p>The knitro interface for the user is now updated to version 12.4.</p>
+<p>More information on using the MATLAB/Knitro interface can be found in
+the <a class="reference external" href="https://www.artelys.com/tools/knitro_doc/2_userGuide/gettingStarted/startMatlab.html">Knitro
+Documentation</a>.</p>
+</section>
+<section id="r">
+<h2 id="r">R<a class="headerlink" href="#r" title="Permalink to this heading">¶</a></h2>
+<p>The knitro API for R can be installed by any user for any version of R
+running the following commands:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>module load knitro/12.4
+module load R/4.1.1
+rm -rf ~/R_knitro
+mkdir -p ~/R_knitro
+cp -r /software/knitro/12.4/examples/R ~/R_knitro/
+cd ~/R_knitro/R
+R CMD INSTALL --build KnitroR
+</pre></div>
+</div>
+<p>You can access use the <code class="docutils literal notranslate"><span class="pre">KnitroR</span></code> package by running the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[quser24 R]$ module purge
+[quser24 R]$ module load knitro/12.4
+[quser24 R]$ module load R/4.1.1
+[quser24 R]$ R
+
+R version 4.1.1 (2021-08-10) -- "Kick Things"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+ Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+&gt; library("KnitroR")
+&gt; lsf.str("package:KnitroR")
+knitro : function (nvar = numeric(0), ncon = numeric(0), objective = NULL, objGoal = 0,
+  gradient = NULL, gradientIndexVars = numeric(0), constraints = NULL,
+  constraintsIndexCons = numeric(0), jacobian = NULL, jacIndexCons = numeric(0),
+  jacIndexVars = numeric(0), jacBitMap = numeric(0), hessianLag = NULL,
+  hessIndexVars1 = numeric(0), hessIndexVars2 = numeric(0), hessBitMap = numeric(0),
+  objLinearStruct = numeric(0), objLinearStructIndexVars = numeric(0),
+  conLinearStruct = numeric(0), conLinearStructIndexCons = numeric(0),
+  conLinearStructIndexVars = numeric(0), objQuadraticStruct = numeric(0),
+  objQuadraticStructIndexVars1 = numeric(0), objQuadraticStructIndexVars2 = numeric(0),
+  conQuadraticStruct = numeric(0), conQuadraticStructIndexCons = numeric(0),
+  conQuadraticStructIndexVars1 = numeric(0), conQuadraticStructIndexVars2 = numeric(0),
+  xL = numeric(0), xU = numeric(0), x0 = numeric(0), cL = numeric(0),
+  cU = numeric(0), xTypes = numeric(0), xTypesIndexVars = numeric(0),
+  xStrategies = numeric(0), xStrategiesIndexVars = numeric(0), xPriorities = numeric(0),
+  xPrioritiesIndexVars = numeric(0), xHonorBnds = numeric(0), xHonorBndsIndexVars = numeric(0),
+  ccTypes = numeric(0), ccIdxList1 = numeric(0), ccIdxList2 = numeric(0),
+knitrolsq : function (dimp = numeric(0), par0 = numeric(0), dataFrameX, dataFrameY,
+  residual, jacobian = NULL, jacIndexRsds = numeric(0), jacIndexVars = numeric(0),
+  rsdLinearStruct = numeric(0), rsdLinearStructIndexRsds = numeric(0),
+  rsdLinearStructIndexVars = numeric(0), parL = numeric(0), parU = numeric(0),
+  xScaleFactors = numeric(0), xScaleCenters = numeric(0), objScaleFactor = numeric(0),
+  options = list(), optionsFile = NULL, env = NULL)
+</pre></div>
+</div>
+<p>To verify access to the knitroR interface a user can run a simple
+example of the minimization of the Rosenbrock function: f(x,y) =
+(1-x^2)+100*(y-x^2)^2.</p>
+<p>At the R prompt, cut and paste the following commands that evaluate the
+function and its derivatives and then call the KnitroR interface
+calculate the location and value of the global minimum based on an
+initial estimate.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>&gt; eval_f &lt;- function(x) {
+    return( 100 * (x[2] - x[1] * x[1])^2 + (1 - x[1])^2 )}
+
+&gt; eval_grad_f &lt;- function(x) {
+    grad_f &lt;-rep(0, length(x))
+    grad_f[1] &lt;- 2*x[1]-2+400*x[1]^3-400*x[1]*x[2]
+    grad_f[2] &lt;- 200*(x[2]-x[1]^2)
+    return( grad_f )}
+
+&gt; x0 &lt;- c( -1.2, 1 )
+
+&gt; sol &lt;- knitro(x0 = x0, objective = eval_f)
+</pre></div>
+</div>
+<p>Knitro then returns:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>=======================================
+     Academic License
+   (NOT FOR COMMERCIAL USE)
+    Artelys Knitro 12.4.0
+=======================================
+
+Knitro performing finite-difference gradient computation with 1 thread.
+Knitro presolve eliminated 0 variables and 0 constraints.
+Knitro performing finite-difference gradient computation with 1 thread.
+Knitro presolve eliminated 0 variables and 0 constraints.
+
+gradopt:                 2
+hessopt:                 2
+outlev:                  1
+par_concurrent_evals:    0
+The problem is identified as unconstrained.
+Knitro changing algorithm from AUTO to 1.
+Knitro changing bar_initpt from AUTO to 3.
+Knitro changing bar_murule from AUTO to 4.
+Knitro changing bar_penaltycons from AUTO to 1.
+Knitro changing bar_penaltyrule from AUTO to 2.
+Knitro changing bar_switchrule from AUTO to 1.
+Knitro changing linesearch from AUTO to 1.
+Knitro changing linsolver from AUTO to 2.
+
+Problem Characteristics                    ( Presolved)
+-----------------------
+Objective goal:  Minimize
+Number of variables:                           2 (         2)
+    bounded below only:                        0 (         0)
+    bounded above only:                        0 (         0)
+    bounded below and above:                   0 (         0)
+    fixed:                                     0 (         0)
+    free:                                      2 (         2)
+Number of constraints:                         0 (         0)
+    linear equalities:                         0 (         0)
+    nonlinear equalities:                      0 (         0)
+    linear one-sided inequalities:             0 (         0)
+    nonlinear one-sided inequalities:          0 (         0)
+    linear two-sided inequalities:             0 (         0)
+    nonlinear two-sided inequalities:          0 (         0)
+Number of nonzeros in Jacobian:                0 (         0)
+Number of nonzeros in Hessian:                 3 (         3)
+
+EXIT: Locally optimal solution found.
+
+Final Statistics
+----------------
+Final objective value               =   2.00694602943133e-11
+Final feasibility error (abs / rel) =   0.00e+00 / 0.00e+00
+Final optimality error  (abs / rel) =   1.54e-08 / 1.54e-08
+# of iterations                     =         18
+# of CG iterations                  =          2
+# of function evaluations           =         71
+# of gradient evaluations           =          0
+Total program time (secs)           =       0.00355 (     0.004 CPU time)
+Time spent in evaluations (secs)    =       0.00062
+
+===============================================================================
+
+&gt; sol$x
+[1] 0.9999955 0.9999910
+</pre></div>
+</div>
+<p>The theoretical location of the minimum is at (1,1) and the global
+minimum value of 0. Knitro returns:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>Final objective value               =   2.00694602943133e-11
+</pre></div>
+</div>
+<p>Further examples are provided on Quest in
+<code class="docutils literal notranslate"><span class="pre">/software/knitro/12.4/examples/R</span></code>. Further information is available
+in the <a class="reference external" href="https://www.artelys.com/tools/knitro_doc/3_referenceManual/knitroRreference.html#knitrorreference%0A">Knitro
+documentation</a>.</p>
+</section>
+<section id="python">
+<h2 id="python">Python<a class="headerlink" href="#python" title="Permalink to this heading">¶</a></h2>
+<p>Knitro provides a Python interface for the Knitro callable library
+functions. Knitro’s Python API is thread-safe where a Python code can
+launch multiple instances of the knitro solver in different threads,
+each solving a different problems. Examples are provided on Quest in
+/software/knitro/12.4/examples/Python for users to gauge the structure
+of a Knitro enabled python code. To use knitro/Python on Quest, you will
+first create an anaconda virtual environment with the Python
+distribution of your choice and then load the knitro module. In the
+example below, we create a virtual environment with the name
+<code class="docutils literal notranslate"><span class="pre">knitro-py38</span></code> and install Python 3.8 into it.</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>% module load knitro/12.4
+% module load python-miniconda3
+% conda create --name knitro-py38 python=3.8 --yes
+% source activate knitro-py38
+% mkdir ~/python_knitro
+% cp -r /software/knitro/12.4/examples/Python ~/python_knitro/
+% cd ~/python_knitro/Python
+% python setup.py install
+</pre></div>
+</div>
+<p>After the initial step of creating the virtual environment and
+installing Knitro into it, each subsequent time you would like to use
+Knitro and/or the virtual environment, you need only add the following
+to your shell script or run the following on the command line</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>module load knitro/12.4
+module load python-miniconda3
+source activate knitro-py38
+</pre></div>
+</div>
+<p>If this is done on the command line, you can test that importing Knitro
+works by launching the Python command line and importing <code class="docutils literal notranslate"><span class="pre">knitro</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(knitro-py38) $ python
+Python 3.8.13 (default, Mar 28 2022, 11:38:47)
+[GCC 7.5.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; import knitro
+&gt;&gt;&gt;
+</pre></div>
+</div>
+<p>For more information please refer to the <a class="reference external" href="https://www.artelys.com/docs/knitro/2_userGuide/gettingStarted/startPython.html#startpython">Knitro
+documentation</a>.</p>
+</section>
+<section id="ampl">
+<h2 id="ampl">AMPL<a class="headerlink" href="#ampl" title="Permalink to this heading">¶</a></h2>
+<p>AMPL is a modeling language to solve optimization problems. AMPL is
+installed on Quest and can be loaded as:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>% module load ampl
+</pre></div>
+</div>
+<p>There are only 2 licenses available on Quest at present. Users can check
+if any there are any licenses available by running the following
+command:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>% ampl_lic status
+</pre></div>
+</div>
+<p>Loading the AMPL module also loads knitro/10.3 which sets the path to
+the knitroampl executable found on Quest in
+/software/knitro/10.3/knitroampl.</p>
+<p>To invoke knitro within AMPL one must either run or include in their
+script the following line:</p>
+<div class="code docutils container">
+<p>option solver knitroampl;</p>
+</div>
+<p>For more information and examples please see the <a class="reference external" href="https://www.artelys.com/tools/knitro_doc/2_userGuide/gettingStarted/startAmpl.html">Knitro
+documentation</a>.</p>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html" title="Installing and Managing R Packages on Quest"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Installing and Managing R Packages on Quest </span>
+              </div>
+            </a>
+          
+          
+            <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html" title="Logging in to Quest"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Logging in to Quest </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Quest.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>

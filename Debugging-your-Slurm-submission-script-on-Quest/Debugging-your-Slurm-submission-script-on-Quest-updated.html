@@ -1,0 +1,2368 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
+    <title>Debugging your Slurm submission script on Quest &#8212; Quest v2023.01.18 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Disconnecting from a RDSS/FSMResFiles share" href="../Disconnecting-from-a-RDSS-FSMResFiles-share/Disconnecting-from-a-RDSS-FSMResFiles-share-updated.html" />
+    <link rel="prev" title="Creating an Amazon S3 bucket" href="../Creating-an-Amazon-S3-bucket/Creating-an-Amazon-S3-bucket-updated.html" />
+
+
+
+  
+   
+
+  </head>
+  <body dir=ltr
+        data-md-color-primary=deep-purple data-md-color-accent=purple>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="Quest v2023.01.18 documentation"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">Research Computing Services Documentation</span>
+          <span class="md-header-nav__topic"> Debugging your Slurm submission script on Quest </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+          </div>
+        </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">Quest v2023.01.18 documentation</a></li>
+            
+            <li class="md-tabs__item"><a href="https://www.it.northwestern.edu/departments/it-services-support/research/index.html" class="md-tabs__link">RCS Home Page</a></li>
+      </ul>
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="Quest v2023.01.18 documentation" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="Quest v2023.01.18 documentation">Research Computing Services Documentation</a>
+  </label>
+    <div class="md-nav__source">
+      <a href="https://github.com/nuitrcs/examplejobs/" title="Go to repository" class="md-source" data-md-source="github">
+
+    <div class="md-source__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Quest Example Jobs
+  </div>
+</a>
+    </div>
+  
+  
+
+  
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+    
+    
+      <a href="../Advanced-Globus-Features/Advanced-Globus-Features-updated.html" class="md-nav__link">Advanced Globus Features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../AlphaFold-on-Quest/AlphaFold-on-Quest-updated.html" class="md-nav__link">AlphaFold on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html" class="md-nav__link">Checking Processor and Memory Utilization for Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-completed-jobs" class="md-nav__link">How to check resource utilization for completed jobs?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#profiling-your-processes-for-memory-and-cpu-usage-before-production" class="md-nav__link">Profiling your processes for memory and CPU usage before production</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest/Checking-Processor-and-Memory-Utilization-for-Jobs-on-Quest-updated.html#how-to-check-resource-utilization-for-running-jobs" class="md-nav__link">How to check resource utilization for running jobs?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html" class="md-nav__link">Compiling Code on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#basic-compiling-strategies" class="md-nav__link">Basic Compiling Strategies</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Compiling-Code-on-Quest/Compiling-Code-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html" class="md-nav__link">Connecting to NUworkspace</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#accounts" class="md-nav__link">Accounts</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#for-support-contactnuworkspace-support-center" class="md-nav__link">For Support, contactNuworkspace Support Center</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-NUworkspace/Connecting-to-NUworkspace-updated.html#software-installation" class="md-nav__link">Software Installation</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-Quest-with-FastX/Connecting-to-Quest-with-FastX-updated.html" class="md-nav__link">Connecting to Quest with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Connecting-to-a-Research-Data-Storage-Service-Share/Connecting-to-a-Research-Data-Storage-Service-Share-updated.html" class="md-nav__link">Connecting to a Research Data Storage Service Share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Creating-an-Amazon-S3-bucket/Creating-an-Amazon-S3-bucket-updated.html" class="md-nav__link">Creating an Amazon S3 bucket</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    <label class="md-nav__link md-nav__link--active" for="__toc"> Debugging your Slurm submission script on Quest </label>
+    
+      <a href="#" class="md-nav__link md-nav__link--active">Debugging your Slurm submission script on Quest</a>
+      
+        
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#debugging-your-slurm-submission-script-on-quest-debugging-your-slurm-submission-script-on-quest-updated--page-root" class="md-nav__link">Debugging your Slurm submission script on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#debugging-a-job-submission-script-rejected-by-the-scheduler" class="md-nav__link">Debugging a Job Submission Script Rejected By The Scheduler</a>
+        </li>
+        <li class="md-nav__item"><a href="#mistakes-that-generate-error-messages" class="md-nav__link">Mistakes That Generate Error Messages</a>
+        </li>
+        <li class="md-nav__item"><a href="#mistakes-that-dont-generate-error-messages" class="md-nav__link">Mistakes That Don’t Generate Error Messages</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#debugging-a-job-accepted-by-the-scheduler" class="md-nav__link">Debugging a Job Accepted by the Scheduler</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+  </ul>
+</nav>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="#debugging-a-job-submission-script-rejected-by-the-scheduler" class="md-nav__link">Debugging a Job Submission Script Rejected By The Scheduler</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#mistakes-that-generate-error-messages" class="md-nav__link">Mistakes That Generate Error Messages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="#mistakes-that-dont-generate-error-messages" class="md-nav__link">Mistakes That Don’t Generate Error Messages</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Disconnecting-from-a-RDSS-FSMResFiles-share/Disconnecting-from-a-RDSS-FSMResFiles-share-updated.html" class="md-nav__link">Disconnecting from a RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Everything-You-Need-to-Know-about-Using-Slurm-on-Quest/Everything-You-Need-to-Know-about-Using-Slurm-on-Quest-updated.html" class="md-nav__link">Everything You Need to Know about Using Slurm on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html" class="md-nav__link">Examples of Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#interactive-jobs" class="md-nav__link">Interactive Jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Examples-of-Jobs-on-Quest/Examples-of-Jobs-on-Quest-updated.html#batch-jobs" class="md-nav__link">Batch Jobs</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html" class="md-nav__link">Extended SLURM Job and Submission Options</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#job-submission-options" class="md-nav__link">Job Submission Options</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#common-job-commands" class="md-nav__link">Common Job Commands</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Extended-SLURM-Job-and-Submission-Options/Extended-SLURM-Job-and-Submission-Options-updated.html#script-variables" class="md-nav__link">Script Variables</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html" class="md-nav__link">Factors Affecting Job Scheduling on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#priority" class="md-nav__link">Priority</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Factors-Affecting-Job-Scheduling-on-Quest/Factors-Affecting-Job-Scheduling-on-Quest-updated.html#backfill-scheduling" class="md-nav__link">Backfill Scheduling</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html" class="md-nav__link">File Systems, Storage, and Permissions on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#summary-of-file-permissions" class="md-nav__link">Summary of File Permissions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#home-directories" class="md-nav__link">Home Directories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#project-space" class="md-nav__link">Project Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../File-Systems-and-Storage-on-Quest/File-Systems-and-Storage-on-Quest-updated.html#scratch-space" class="md-nav__link">Scratch Space</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html" class="md-nav__link">Finding the full path to your RDSS share</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-1-identify-your-access-zone" class="md-nav__link">Step 1: Identify your access zone</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#step-2-identify-the-full-path-to-your-share" class="md-nav__link">Step 2: Identify the full path to your share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Finding-the-full-path-to-your-RDSS-share/Finding-the-full-path-to-your-RDSS-share-updated.html#multiple-shares" class="md-nav__link">Multiple Shares</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html" class="md-nav__link">GPUs on QUEST</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpus-are-available-on-quest" class="md-nav__link">What GPUs are available on QUEST?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#interactive-gpu-jobs" class="md-nav__link">Interactive GPU jobs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../GPUs-on-QUEST/GPUs-on-QUEST-updated.html#what-gpu-software-is-available-on-quest" class="md-nav__link">What GPU software is available on QUEST?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html" class="md-nav__link">Generating a AWS IAM Access Key for Amazon S3</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#using-the-aws-management-console" class="md-nav__link">Using the AWS Management Console</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Generating-a-AWS-IAM-Access-Key-for-Amazon-S3/Generating-a-AWS-IAM-Access-Key-for-Amazon-S3-updated.html#creating-an-iam-user" class="md-nav__link">Creating an IAM user</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html" class="md-nav__link">Genomic Data Commons Data Transfer Tool on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Genomic-Data-Commons-Data-Transfer-Tool-on-Quest/Genomic-Data-Commons-Data-Transfer-Tool-on-Quest-updated.html#genomic-data-commons" class="md-nav__link">Genomic Data Commons</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html" class="md-nav__link">Getting Started on the Genomics Compute Cluster (b1042) on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest/Getting-Started-on-the-Genomics-Compute-Cluster-%28b1042%29-on-Quest-updated.html#about-the-genomics-compute-cluster-on-quest" class="md-nav__link">About the Genomics Compute Cluster on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Globus-Endpoints-and-Collections/Globus-Endpoints-and-Collections-updated.html" class="md-nav__link">Globus Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-Software-on-Quest/Installing-Software-on-Quest-updated.html" class="md-nav__link">Installing Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Installing-and-Managing-R-Packages-on-Quest/Installing-and-Managing-R-Packages-on-Quest-updated.html#installing-and-managing-r-packages-on-quest-1" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html" class="md-nav__link">Knitro on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#knitro-overview" class="md-nav__link">Knitro Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#matlab" class="md-nav__link">MATLAB</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#r" class="md-nav__link">R</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#python" class="md-nav__link">Python</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Knitro-on-Quest/Knitro-on-Quest-updated.html#ampl" class="md-nav__link">AMPL</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html" class="md-nav__link">Logging in to Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-fastx" class="md-nav__link">Connecting with FastX</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Logging-in-to-Quest/Logging-in-to-Quest-updated.html#connecting-with-an-ssh-terminal" class="md-nav__link">Connecting with an SSH Terminal</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html" class="md-nav__link">Managing Full Access Allocations on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-jobs-in-queue" class="md-nav__link">Status of Allocation Jobs in Queue</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#status-of-allocation-nodes" class="md-nav__link">Status of Allocation Nodes</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#individual-node-status" class="md-nav__link">Individual Node Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Full-Access-Allocations-on-Quest/Managing-Full-Access-Allocations-on-Quest-updated.html#why-are-my-jobs-running-on-nodes-other-than-those-reserved-for-my-allocation" class="md-nav__link">Why are my jobs running on nodes other than those reserved for my allocation?</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html" class="md-nav__link">Managing Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-id" class="md-nav__link">Job ID</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#job-status" class="md-nav__link">Job Status</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-Jobs-on-Quest/Managing-Jobs-on-Quest-updated.html#commonly-used-commands" class="md-nav__link">Commonly Used Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares/Managing-access-to-Research-Data-Storage-Service-%28RDSS%29-Shares-updated.html" class="md-nav__link">Managing access to Research Data Storage Service (RDSS) Shares</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html" class="md-nav__link">Managing an Allocation on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#allocation-resource-management" class="md-nav__link">Allocation Resource Management</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#list-allocation-members" class="md-nav__link">List Allocation Members</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Managing-an-Allocation-on-Quest/Managing-an-Allocation-on-Quest-updated.html#check-allocation-resources" class="md-nav__link">Check Allocation Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html" class="md-nav__link">Modules Software Environment Manager on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#available-modules" class="md-nav__link">Available Modules</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#loading-a-module" class="md-nav__link">Loading a Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#module-versions" class="md-nav__link">Module Versions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Modules-Software-Environment-Manager-on-Quest/Modules-Software-Environment-Manager-on-Quest-updated.html#useful-module-commands" class="md-nav__link">Useful Module Commands</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Opening-an-Archived-File-in-RDSS/Opening-an-Archived-File-in-RDSS-updated.html" class="md-nav__link">Opening an Archived File in RDSS</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html" class="md-nav__link">Parabricks on the Genomics Compute Cluster</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#checking-out-parabricks-licenses" class="md-nav__link">Checking out Parabricks Licenses</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Parabricks-on-the-Genomics-Compute-Cluster/Parabricks-on-the-Genomics-Compute-Cluster-updated.html#running-parabricks-on-quest" class="md-nav__link">Running Parabricks on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-FAQ/Quest-FAQ-updated.html" class="md-nav__link">Quest FAQ</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html" class="md-nav__link">Quest Partitions/Queues</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-general-access-p-and-e-accounts" class="md-nav__link">Partition Definitions: General Access (“p” and “e” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#partition-definitions-full-access-buy-ins-or-b-accounts" class="md-nav__link">Partition Definitions: Full Access (buy-ins, or “b” accounts)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Partitions-Queues/Quest-Partitions-Queues-updated.html#notes" class="md-nav__link">Notes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html" class="md-nav__link">Quest Quick Start Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#navigating-quest" class="md-nav__link">Navigating Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#moving-files-onto-quest" class="md-nav__link">Moving Files onto Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#software-available-on-quest" class="md-nav__link">Software available on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#running-jobs-on-quest" class="md-nav__link">Running Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#managing-your-jobs-on-quest" class="md-nav__link">Managing Your Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Quick-Start-Guide/Quest-Quick-Start-Guide-updated.html#getting-help" class="md-nav__link">Getting Help</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html" class="md-nav__link">Quest Slurm Quick Start</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Slurm-Quick-Start/Quest-Slurm-Quick-Start-updated.html#quick-start" class="md-nav__link">Quick Start</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-Troubleshooting%3A-Checking-the-job-output-file/Quest-Troubleshooting%3A-Checking-the-job-output-file-updated.html" class="md-nav__link">Quest Troubleshooting: Checking the job output file</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html" class="md-nav__link">Quest User Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Quest-User-Guide/Quest-User-Guide-updated.html#user-guides" class="md-nav__link">User Guides</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html" class="md-nav__link">Research Data Management Guide</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#research-data-storage-service-rdss" class="md-nav__link">Research Data Storage Service (RDSS)</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Research-Data-Management-Guide/Research-Data-Management-Guide-updated.html#globus-data-transfer-tool" class="md-nav__link">Globus data transfer tool</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Resolving-issues-accessing-a-Research-Data-Storage-Service-share/Resolving-issues-accessing-a-Research-Data-Storage-Service-share-updated.html" class="md-nav__link">Resolving issues accessing a Research Data Storage Service share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html" class="md-nav__link">Restoring a previous version of a file or folder from RDSS</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Restoring-a-previous-version-of-a-file-or-folder-from-RDSS/Restoring-a-previous-version-of-a-file-or-folder-from-RDSS-updated.html#retrieving-older-versions-of-modified-deleted-files" class="md-nav__link">Retrieving older versions of modified/deleted files</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html" class="md-nav__link">Running GATK4 Spark on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#gatk4-spark-tools" class="md-nav__link">GATK4 SPARK tools</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#converting-fasta-files-for-parallel-runs" class="md-nav__link">Converting FASTA Files for Parallel Runs</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-GATK4-Spark-on-Quest/Running-GATK4-Spark-on-Quest-updated.html#example-job-submission" class="md-nav__link">Example Job Submission</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html" class="md-nav__link">Running Jupyter Notebook on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#accessing-conda-environments-in-jupyter" class="md-nav__link">Accessing Conda Environments in Jupyter</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-ipython-kernel" class="md-nav__link">Create a iPython Kernel</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Running-Jupyter-Notebook-on-Quest/Running-Jupyter-Notebook-on-Quest-updated.html#create-a-r-kernel" class="md-nav__link">Create a R Kernel</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Software-on-Quest/Software-on-Quest-updated.html" class="md-nav__link">Software on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Specifying-Memory-for-Jobs-on-Quest/Specifying-Memory-for-Jobs-on-Quest-updated.html" class="md-nav__link">Specifying Memory for Jobs on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html" class="md-nav__link">Transferring Files to and from Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#globus" class="md-nav__link">Globus</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-Files-to-and-from-Quest/Transferring-Files-to-and-from-Quest-updated.html#other-data-transfer-options" class="md-nav__link">Other Data Transfer Options</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html" class="md-nav__link">Transferring files using Globus</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Transferring-files-using-Globus/Transferring-files-using-Globus-updated.html#to-initiate-a-file-transfer" class="md-nav__link">To initiate a file transfer:</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html" class="md-nav__link">Troubleshooting Installing R Packages on Quest and Quest Analytics</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics/Troubleshooting-Installing-R-Packages-on-Quest-and-Quest-Analytics-updated.html#introduction" class="md-nav__link">Introduction</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html" class="md-nav__link">Troubleshooting Jobs on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#why-isnt-my-job-running" class="md-nav__link">Why isn’t my job running?</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#check-the-output-file" class="md-nav__link">Check the Output File</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#resources-exceeded" class="md-nav__link">Resources Exceeded</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#out-of-disk-space" class="md-nav__link">Out of Disk Space</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-Jobs-on-Quest/Troubleshooting-Jobs-on-Quest-updated.html#examples" class="md-nav__link">Examples</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html" class="md-nav__link">Troubleshooting R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Troubleshooting-R-on-Quest/Troubleshooting-R-on-Quest-updated.html#common-issues" class="md-nav__link">Common Issues</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Amazon-S3-Storage/Using-Amazon-S3-Storage-updated.html" class="md-nav__link">Using Amazon S3 Storage</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html" class="md-nav__link">Using Git on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#making-git-available" class="md-nav__link">Making Git Available</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#setting-up-git" class="md-nav__link">Setting up Git</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#repositories" class="md-nav__link">Repositories</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Git-on-Quest/Using-Git-on-Quest-updated.html#git-resources" class="md-nav__link">Git Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-Timer/Using-Globus-Timer-updated.html" class="md-nav__link">Using Globus Timer</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html" class="md-nav__link">Using Globus with Amazon S3 storage</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Globus-with-Amazon-S3-storage/Using-Globus-with-Amazon-S3-storage-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using Jupyter on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#environments-and-packages" class="md-nav__link">Environments and Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Jupyter-on-the-Quest-Analytics-Nodes/Using-Jupyter-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-quest-analytics-nodes" class="md-nav__link">Issues or Problems with the Quest Analytics nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-MATLAB-on-Quest/Using-MATLAB-on-Quest-updated.html" class="md-nav__link">Using MATLAB on Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html" class="md-nav__link">Using Python on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Python-on-Quest/Using-Python-on-Quest-updated.html#python-package-management" class="md-nav__link">Python Package Management</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html" class="md-nav__link">Using QIIME2 on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-QIIME2-on-Quest/Using-QIIME2-on-Quest-updated.html#installing-qiime2-on-quest" class="md-nav__link">Installing QIIME2 on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html" class="md-nav__link">Using R on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#availability" class="md-nav__link">Availability</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-R-on-Quest/Using-R-on-Quest-updated.html#installing-and-managing-r-packages-on-quest" class="md-nav__link">Installing and Managing R Packages on Quest</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using RStudio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#installing-packages" class="md-nav__link">Installing Packages</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-RStudio-on-the-Quest-Analytics-Nodes/Using-RStudio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html" class="md-nav__link">Using SAS Studio on the Quest Analytics Nodes</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#connecting" class="md-nav__link">Connecting</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#transferring-and-accessing-files" class="md-nav__link">Transferring and Accessing Files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#system-details" class="md-nav__link">System Details</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-SAS-Studio-on-the-Quest-Analytics-Nodes/Using-SAS-Studio-on-the-Quest-Analytics-Nodes-updated.html#issues-or-problems-with-the-analytics-nodes" class="md-nav__link">Issues or Problems with the Analytics Nodes</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html" class="md-nav__link">Using Singularity on Quest</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#load-the-singularity-module" class="md-nav__link">Load the Singularity Module</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#getting-singularity-images-on-quest" class="md-nav__link">Getting Singularity Images On Quest</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#running-singularity-containers" class="md-nav__link">Running Singularity Containers</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-Singularity-on-Quest/Using-Singularity-on-Quest-updated.html#best-practices" class="md-nav__link">Best Practices</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html" class="md-nav__link">Using the Globus Data Transfer Tool</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#overview" class="md-nav__link">Overview</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#restrictions" class="md-nav__link">Restrictions</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#endpoints-and-collections" class="md-nav__link">Endpoints and Collections</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#transferring-data" class="md-nav__link">Transferring data</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#advanced-features" class="md-nav__link">Advanced features</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Globus-Data-Transfer-Tool/Using-the-Globus-Data-Transfer-Tool-updated.html#resources" class="md-nav__link">Resources</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html" class="md-nav__link">Using the OneDrive/SharePoint Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#activating-the-onedrive-sharepoint-endpoint" class="md-nav__link">Activating the OneDrive/Sharepoint Endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#accessing-files" class="md-nav__link">Accessing files</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#my-file-transfer-fails-because-of-a-checksum-error-when-i-try-to-send-a-microsoft-office-document-to-a-sharepoint-library" class="md-nav__link">My file transfer fails because of a checksum error when I try to send a Microsoft Office Document to a SharePoint library.</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-OneDrive-SharePoint-Globus-Endpoint/Using-the-OneDrive-SharePoint-Globus-Endpoint-updated.html#i-cant-see-a-sharepoint-library-i-have-access-to" class="md-nav__link">I can’t see a SharePoint Library I have access to.</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-Quest-Globus-endpoint/Using-the-Quest-Globus-endpoint-updated.html" class="md-nav__link">Using the Quest Globus endpoint</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html" class="md-nav__link">Using the RDSS Globus Endpoint</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#setup" class="md-nav__link">Setup</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#mounting-your-rdss-fsmresfiles-share" class="md-nav__link">Mounting your RDSS/FSMResFiles share</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#transferring-files-to-from-rdss-fsmresfiles" class="md-nav__link">Transferring files to/from RDSS<strong>/FSMResFiles</strong></a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#extending-rdss-fsmresfiles-endpoint-activation" class="md-nav__link">Extending RDSS<strong>/FSMResFiles</strong> endpoint activation</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../Using-the-RDSS-Globus-Endpoint/Using-the-RDSS-Globus-Endpoint-updated.html#troubleshooting" class="md-nav__link">Troubleshooting</a>
+      
+    
+    </li></ul>
+    
+    </li>
+  </ul>
+  
+
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#debugging-your-slurm-submission-script-on-quest-debugging-your-slurm-submission-script-on-quest-updated--page-root" class="md-nav__link">Debugging your Slurm submission script on Quest</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#debugging-a-job-submission-script-rejected-by-the-scheduler" class="md-nav__link">Debugging a Job Submission Script Rejected By The Scheduler</a>
+        </li>
+        <li class="md-nav__item"><a href="#mistakes-that-generate-error-messages" class="md-nav__link">Mistakes That Generate Error Messages</a>
+        </li>
+        <li class="md-nav__item"><a href="#mistakes-that-dont-generate-error-messages" class="md-nav__link">Mistakes That Don’t Generate Error Messages</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#debugging-a-job-accepted-by-the-scheduler" class="md-nav__link">Debugging a Job Accepted by the Scheduler</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/Debugging-your-Slurm-submission-script-on-Quest/Debugging-your-Slurm-submission-script-on-Quest-updated.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
+            
+  <section id="debugging-your-slurm-submission-script-on-quest">
+<h1 id="debugging-your-slurm-submission-script-on-quest-debugging-your-slurm-submission-script-on-quest-updated--page-root">Debugging your Slurm submission script on Quest<a class="headerlink" href="#debugging-your-slurm-submission-script-on-quest-debugging-your-slurm-submission-script-on-quest-updated--page-root" title="Permalink to this heading">¶</a></h1>
+<p>This document explains how to fix a Slurm job submission script that
+either does not run or runs incorrectly, and lists common mistakes as
+well as how to identify and fix them.</p>
+<section id="debugging-a-job-submission-script-rejected-by-the-scheduler">
+<h2 id="debugging-a-job-submission-script-rejected-by-the-scheduler">Debugging a Job Submission Script Rejected By The Scheduler<a class="headerlink" href="#debugging-a-job-submission-script-rejected-by-the-scheduler" title="Permalink to this heading">¶</a></h2>
+<p>If your job submission script generates an error when you submit it with
+the <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> command, the problem in your script is in one or more of
+the lines that begin with <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code>. To debug job scripts that
+generate errors, look up the error message in the section below to
+identify the most likely reason your script received that error message.
+Once you have identified the mistake in your script, edit your script to
+correct it and re-submit your job. If you receive the same error message
+again, examine the error message and the mistake in your script more
+closely. Sometimes the same error message can be generated by two
+different mistakes in the same script, meaning it’s possible that you
+may resolve the first mistake but need to correct a second mistake to
+clear that particular error message. Mistakes can be difficult to
+identify, and often require careful reading of your <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> lines.</p>
+<p>When you re-submit your job you may receive a new error message. This
+means the mistake that generated the first error message has been
+resolved, and now you need to fix a second mistake. Slurm returns up to
+two distinct error messages at a time. If your submission script has
+more than two mistakes, you will need to re-submit your job multiple
+times to identify and fix all of them.</p>
+<p>When Slurm encounters a mistake in your job submission script, it does
+not read the rest of your script that comes after the mistake. If the
+mistake generates an error, you can fix it and resubmit your job,
+however not all mistakes generate errors. If your script’s required
+elements (account, partition, nodes, cores, and wall time) have been
+read successfully before Slurm encounters your mistake, your job will be
+still be accepted by the scheduler and run, just not the way you expect
+it to. Scripts with mistakes that don’t generate errors still need to be
+debugged since the scheduler has ignored some of your <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> lines.
+You can identify a script with mistakes if the output from your job is
+unexpected or incorrect.</p>
+</section>
+<section id="mistakes-that-generate-error-messages">
+<h2 id="mistakes-that-generate-error-messages">Mistakes That Generate Error Messages<a class="headerlink" href="#mistakes-that-generate-error-messages" title="Permalink to this heading">¶</a></h2>
+<p>To use this reference: search for the exact error message generated by
+your job. Some error messages appear to be similar but are generated by
+different mistakes.</p>
+<p>Note that the errors listed in this document may also be generated by
+interactive job submissions using <code class="docutils literal notranslate"><span class="pre">srun</span></code> or <code class="docutils literal notranslate"><span class="pre">salloc</span></code>. In those
+cases, the error messages will begin with <code class="docutils literal notranslate"><span class="pre">srun</span> <span class="pre">error</span></code> or
+<code class="docutils literal notranslate"><span class="pre">salloc</span> <span class="pre">error</span></code>. The information about resolving these error messages
+is the same.</p>
+<p>With certain combinations of GUI editors and character sets on your
+personal computer, copying and pasting into Quest job submission scripts
+may bring in specific hidden characters that interfere with the
+scheduler’s ability to interpret the script. In these cases, <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code>
+lines will have no mistakes but still generate errors when submitted to
+the scheduler. To see all of the hidden characters in your job
+submission script, use the command <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">-A</span> <span class="pre">&lt;script_name&gt;</span></code>. To resolve
+this, you may need to type your submission script into a native unix
+editor like vi and not use copy and paste.</p>
+<div class="expander expander1 docutils container">
+<p class="rubric" id="sbatch-error-account-option-required-sbatch-error-unable-to-allocate-resources-invalid-account-or-accountpartition-combination-specified">sbatch: error: –account option required
+sbatch: error: Unable to allocate resources: Invalid account or
+account/partition combination specified</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">&lt;allocation&gt;</span></code></div>
+<div class="line">Example of correct account syntax:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=p12345</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">p12345</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: your script doesn’t have an <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line
+specifying account</div>
+<div class="line">Fix: confirm that <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> is in your
+script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–account=” or “-A” part of this
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is
+correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: you are not a member of the allocation
+specified in your job submission script</div>
+<div class="line">Fix: confirm you are a member of the allocation by typing
+<code class="docutils literal notranslate"><span class="pre">groups</span></code> at the command line on Quest. If the allocation you
+have specified in your job submission script is not listed, you
+are not a member of this allocation. Use an allocation that you
+are a member of in your job submission script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different
+line of your script, the account line is correct and the mistake
+is elsewhere in your submission script. To resolve the new
+error, follow the debugging suggestions for the new error
+message.</div>
+</div>
+</div>
+<p class="rubric" id="sbatch-error-your-allocation-has-expired-sbatch-error-unable-to-allocate-resources-invalid-qos-specification">sbatch: error: Your allocation has expired
+sbatch: error: Unable to allocate resources: Invalid qos
+specification</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">&lt;allocation&gt;</span></code></div>
+</div>
+<p>The allocation specified in your job submission script is no
+longer active.</p>
+<p>If you are a member of more than one allocation, you may wish to
+submit your job to an alternate allocation. To see a list your
+allocations, type <code class="docutils literal notranslate"><span class="pre">groups</span></code> at the command line on Quest.</p>
+<p>To renew your allocation or request a new one, please see
+<a class="reference external" href="https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=1486">Managing an Allocation on
+Quest</a>.</p>
+</div>
+<p class="rubric" id="srun-error-partition-option-required-srun-error-unable-to-allocate-resources-accesspermission-denied">srun: error: –partition option required
+srun: error: Unable to allocate resources: Access/permission
+denied</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for general access allocations (“p”
+account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=short</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">short</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for buy-in allocations (“b” account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=buyin</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">buyin</span></code></div>
+</div>
+<p>Note that Slurm refers to queues as partitions. When specifying
+partition in your job submission script, use the queue name that
+you submitted to under Moab.</p>
+<div class="line-block">
+<div class="line">Possible mistake: your script doesn’t have an <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line
+specifying partition</div>
+<div class="line">Fix: confirm that <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code> is in your script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–partition=” or “-p” part of
+this <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is
+correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different
+line of your script, the account line is correct and the mistake
+is elsewhere in your submission script. To resolve the new
+error, follow the debugging suggestions for the new error
+message.</div>
+</div>
+</div>
+<p class="rubric" id="sbatch-error-unable-to-allocate-resources-invalid-qos-specification">sbatch: error: Unable to allocate resources: Invalid qos
+specification</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<p>The partition/queue name specified is not associated with the
+allocation in the line <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;.</span></code></p>
+<p>Possible mistake: Your script specifies a buy-in allocation, and
+you’ve specified “short”, “normal” or “long” as your
+partition/queue.</p>
+<div class="line-block">
+<div class="line">Possible mistake: Your script specifies an allocation and
+partition combination which do not belong together.</div>
+<div class="line">Fix: Specify the correct partition/queue for your allocation. To
+see the allocations and partitions you have access to, use this
+version of the sinfo command:</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o "%g %.10R %.20l"
+GROUPS      PARTITION         TIMELIMIT
+b1234       buyin             168:00:00
+</pre></div>
+</div>
+<p>Note that “GROUPS” are allocations/accounts on Quest.
+In this example, valid lines in your job submission script that
+relate to account, partition and time would be:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --account=b1234
+#SBATCH --partition=buyin
+#SBATCH --time=168:00:00
+</pre></div>
+</div>
+</div>
+<p class="rubric" id="sbatch-error-invalid-partition-specified-partition-name-sbatch-error-unable-to-allocate-resources-invalid-partition-name-specified">sbatch: error: invalid partition specified:
+&lt;partition_name&gt;
+sbatch: error: Unable to allocate resources: Invalid partition
+name specified</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for general access allocations (“p”
+account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=short</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">short</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax for buy-in allocations (“b” account):</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=buyin</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">buyin</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–partition=” or “-p” part of
+this <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is
+correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: Your script specifies a general access
+allocation (“p” account) with a queue that isn’t “short”,
+“normal” or “long”.</div>
+<div class="line">Fix: change your partition to be “short”, “normal” or “long”</div>
+</div>
+</div>
+<p class="rubric" id="sbatch-error-unable-to-allocate-resources-invalid-account-or-accountpartition-combination-specified-sbatch-error-unable-to-allocate-resources-users-group-not-permitted-to-use-this-partition">sbatch: error: Unable to allocate resources: Invalid
+account or account/partition combination specified
+sbatch: error: Unable to allocate resources: User’s group not
+permitted to use this partition</p>
+<div class="docutils container">
+<p>This message can refer to mistakes on the SBATCH lines specifying
+account or partition.</p>
+<div class="line-block">
+<div class="line">Possible location of mistake specifying account:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">&lt;allocation&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible location of mistake specifying partition</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--partition=&lt;partition/queue&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-p</span> <span class="pre">&lt;partition/queue&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the syntax in the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line specifying
+account is incorrect</div>
+<div class="line">Fix: examine the account line closely to confirm the syntax is
+exactly correct. Example of correct account syntax:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=p12345</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-A</span> <span class="pre">p12345</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: you are trying to run in a partition/queue
+that belongs to one account, while specifying a different
+account.</div>
+<div class="line">Fix: Specify the correct partition/queue for your allocation. To
+see the allocations and partitions you have access to, use this
+version of the sinfo command:</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o "%g %.10R %.20l"
+GROUPS      PARTITION         TIMELIMIT
+b1234       buyin             168:00:00
+</pre></div>
+</div>
+<p>Note that “GROUPS” are allocations/accounts on Quest.
+In this example, valid lines in your job submission script that
+relate to account, partition and time would be:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --account=b1234
+#SBATCH --partition=buyin
+#SBATCH --time=168:00:00
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different
+line of your script, the account line is correct and the mistake
+is elsewhere in your submission script. To resolve the new
+error, follow the debugging suggestions for the new error
+message.</div>
+</div>
+</div>
+<p class="rubric" id="sbatch-error-time-limit-option-required-sbatch-error-unable-to-allocate-resources-requested-time-limit-is-invalid-missing-or-exceeds-some-limit">sbatch: error: –time limit option required
+sbatch: error: Unable to allocate resources: Requested time limit
+is invalid (missing or exceeds some limit)</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=&lt;hours:minutes:seconds&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-t</span> <span class="pre">&lt;hours:minutes:seconds&gt;</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Example of correct syntax:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=10:00:00</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-t</span> <span class="pre">10:00:00</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: your script doesn’t have an <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line
+specifying time</div>
+<div class="line">Fix: confirm that <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=&lt;hh:mm:ss&gt;</span></code> is in your
+script.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: a typo in the “–time=” or “-t” part of this
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is
+correct.</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the time request is too long for the partition
+(queue)</div>
+<div class="line">Fix: review the wall time limits of your partition and adjust
+the amount of time requested by your script. For general access
+users with allocations that begin with a “p”, please use this
+reference:</div>
+</div>
+<div class="table-responsive docutils container">
+<table>
+<thead>
+<tr class="row-odd"><th class="head"><p>Partition</p></th>
+<th class="head"><p>Walltime limit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Short</p></td>
+<td><p>4 hours</p></td>
+</tr>
+<tr class="row-odd"><td><p>Normal</p></td>
+<td><p>48 hours</p></td>
+</tr>
+<tr class="row-even"><td><p>Long</p></td>
+<td><p>7 days / 168 hours</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Buy-in accounts that begin with a “b” have their own wall time
+limits. For information on the wall time of your partition, use
+the <code class="docutils literal notranslate"><span class="pre">sinfo</span></code> command:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o "%g %.10R %.20l"
+GROUPS      PARTITION         TIMELIMIT
+b1234       buyin             168:00:00
+</pre></div>
+</div>
+<p>To fix this error, set your wall time to be less than the time
+limit of your partition and re-submit your job.
+| Possible mistake: the mistake is on a line earlier in your job</p>
+<blockquote>
+<div><p>submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--account=&lt;allocation&gt;</span></code> line</p>
+</div></blockquote>
+<div class="line-block">
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--time=&lt;hh:mm::ss&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different
+line of your script, the account line is correct and the mistake
+is elsewhere in your submission script. To resolve the new
+error, follow the debugging suggestions for the new error
+message.</div>
+</div>
+</div>
+<p class="rubric" id="sbatch-unrecognized-option-option">sbatch: unrecognized option &lt;option&gt;</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Example:</div>
+<div class="line">Line in script: <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--n-tasks-per-node=1</span></code></div>
+<div class="line">Error generated sbatch:
+<code class="docutils literal notranslate"><span class="pre">unrecognized</span> <span class="pre">option</span> <span class="pre">‘--n-tasks-per-node=1'</span></code></div>
+</div>
+<div class="line-block">
+<div class="line">With an “unrecognized option” error, Slurm correctly read the
+first part of the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> line but the option that follows
+it has generated the error. In this example, the option has a
+dash between “n” and “tasks” that should not be there. The
+correct option does not have a dash in that location. This line
+should be corrected to:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks-per-node=1</span></code></div>
+<div class="line">To fix this error, locate the option specified in the error
+message and examine it carefully for errors. To see correct
+syntax for all <code class="docutils literal notranslate"><span class="pre">#SBATCH</span></code> directives, see <a class="reference external" href="https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=1795">Converting
+Moab/Torque scripts to
+Slurm</a>.</div>
+</div>
+</div>
+<p class="rubric" id="sbatch-error-cpu-count-per-node-can-not-be-satisfied-sbatch-error-batch-job-submission-failed-requested-node-configuration-is-not-available">sbatch: error: CPU count per node can not be satisfied
+sbatch: error: Batch job submission failed: Requested node
+configuration is not available</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks-per-node=&lt;CPU</span> <span class="pre">count&gt;</span></code></div>
+<div class="line">Example of mistake:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks-per-node=10000</span></code></div>
+</div>
+<p>This error is generated if your job requests more CPUs/cores than
+are available on the nodes in the partition your job submission
+script specified. CPU count is the number of cores requested by
+your job submission script. Cores are also called processors or
+CPUs.</p>
+<p>To fix this mistake, use the sinfo command to get the maximum
+number of cores available in the partitions you have access to:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>sinfo -o "%g %.10R %.20l %.10c"
+GROUPS      PARTITION       TIMELIMIT       CPUS
+b1234       buyin           2-00:00:00      20+
+</pre></div>
+</div>
+<p>In this example, your job submission script can request up to 20
+CPUs/cores per node like this:
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--ntasks-per-node=20</span></code></p>
+</div>
+<p class="rubric" id="sbatch-error-batch-script-contains-dos-line-breaks-rn-sbatch-error-instead-of-expected-unix-line-breaks-n">sbatch: error: Batch script contains DOS line breaks
+(rn)
+sbatch: error: instead of expected UNIX line breaks (n).</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Location of mistake:</div>
+<div class="line">Hidden characters in your job submission script</div>
+</div>
+<div class="line-block">
+<div class="line">Mistake: your job submission script was created on a Windows
+machine and copied onto Quest without converting it into UNIX
+encoded characters.</div>
+<div class="line">Fix: from the command line on Quest run the command
+<code class="docutils literal notranslate"><span class="pre">dos2unix</span> <span class="pre">&lt;submission_script&gt;</span></code> to correct your job submission
+script and re-submit your job to the scheduler.</div>
+</div>
+</div>
+</div>
+</section>
+<section id="mistakes-that-dont-generate-error-messages">
+<h2 id="mistakes-that-dont-generate-error-messages">Mistakes That Don’t Generate Error Messages<a class="headerlink" href="#mistakes-that-dont-generate-error-messages" title="Permalink to this heading">¶</a></h2>
+<section id="debugging-a-job-accepted-by-the-scheduler">
+<h3 id="debugging-a-job-accepted-by-the-scheduler">Debugging a Job Accepted by the Scheduler<a class="headerlink" href="#debugging-a-job-accepted-by-the-scheduler" title="Permalink to this heading">¶</a></h3>
+<p>Once your job has been accepted, the Slurm scheduler will return a job
+id number. After waiting in the queue, your job will run. To see the
+status of your job, use the command <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-X</span></code></p>
+<p>For jobs with mistakes that do not give error messages, you will need to
+investigate if you notice something is wrong with how the job runs. If
+you notice a problem on the list below, click on it for debugging
+suggestions.</p>
+<div class="expander expander1 docutils container">
+<p class="rubric" id="job-runs-in-home-directory-instead-of-project-directory-job-cant-locate-files-or-executables">Job runs in home directory instead of project directory
+Job can’t locate files or executables</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Problem: job runs in home directory instead of project
+directory, job can’t locate files or executables.</div>
+<div class="line">Possible cause: job script contains the Moab variable
+<code class="docutils literal notranslate"><span class="pre">$PBS_O_WORKDIR</span></code>.</div>
+</div>
+<div class="line-block">
+<div class="line">In Moab job submission scripts, the <code class="docutils literal notranslate"><span class="pre">$PBS_O_WORKDIR</span></code> variable
+contains the name of the directory where you submit your job.
+Some Moab scripts begin with the line:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$PBS_O_WORKDIR</span></code></div>
+<div class="line">to start the job running in the job submission directory.</div>
+</div>
+<div class="line-block">
+<div class="line">Slurm jobs start in the job submission directory by default.
+Slurm does not read the Moab variable <code class="docutils literal notranslate"><span class="pre">$PBS_O_WORKDIR</span></code>, which
+means <code class="docutils literal notranslate"><span class="pre">$PBS_O_WORKDIR</span></code> is an empty variable when your Slurm
+job runs. Your Slurm script will still run the command
+<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$PBS_O_WORKDIR</span></code> however since <code class="docutils literal notranslate"><span class="pre">$PBS_O_WORKDIR</span></code> is empty,
+the command becomes</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">""</span></code></div>
+<div class="line">In Unix, executing <code class="docutils literal notranslate"><span class="pre">cd</span></code> by itself is shorthand for changing
+into your home directory. Slurm jobs that begin with
+<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$PBS_O_WORKDIR</span></code> begin running in your home directory
+instead of in your job submission directory. <code class="docutils literal notranslate"><span class="pre">$PBS_O_WORKDIR</span></code>
+should never be used in a Slurm job submission script, as it can
+only cause mistakes.</div>
+</div>
+<div class="line-block">
+<div class="line">Fix: You can solve this problem by changing this line to</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$SLURM_SUBMIT_DIR</span></code></div>
+<div class="line">or by deleting the line</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$PBS_O_WORKDIR</span></code></div>
+<div class="line">completely, as Slurm’s default is to run in the job submission
+directory.</div>
+</div>
+</div>
+<p class="rubric" id="job-runs-very-slowly-or-dies-after-starting">Job runs very slowly or dies after starting</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Problem: job runs very slowly, or dies after starting</div>
+<div class="line">Possible cause: job script is not reading the directive
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--mem=&lt;amount&gt;</span></code>.</div>
+</div>
+<p>All Slurm job scripts should specify the amount of memory your job
+needs to run. If your job runs very slowly or dies, investigate if
+it requests enough memory with the Slurm utility <code class="docutils literal notranslate"><span class="pre">seff</span></code>. For
+more information, see <a class="reference external" href="https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=1695">Checking Processor and Memory Utilization
+for Jobs on
+Quest</a>.</p>
+</div>
+<p class="rubric" id="job-name-is-name-of-job-submission-script-instead-of-name-in-submission-script">Job name is name of job submission script instead of name
+in submission script</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Problem: job name is name of job submission script instead of
+name in submission script</div>
+<div class="line">Possible cause: job script is not reading the
+<code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;job</span> <span class="pre">name&gt;</span></code> directive.</div>
+</div>
+<div class="line-block">
+<div class="line">Slurm is not reading the SBATCH directive:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">-J</span> <span class="pre">&lt;Job_Name&gt;</span></code></div>
+<div class="line">or</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;Job_Name&gt;</span></code></div>
+</div>
+<p>To see the name of your job, run <code class="docutils literal notranslate"><span class="pre">sacct</span> <span class="pre">-X</span></code>. If JOB NAME is the
+first eight characters of the name of your submission script,
+SLURM has not read the #SBATCH lines for job name.</p>
+<div class="line-block">
+<div class="line">Possible Mistake: a typo in the “–job-name=” or “-J” part of
+this #SBATCH line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is
+correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible mistake: the mistake is on a line earlier in your job
+submission script which causes Slurm to stop reading your script
+before it reaches the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;job</span> <span class="pre">name&gt;</span></code> line</div>
+<div class="line">Fix: Move the <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--job-name=&lt;job</span> <span class="pre">name&gt;</span></code> line to be
+immediately after the line <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code> and submit your job
+again. If this generates a new error referencing a different
+line of your script, the account line is correct and the mistake
+is elsewhere in your submission script. To resolve the new
+error, follow the debugging suggestions for the new error
+message.</div>
+</div>
+</div>
+<p class="rubric" id="modules-or-environment-variables-are-inherited-from-the-login-session-by-a-running-job">Modules or environment variables are inherited from the
+login session by a running job</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Problem: modules or environmental variables are inherited from
+the login session by a running job</div>
+<div class="line">Possible cause: job script is not purging modules before
+beginning compute node session</div>
+</div>
+<p>Fix: after the #SBATCH directives in your job submission script,
+add the line</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>module purge all
+</pre></div>
+</div>
+<p>This will clear any modules inherited from your login session, and
+begin your job in a clean environment. You will need to load any
+necessary modules into your job submission script after this line.</p>
+</div>
+<p class="rubric" id="job-immediately-fails-and-generates-no-output-or-error-file">Job immediately fails and generates no output or error
+file</p>
+<div class="docutils container">
+<div class="line-block">
+<div class="line">Problem: job can’t write into output and/or error files so job
+immediately dies</div>
+<div class="line">Possible cause: job script specifies directory path for output
+and/or error files but does not provide a file name</div>
+<div class="line">Possible cause: job script specifies a directory that does not
+exist</div>
+</div>
+<p>Slurm is not getting a file name that it can write into in the
+SBATCH directive:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH –-output=/path/to/file/file_name
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH --error=/path/to/file/file_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Possible Mistake: a typo in the “–output=” or “–error” part of
+this #SBATCH line</div>
+<div class="line">Fix: examine this line closely to make sure the syntax is
+correct</div>
+</div>
+<div class="line-block">
+<div class="line">Possible Mistake: providing a directory but not a file name for
+output and/or error files</div>
+<div class="line">Fix: add a file name at the end of the specified path. For a
+file name in the format &lt;job_name&gt;.o&lt;job_id&gt;, use</div>
+</div>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH –-output=/path/to/file/"%x.o%j"
+</pre></div>
+</div>
+<p>Note if a separate error file is not specified, errors and output
+will both be written into the output file. To generate a separate
+error file, include the line:</p>
+<div class="highlight-code notranslate"><div class="highlight"><pre><span></span>#SBATCH –-error=/path/to/file/"%x.e%j"
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="../Creating-an-Amazon-S3-bucket/Creating-an-Amazon-S3-bucket-updated.html" title="Creating an Amazon S3 bucket"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Creating an Amazon S3 bucket </span>
+              </div>
+            </a>
+          
+          
+            <a href="../Disconnecting-from-a-RDSS-FSMResFiles-share/Disconnecting-from-a-RDSS-FSMResFiles-share-updated.html" title="Disconnecting from a RDSS/FSMResFiles share"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Disconnecting from a RDSS/FSMResFiles share </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2023, Quest.
+              
+          </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  </body>
+</html>
