@@ -15,8 +15,9 @@
 import sys
 import os
 import re
+import sphinx_bootstrap_theme
 
-Quest_version = 'v2022.04.20'
+Quest_version = 'v2023.01.18'
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -31,40 +32,8 @@ sys.path.insert(0, os.path.abspath('.'))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'matplotlib.sphinxext.plot_directive',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.viewcode',
-    'IPython.sphinxext.ipython_console_highlighting',
-    'IPython.sphinxext.ipython_directive',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.mathjax',
-    'numpydoc',
-    'sphinxcontrib.programoutput',
-]
+#extensions = []
 
-# -- numpydoc -----------------------------------
-
-# fix numpydoc autosummary
-numpydoc_show_class_members = False
-
-# use blockquotes (numpydoc>=0.8 only)
-numpydoc_use_blockquotes = True
-
-# auto-insert plot directive in examples
-numpydoc_use_plots = True
-
-# try and update the plot detection to include .show() calls
-try:  # requires numpydoc >= 0.8
-    from numpydoc import docscrape_sphinx
-    parts = re.split('[\(\)|]', docscrape_sphinx.IMPORT_MATPLOTLIB_RE)[1:-1]
-except AttributeError:
-    pass
-else:
-    parts.extend(('fig.show()', 'plot.show()'))
-    docscrape_sphinx.IMPORT_MATPLOTLIB_RE = r'\b({})\b'.format('|'.join(parts))
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -82,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Quest'
-copyright = u'2022, Quest'
+copyright = u'2023, Quest'
 author = u'Quest'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -141,18 +110,39 @@ todo_include_todos = False
 
 
 # -- Options for HTML output ----------------------------------------------
+html_theme = 'sphinx_material'
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+# Material theme options (see theme.conf for more information)
+html_theme_options = {
 
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-# html_theme_options = {}
+    # Set the name of the project to appear in the navigation.
+    'nav_title': 'Research Computing Services Documentation',
+
+    # Specify a base_url used to generate sitemap.xml. If not
+    # specified, then no sitemap will be built.
+    'base_url': 'https://nuitrcs.github.io/',
+
+    # Set the color and the accent color
+    'color_primary': 'deep-purple',
+    'color_accent': 'purple',
+
+    # Set the repo location to get a badge with stats
+    'repo_url': 'https://github.com/nuitrcs/examplejobs/',
+    'repo_name': 'Quest Example Jobs',
+
+    # Visible levels of the global TOC; -1 means unlimited
+    'globaltoc_depth': 2,
+    # If False, expand all TOC entries
+    'globaltoc_collapse': False,
+    # If True, show hidden TOC entries
+    'globaltoc_includehidden': False,
+
+    'nav_links' : [{'href' : 'https://www.it.northwestern.edu/departments/it-services-support/research/index.html', 'title' :'RCS Home Page', 'internal' : False}],
+}
+
 
 # Add any paths that contain custom themes here, relative to this directory.
-# html_theme_path = []
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
@@ -190,7 +180,9 @@ html_static_path = ['_static']
 # html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-# html_sidebars = {}
+html_sidebars = {
+    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -321,8 +313,3 @@ texinfo_documents = [
 # texinfo_no_detailmenu = False
 
 # -- Extensions -----------------------------------------------------------
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {
-    'python': ('https://docs.python.org/', None),
-}

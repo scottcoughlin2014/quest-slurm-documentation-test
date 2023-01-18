@@ -1,0 +1,679 @@
+<!DOCTYPE html><html lang="en"><head><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5MRHB7J');</script><title>Quest Quick Start Guide</title><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta name="description" content="Higher Education Knowledge Base content management, sharing and collaboration platform."/><meta name="keywords" content="KnowledgeBase, knowledge base, university, universities, colleges, higher education, knowledge sharing, knowledge collaboration, technical support self-service solutions"/><meta name="application-name" content="University KnowledgeBase"/><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="canonical" href="https://kb.northwestern.edu/page.php?id=70706" /><script src="/css/common.js" type="text/javascript"></script><link rel="stylesheet" type="text/css" media="screen" href="/css/froala-editor@3.2.2/froala_style.min.css" /><link rel="stylesheet" type="text/css" media="screen" href="/css/froala-editor@3.2.2/froala_override.css" /><link rel="stylesheet" type="text/css" media="screen" href="/css/tinymce@5/content.css" /><link rel="stylesheet" type="text/css" media="print" href="/css/print.css" /><link rel="stylesheet" type="text/css" media="screen" href="/css/default_layout1.css" /><style>body {
+    background-color: #4e2a84;
+    font-family: "Akkurat Pro Regular";
+    font-size: 16px;
+}
+
+#top-left-links li {
+    font-weight: normal;
+}
+
+#top-links, #top-links-int {
+    background-color: #401f68;
+    color: #ffffff;
+    margin: 0;
+    padding: 10px 80px 10px 150px;
+}
+
+.span_logo-search_2_of_2 {
+    margin: 40px 0 0;
+    text-align: right;
+    width: 68%;
+}
+
+#logo-search {
+    background-color: #4e2a84;
+    color: #ffffff;    
+}
+
+#logo-search {
+    margin: 0;
+    padding: 30px;
+}
+
+
+
+#search-form .inputBox {
+    font-size: 19px;
+    background-image: url(/images/group293/logo/magnify_glass.png);
+    background-size: 20px 20px;
+    margin:4px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #4e2a84;
+    color: #fff;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    font-size: 19px;
+    font-weight: bold;
+    margin: 4px;
+    padding-right: 10px;
+}
+
+
+
+
+
+#search-form {
+    font-size: 10px;
+    margin-top: -50px;
+    white-space: nowrap;
+    width: 90%;
+}
+
+
+.feedback-btn-no, .feedback-btn-no-clicked, .no_match {
+    color: red;
+}
+
+
+#group-logo .group-name, #group-logo .group-name-hide {
+    color: #ffffff;
+    font-family: serif,Verdana,Arial,sans-serif;
+    font-size: 45px;
+    font-weight: normal;
+    padding: 6px 5px 7px;
+    text-align: center;
+    text-shadow: 0 0 #000000;
+}
+
+#group-logo {
+    margin:10px 0 0;
+    width: auto;
+}
+
+#middle-sect1, #middle-sect2, #middle-sect22, #middle-sect3 {
+    margin: auto;
+    padding-bottom: 20px;
+    max-width: 1250px;
+    border-right: none;
+    border-left: none;
+}
+
+
+
+.span_middle22_2_of_2 {width:230px; text-align:left; padding-left:10px; padding-right:0; margin:0px; min-height:470px;}
+.span_middle22_1_of_2 {width:720px; text-align:left; padding:0px; padding-top:4px;}
+
+
+#container 
+{
+width:auto !important;
+position: relative;
+background: none repeat scroll 0% 0% #FFF;
+}
+
+#container {
+    min-width: 500px;
+    padding-top: 20px;
+    position: relative;
+    width: 100% !important;
+}
+
+
+.kbleftlinks .head, .kbrightlinks .head, #qlinks .head, #resource-links .head, #qcats .head, #news h2, #topDocs h2, #recentDocs h2, .custom h2, #out .head, #out-green .head {
+    border-top-left-radius: 0.0em;
+    border-top-right-radius: 0.0em;
+}
+
+
+.kbleftlinks .head, .kbrightlinks .head, #qlinks .head, #resource-links .head, #qcats .head, #news h2, #topDocs h2, #recentDocs h2, .custom h2 {
+    background-color: #ffffff;
+    color: #4e2a84;
+}
+
+.kbleftlinks .head, .kbrightlinks .head, #qlinks .head, #resource-links .head, #qcats .head {
+    display: block;
+    font: bold 13px/15px Verdana,Arial,Helvetica;
+    padding: 3px 0;
+    text-align: center;
+}
+
+
+.kbleftlinks a, .kbrightlinks a, #qlinks a, #resource-links a, #qcats a {
+    color: #4e2a84;
+    display: block;
+    padding: 4px 6px;
+    text-decoration: none;
+}
+
+.kbleftlinks a:hover, .kbrightlinks a:hover, #qlinks a:hover, #resource-links a:hover, #qcats a:hover {
+    background-color: #f0f0f0;
+    color: #716c6b;
+}
+
+.kbleftlinks ul, .kbrightlinks ul, #qlinks ul, #resource-links ul, #qcats .pad, #out .history, #out-green .history {
+    border-bottom-left-radius: 0.0em;
+    border-bottom-right-radius: 0.0em;
+}
+
+.kbleftlinks ul, .kbrightlinks ul, #qlinks ul, #resource-links ul {
+    border-bottom: 8px solid #ffffff;
+    border-left: 23px solid #ffffff;
+    border-right: 3px solid #ffffff;
+}
+
+.kbleftlinks li, .kbrightlinks li, #qlinks li, #resource-links li {
+    border-bottom: 0 solid #e9ddbf;
+}
+
+div#mouseover-dropdown {
+    background-image: none;
+    background-color: #ffffff;
+    background-position: left top;
+    background-repeat: repeat-x;
+    border-bottom: none;
+    border-top: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+div#mouseover-dropdown span, div#mouseover-dropdown a {
+    color: #4e2a84;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 32px;
+    text-decoration: none;
+}
+
+div#mouseover-dropdown li:last-child {
+    background: #ffffff none repeat scroll 0 0;
+}
+
+div#mouseover-dropdown li li {
+    background: #ffffff none repeat scroll 0 0;
+    border-bottom: 0px solid #ffffff;
+    padding: 0 5%;
+    text-align: center;
+    width: 90%;
+}
+
+div#mouseover-dropdown li ul {
+    background-color: #e9ddbf;
+    border: 0 groove #e9ddbf;
+    display: none;
+    left: -1px;
+    padding: 0;
+    position: absolute;
+    right: -1px;
+    top: 25px;
+    z-index: 3;
+}
+
+div#mouseover-dropdown li {
+    background: none;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 28px;
+    list-style-type: none;
+    padding: 0 53px;
+    position: relative;
+    vertical-align: top;
+}
+
+#news a, #topDocs a, #recentDocs a, .custom a {
+    color:  #342f2e;
+    text-decoration: underline;
+}
+
+#news a:hover, #topDocs a:hover, #recentDocs a:hover, .custom a:hover {
+    color: #4e2a84;
+    text-decoration: none;
+}
+
+#copyright {
+    border-top: 2px solid #4e2a84;
+    clear: both;
+    font-family: verdana,arial,sans-serif;
+    font-size: 11px;
+    margin-top: 8px;
+    padding: 10px 0 8px;
+    text-align: center;
+    width: 100%;
+}
+#copyright {
+    background-color: #4e2a84;
+    color: #ffffff;
+}
+
+#copyright a {
+    background-color: inherit;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#landing-footer-image {display:none;}
+
+@media only screen and (max-width: 1000px) {/*Response elements*/
+
+     #top-links, #top-links-int {padding:10px}
+     #group-logo {margin: 0 auto 0 20px; padding-right:20px;}
+     #search-form .inputBox {font-size: 17px;}
+}
+
+@media only screen and (max-width: 800px) {/*Response elements*/
+
+	body, #body-container {margin:0; padding:0;}
+    #top-links, #top-links-int {padding:2px 1px 2px 1px;height: 50px;}
+    #top-left-links ul, #top-right-links ul  {padding:0; text-align:center;}
+    #top-left-links li, #top-right-links li {font-size:12px; font-weight:normal; line-height:8px;}
+    .span_top_3_of_3 {width:100%; text-align:left; padding:0; line-height:8px;}
+    .span_top_2_of_3 {width:100%; text-align:left; padding:0; line-height:8px;}
+    .span_top_1_of_3 {width:0%; text-align:left; padding:0; line-height:0; display:none;}
+
+    #logo-search, #group-logo, #search-form {margin:0; padding:0; background:none; height:normal;}
+    #group-logo {background:none; width:100%; height:40px;}
+    #group-logo img {margin-top:8px; margin-left:20px; width:260px; height:35px;}
+    #group-logo .group-name {padding:0; font-size:14px;}
+    #logo-search {margin-bottom:6px;}
+    #search-form .inputBox, #search-form .search {font-size:17px; font-weight:normal;}
+	#search-form {width:100%;}
+    #search-form.lower {width:100%;}
+    #search-form.lower form input#q {width: 200px; font-size: 12px; height: 18px;}
+    #search-form.lower form input.search {font-size: 11px; height: 22px; line-height: 12px; width: 78px;}
+	
+    #under-logo-links, #under-search-links {background-image:none; height:normal;}
+    #under-logo-links li , #under-search-links li {display:inline; line-height:normal; vertical-align:middle; background:none;}
+    #under-logo-links li a, #under-search-links li a {font-size:0.9em; padding:0 10px; display:inline;}
+    #under-logo-links ul li a:hover, #under-search-links ul li a:hover {background:none;}
+    .span_logo-search_2_of_2 {width:100%; text-align:center; margin:0; padding:0; line-height:8px;}
+    .span_logo-search_1_of_2 {width:100%; text-align:center; margin:0; padding:0; line-height:15px;}
+
+    #middle-sect1, #middle-sect2, #middle-sect22, #middle-sect3 {margin:0; padding:0; width:100%; background:none;}
+
+    #middle-sect2 {margin-left:0; margin-right:0; margin-bottom:6px; padding:2px;}
+    .span_middle2_2_of_2 {width:100%; text-align:left; padding:0;}
+    .span_middle2_1_of_2 {width:100%; text-align:left; padding:0;}
+
+    #middle-sect22 {margin-left:0; margin-right:0; margin-bottom:6px; padding:2px;}
+    .span_middle22_2_of_2 {width:100%; text-align:left; padding:0; min-height:2px;}
+    .span_middle22_1_of_2 {width:100%; text-align:left; padding:0;}
+
+    #middle-sect3 {margin-left:0; margin-right:0; margin-bottom:6px; padding:2px;}
+    .span_middle3_3_of_3 {width:100%; text-align:left; padding:0;}
+    .span_middle3_2_of_3 {width:100%; text-align:left; padding:0;}
+    .span_middle3_1_of_3 {width:100%; text-align:left; padding:0;}
+
+    .kbleftlinks .head, .kbrightlinks .head, #qlinks .head, #resource-links .head, #qcats .head, #out .head, #out-green .head {display:none;}
+    .kbleftlinks a, .kbrightlinks a, #qlinks a, #resource-links a, #qcats a, #cat-nav a {padding:5px; font-size:11px; font-weight:bold; display:inline;}
+    .kbleftlinks a:hover, .kbrightlinks a:hover, #qlinks a:hover, #resource-links a:hover, #qcats a:hover {background-color:#F3E9CF; text-decoration:none; display:inline;}
+    .kbleftlinks a:visited, .kbrightlinks a:visited,#qlinks a:visited, #resource-links a:visited, #qcats a:visited {color:#660000;}
+    .kbleftlinks ul, .kbrightlinks ul, #qlinks ul, #resource-links ul, #qcats ul {list-style:none; margin-top:6px; margin-left:2px; margin-bottom:0; padding:0; border:0; background-color:transparent;}
+    .kbleftlinks li, .kbrightlinks li, #qlinks li, #resource-links li, #qcats li  {list-style-type:none; display:inline; border:0; margin:0; line-height:14px;}
+    #qcats .pad {border-left:0; border-right:0;}
+    #cat-nav ul {margin:3px; padding:0; list-style:none; width:auto; border-bottom:0px solid #ccc;}
+    #cat-nav ul li {position:static;}
+    #cat-nav li ul {position:static; left:auto; top:0; display:inline;}
+    #cat-nav ul li a {display:inline; text-decoration:none; font-size:11px; font-weight:bold; padding:5px; line-height:14px; border:0px solid #ccc; border-bottom:0;}
+    #cat-nav ul {margin-top:6px; margin-left:2px; margin-bottom:0; padding:0; border:0;}
+    #cat-nav li {list-style-type:none; display:inline; border:0; margin:0; line-height:18px;}
+    #cat-nav li:hover ul, li.over ul {display:inline;}
+	
+	#news, #topDocs, #recentDocs, #custom {margin:0; padding:0;}
+	#news h2 , #topDocs h2, #recentDocs h2, #custom h2 {font-weight:normal; font-size:13px;}
+
+  #footer {text-align: left; border-right: none; width: 100%;}
+  #footer, div#footer a, #footer p.copy a {color: #EEEEEE;}
+  #footer a, #footer a:hover {text-decoration: underline;}
+  #footer a:hover {color: #FFFFF;}
+  #footer p {font-size: 12px; margin: 1px;}
+  #footer div#lineage {clear: both; padding: 5px; background-color: #80735C; width: 100%;}
+  #finadmin {width: 100%; margin: 0 auto; padding: 5px 0 5px 0;}
+  #footer div#footer-quicklinks {clear: both;  padding: 3px 5px 20px 0px; background-color: #776B53; width: 100%;}
+  #footer div#footer-quicklinks-wrapper {width: 90%; margin: 0 auto;}
+  #footer-quicklinks h2 {font-size: 1em; margin-bottom: 10px; font-weight: bold; color: #FFFFFF;}
+  #footer-quicklinks {float: left; margin-left: 0px; width: 100%; padding-left: 10px;}
+  #footer-left {margin: 10px auto auto 5px;}
+  #footer p.copy { margin-bottom: 5px; width:100%;}
+}
+
+@font-face {
+  font-family: "Akkurat Pro Light";
+  src: url("https://common.northwestern.edu/v8/css/fonts/AkkuratProLight.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat Pro Light Italic";
+  src: url("https://common.northwestern.edu/v8/css/fonts/AkkuratProLightItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat Pro Regular";
+  src: url("https://common.northwestern.edu/v8/css/fonts/AkkuratProRegular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat Pro Italic";
+  src: url("https://common.northwestern.edu/v8/css/fonts/AkkuratProItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat Pro Bold";
+  src: url("https://common.northwestern.edu/v8/css/fonts/AkkuratProBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat Pro Bold Italic";
+  src: url("https://common.northwestern.edu/v8/css/fonts/AkkuratProBoldItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton Book";
+  src: url("https://common.northwestern.edu/v8/css/fonts/CamptonBook.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton Bold";
+  src: url("https://common.northwestern.edu/v8/css/fonts/CamptonBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton Extra Bold";
+  src: url("https://common.northwestern.edu/v8/css/fonts/CamptonExtraBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton Extra Light";
+  src: url("https://common.northwestern.edu/v8/css/fonts/CamptonExtraLight.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+div#page-content {
+    line-height: 1.7em;
+}
+
+div#page-content ul>li {
+    list-style: none;
+    background: url(https://common.northwestern.edu/v8/css/images/icons/bullet.png) 0 0.5em no-repeat;
+    padding: 0 0 .5em 1em;
+}
+
+div#page-content ul.toggle>li{
+    background: none;
+    padding: 0 0 0 0
+}
+
+table#search-result-table1 {
+    line-height: 1.3em;
+}
+
+h2 {
+    font: 30px/1.2em "Campton Book",Tahoma,sans-serif;
+    color: #4e2a84;
+    margin-bottom: 1rem;
+}
+
+h2.title, h1.title {
+    font: 34px/1.2em "Campton Book",Tahoma,sans-serif;
+    color: #4e2a84;
+    -webkit-margin-before: 0.42em;
+    -webkit-margin-after: 0.42em;
+}
+
+h3 {
+    font: 26px/1.2em "Campton Book",Impact,sans-serif;
+    color: #4e2a84;
+    margin-bottom: .5rem;
+}
+
+h4 {
+    font: 22px/1.2em "Akkurat Pro Regular",Arial,sans-serif;
+    color: #716c6b;
+    margin-bottom: 1rem;
+}
+
+div#page-content strong, div#page-content b {
+    font-family: "Akkurat Pro Bold","Arial Black",sans-serif;
+    font-weight: normal;
+}
+
+div#page-content a {
+    font-family: "Akkurat Pro Bold","Arial Black",sans-serif;
+    color: #4e2a84;
+    text-decoration: none;
+}
+
+div#page-content a:hover {
+   text-decoration: underline !important;
+}
+
+div#page-content div a.boxlink {
+    color: #365899;
+    font-family: "Akkurat Pro Regular";
+}
+div#page-content div a.boxlink:hover {
+    text-decoration: none !important;
+}
+
+div#page-content div a.boxlink {
+    color: #365899;
+    font-family: "Akkurat Pro Regular";
+}
+div#page-content div a.boxlink:hover {
+    text-decoration: none !important;
+}
+
+div#page-content .responsive-table {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    margin: 1em 0 2em 0;
+}
+
+div#page-content table {
+  width: 100%;
+  margin: 1em 0 0 0;
+  font-family: "Akkurat Pro Regular", Arial, sans-serif;
+  line-height: 1.5em;
+}
+
+div#page-content table th {
+  background: #4e2a84;
+  font: 18px "Akkurat Pro Bold", "Arial Black", sans-serif;
+  color: #fff;
+  padding: .7rem 1rem .7rem 1rem;
+  text-align: left;
+  border: 2px solid #fff;
+}
+
+
+div#page-content table td {
+  padding: .7rem 1rem .7rem 1rem;
+  border: 2px solid #fff;
+  vertical-align: top;
+}
+
+div#page-content table tr.stripe {
+  background: #f0f0f0;
+}
+
+div#page-content table tr.hover td {
+  background: #e4e0ee;
+  color: #342f2e;
+}
+
+div#page-content table.table-no-hover tr.hover td {
+  background: none;
+  color: inherit;
+}
+
+div#page-content table.table-no-hover tr.hover.stripe {
+  background: #f0f0f0;
+}
+
+div#page-content table.table-center-header th {
+  text-align: center;
+}
+
+div#page-content table.table-no-stripe tr.stripe {
+  background: transparent;
+}
+
+div#page-content table ul {
+  margin-left: 0;
+  padding-top: .5rem;
+}
+
+</style>
+<link rel="stylesheet" type="text/css" href="/images/group293/logo/CSSandJS/NorthwesternTables.css">
+<link rel="stylesheet" type="text/css" href="/images/group293/logo/CSSandJS/NorthwesternToggles.css"></style><link rel="stylesheet" type="text/css" media="screen" href="/css/uw-buttons.css" /></head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MRHB7J" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="skip-nav"><a href="#maincontent">Skip navigation</a></div><div id="body-container"><header role="banner"><div id="top-links"><div class="section group top"><div class="col span_top_1_of_3"><span class="hidden">Northwestern KB </span></div><div class="col span_top_2_of_3"></div><div class="col span_top_3_of_3"></div></div></div><div id="logo-search"><div class="section group logo-search"><div class="col span_logo-search_1_of_2"><div id="group-logo"><a href="./"><img src="https://kb.northwestern.edu/images/group293/logo/landing-page/Northwestern-KB.png" alt="Northwestern KB" width="320" height="47" /><span class="group-name-hide">Northwestern </span></a></div></div><div class="col span_logo-search_2_of_2"><div id="search-form" class="upper" role="search"><form accept-charset="UTF-8" method="get" action="search.php" title="Search"><span id="resultc" role="status" aria-live="polite"></span><br /><label for="q" class="hidden">Search term</label><input class="inputBox" id="q" type="text" name="q" placeholder="Search the KB..." value="" size="30" maxlength="140" onkeyup="resultC(this.value)" aria-controls="resultc" aria-expanded="false" aria-autocomplete="both" /> <label for="aud" class="hidden">Select audience</label><select class="selectBox" id="aud" name="aud" onchange="this.form.submit();"><option value="0">All Audiences</option><option value="3">Students</option><option value="1">Faculty</option><option value="2">Staff</option><option value="192">Affiliates</option><option value="183">Researchers</option><option value="253">Emeritus Faculty</option><option value="254">Retirees</option><option value="181">IT Community</option><option value="182">Clinicians</option><option value="6">Alumni</option><option value="5">Parents</option><option value="7">Visitors</option></select> <input class="search" type="submit" value="SEARCH" />&nbsp;<a class="advanced" href="advanced.php">Advanced</a></form></div><script>if(document.getElementsByClassName("search")){document.getElementsByClassName("search")[0].addEventListener("click", searchBtn);}</script></div></div></div><div id="header-banner">The Northwestern Knowledge Base has moved! You can find it in its new location at https://services.northwestern.edu/TDClient/30/Portal/KB/. This system will be sunset on January 15th. For more information on this move, visit https://www.it.northwestern.edu.</div></header><div id="container"><div id="middle-sect1"><main id="maincontent" role="main"><div id="page-content" role="article"><div class="fr-element fr-view"><h1 class="title">Quest Quick Start Guide</h1><div style="float:right;text-align:right;background-color:#F6F4F0;padding:1px;border:0px solid #e5e5e5;border-radius:2px;"></div><div id="doc-summary"><p>This page provides help getting started with connecting to, accessing software on, and submitting jobs to the Quest computing cluster.</p></div><p><div><p>You will need to be logged in to Quest to get started. For further instructions, visit our <a href="https://kb.northwestern.edu//internal/page.php?id=70705">Logging into Quest</a> KB page or watch our <a href="https://youtu.be/xFYHs19gGjU" target="_blank" title="Logging into Quest video tutorial">Logging into Quest video tutorial</a>.</p></div>
+
+<p>See our <a href="https://www.youtube.com/watch?v=rIFbHt_2g4s&amp;feature=youtu.be">Introduction To Quest</a> video for a 90-minute interactive tutorial that takes you step-by-step through logging into Quest, editing a job submission script, launching and monitoring a job, as well as a deep dive into how Quest works.</p>
+
+<h2>Navigating Quest</h2>
+
+<p>If you'd prefer a video demonstration you can get started with basic commands and a demonstration of navigating home and project directories on Quest by watching our video tutorial&nbsp;<a href="https://www.youtube.com/watch?v=cLn_1BzRxCM" target="_self" title="Research Computing Service's Youtube playlist ">Navigating Quest via Shell</a>.</p><p>Once you've logged into Quest, you will begin in your Home directory:
+    <span class="command">/home/&lt;NetID&gt;</span>. The home directory has 80GB of storage and is backed
+    up nightly. Backups are kept for two weeks.</p>
+
+<p>Note that throughout this guide, items in angle brackets (<span class="command">&lt;&gt;</span>) in example
+    commands are parameters you need to change relative to your account and
+    work. Do not include <span class="command">&lt;&gt;</span> around the values you substitute into the
+    commands.</p>
+
+<p>You can navigate to the projects directory of your allocation by typing</p>
+<pre class="code">cd /projects/&lt;project_id&gt;</pre>
+
+<p>Project directories are not backed up. You can check how much storage
+    you have by typing</p>
+
+<pre class="code">checkproject &lt;project_id&gt;</pre>
+
+<p>If you are unfamiliar with using the command line, this tutorial,
+    <a href="http://linuxcommand.org/lc3_learning_the_shell.php" target="_blank">Learning the Shell</a>,
+    will help you learn the basics.</p>
+
+<h2>Moving Files onto Quest</h2>
+<p>Please visit the <a href="https://kb.northwestern.edu/internal/page.php?id=70521">Transferring Files on Quest</a>
+    web page for information about transferring files from your local machine,
+    <a href="https://kb.northwestern.edu/internal/search.php?q=box">Northwestern Box</a>,
+    <a href="https://www.it.northwestern.edu/research/user-services/storage/research-data.html" target="_blank">Research
+        Data Storage Service</a>,
+    or elsewhere, to Quest.</p>
+
+<h2>Software available on Quest</h2>
+<p>Many <a href="https://kb.northwestern.edu/internal/page.php?id=70714">applications are available</a>
+    on Quest. You can access them through <a href="https://kb.northwestern.edu/internal/page.php?id=70718">modules</a>,
+    which modify your environment to enable you to run the software. Quest
+    uses modules so that multiple versions of the same software can be
+    available for different users.</p>
+
+<p>See <a href="https://kb.northwestern.edu/page.php?id=70718">Modules Software Environment Manager</a>
+    for examples of loading software with modules and a list of common commands.</p>
+
+<p>If you would like additional software packages installed on Quest, please
+    fill out the <a href="https://app.smartsheet.com/b/form/130f3f8d9859433d8baa1ca833b2ad90" target="_blank">Software
+        Installation Request Form</a>.
+    Additionally, you can also install software in your own home or project
+    directories. For details, review our
+    <a href="https://kb.northwestern.edu/page.php?id=85199">Installing Software on Quest</a>
+    page.</p>
+
+<h2>Running Jobs on Quest</h2>
+<p>When you first log in to Quest, you will be on one of the four login
+    nodes: <span class="command">quser21</span>, <span class="command">quser22</span>, <span class="command">quser23</span>,
+    or <span class="command">quser24</span>. From the login nodes, you
+    can submit jobs to the compute nodes, edit files, and perform small test
+    jobs. Login node use is limited to 4 cores and 4 GB of RAM per user.</p>
+
+<p>To take advantage of Quest's computing power, jobs can be submitted to
+    the compute nodes in two ways: Interactive jobs, which are particularly
+    useful for GUI applications, or Batch jobs, which are the most common
+    jobs on Quest. Interactive jobs are appropriate for GUI applications
+    like Stata, Visit, Paraview, etc., testing and prototyping of programs, running jobs with small
+    core counts (&lt; 6), and for short duration jobs. Batch jobs are
+    appropriate for jobs with no GUI interface, large core counts, or long
+    duration.</p>
+
+<p>See <a href="https://kb.northwestern.edu/page.php?id=69247">Submitting a Job on Quest</a>
+    for more details, example job submission commands, and an example of a
+    submission script.</p>
+
+<h2>Managing Your Jobs on Quest</h2>
+
+<table class="striped">
+    <thead>
+        <tr>
+            <th>
+                Command
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td><span class="command"> squeue -u &lt;NetID&gt; </span></td>
+            <td> Shows your jobs on the queue </td>
+        </tr>
+        <tr>
+            <td><span class="command"> squeue -A &lt;AllocationID&gt; </span></td>
+            <td> Shows your jobs belonging to specified allocation </td>
+        </tr>
+        <tr>
+            <td><span class="command"> checkjob &lt;JobID&gt; </span></td>
+            <td> Shows detailed information about specified job </td>
+        </tr>
+        <tr>
+            <td><span class="command"> scancel &lt;JobID&gt; </span></td>
+            <td> Cancels your job from the command line </td>
+        </tr>
+        <tr>
+            <td><span class="command"> scancel -u &lt;NetID&gt; </span></td>
+            <td> Cancels all of your jobs from the command line </td>
+        </tr>
+
+    </tbody>
+</table>
+
+<p>For more information about managing your jobs visit
+    <a href="https://kb.northwestern.edu/page.php?id=70710">Managing Jobs on Quest</a>.</p>
+
+<h2>Getting Help</h2>
+
+<p>Learn more about using Quest from our
+    <a href="https://kb.northwestern.edu/page.php?id=72406">documentation</a> or attend
+    one of our Introduction to Quest
+    <a href="https://www.it.northwestern.edu/research/campus-events/index.html" target="_blank">trainings</a>.
+    If you need more personalized assistance, send an email stating your issue to
+    <a href="mailto:quest-help@northwestern.edu">quest-help@northwestern.edu</a> and the Northwestern IT Research
+    Computing Services
+    team will assist you with your issue.</p><link rel="stylesheet" type="text/css" href="/images/group293/shared/researchcomputing/style.css"></p><div id="up-prev-next"><div id="up">&uarr; Up: <a href="72406">Quest User Guide</a></div><div id="clear"></div></div></div></div><div id="credit-feedback"><br style="clear:both;" /><br /><hr class="kbhr1"><table class="kbfeedbacktable1"><tr><th>Keywords:</th><td><span id="kb-page-keywords">Quest, jobs, script, software, batch quickstart</span> &nbsp; <span id="suggestk-button"><a class="feedback-btn-link" onclick="suggestK(70706,'Quest+Quick+Start+Guide','Quest%2C+jobs%2C+script%2C+software%2C+batch+quickstart');">Suggest&nbsp;keywords</a></span><span id="suggestk"></span><span id="ks-thank-you"></span></td><th>Doc ID:</th><td>70706</td></tr><tr><th>Owner:</th><td>Research Computing  .</td><th>Group:</th><td>Northwestern </td></tr><tr><th>Created:</th><td>2017-02-15 15:16 CST</td><th>Updated:</th><td>2022-09-19 10:13 CST</td></tr><tr><th>Sites:</th><td colspan="3">Northwestern </td></tr><tr><th>CleanURL:</th><td colspan="3"><a href="https://kb.northwestern.edu/quest-quickstart">https://kb.northwestern.edu/quest-quickstart</a></td></tr><tr><th>Feedback:</th><td colspan="3"><input type="hidden" id="did" value="70706">&nbsp;<span id="vote-yes"><input type="button" id="helpfulBtn" class="feedback-btn-yes" value="Helpful"></span> <span id="count-yes">2</span> &nbsp; <span id="vote-no"><input type="button" id="unhelpfulBtn" class="feedback-btn-no" value="Unhelpful"></span> <span id="count-no">3</span> &nbsp;<script>if(document.getElementById("helpfulBtn")){document.getElementById("helpfulBtn").addEventListener("click", yesVote);}if(document.getElementById("unhelpfulBtn")){document.getElementById("unhelpfulBtn").addEventListener("click", noVote);}</script> &nbsp; <a class="feedback-btn-link" href="feedback.php?action=2&amp;help=comment&amp;id=70706">Comment</a><span class="suggest-doc3"> &nbsp; <a class="feedback-btn-link" href="feedback.php?action=2&amp;help=suggest&amp;id=70706">Suggest a new document</a></span><span id="feedback-thank-you"></span></td></tr></table></div></main></div><footer><div id="copyright" role="contentinfo"><a href="https://kb.wisc.edu/page.php?id=3">About the KnowledgeBase</a>  ·  <a href="https://kb.northwestern.edu/feedback.php">Feedback or Usage Issues?</a>  ·  <a href="http://www.it.northwestern.edu/">Northwestern IT</a><br />
+<img id="landing-footer-image" src="/images/group293/logo/landing-page/NorthwesternIT_horizontal_black.png" title="Northwestern Information Technology" alt="Northwestern Information Technology" style="height:30px;" />
+<img id="main-footer-image" src="/images/group293/logo/landing-page/NorthwesternIT_horizontal_white.png" title="Northwestern Information Technology" alt="Northwestern Information Technology" style="height:30px;" /><br /><div id="view-toggle"><p></p></div></div></footer></div></div><script type="text/javascript"></script>
+<script src="/cssjs/jquery/current/jquery.min.js" type="text/javascript"></script>
+<script src="https://common.northwestern.edu/dept/1.5/scripts.js" type="text/javascript"></script></script><!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-3781151-8', 'auto');
+ga('send', 'pageview'
+);
+</script>
+<!-- End Google Analytics -->
+<script>if(document.getElementsByTagName("a")){let els=document.getElementsByTagName("a");for(var i=0;i<els.length;i++){els[i].addEventListener("click", lnks);}}</script></body></html>
